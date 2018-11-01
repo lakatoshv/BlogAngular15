@@ -20,6 +20,6 @@ export class Post {
     seen: number;
     likes: number;
     dislikes: number;
-    tags: number;
     imgurl: string;
+    tags: string;
   }
