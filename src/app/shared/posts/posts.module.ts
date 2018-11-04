@@ -8,6 +8,7 @@ import { PostsListComponent } from './posts-list/posts-list.component';
   imports: [
     CommonModule,
     PostsRoutingModule
-  ]
+  ],
+  declarations: [PostsListComponent]
 })
 export class PostsModule { }

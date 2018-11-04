@@ -1,3 +1,18 @@
-<p>
-  posts-list works!
-</p>
+<p class="text-center">Posts</p>
+<div *ngIf="posts">
+  <ul class="posts">
+    <li *ngFor="let post of posts">
+      <a href="post/{{post.id}}">{{post.title}}</a>
+      <img src="{{post.imgurl}}">
+      <p>{{post.description}}</p>
+      <div>Author: {{post.author}}</div>
+      <div>Seen: {{post.seen}}</div>
+      <div>Likes: {{post.likes}}</div>
+      <div>Dislikes: {{post.dislikes}}</div>
+      <p>{{post.tags}}</p>
+    </li>
+  </ul>
+</div>
+<div class="text-center" *ngIf="!posts">
+  <b>Дана категорія ще не створена або не має записів</b>
+</div>

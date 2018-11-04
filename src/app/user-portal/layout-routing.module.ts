@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
-import { PostsListComponent } from "../shared/posts/posts-list/posts-list.component";
 
 const routes: Routes = [
   {
