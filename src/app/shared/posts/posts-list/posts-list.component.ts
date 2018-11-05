@@ -10,7 +10,6 @@ export class PostsListComponent implements OnInit {
   public posts: any;
   constructor() {
     this.posts = Posts;
-    debugger;
   }
 
   ngOnInit() {
