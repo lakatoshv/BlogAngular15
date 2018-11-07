@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Posts } from "../../../data/posts";
+import { Posts } from "../../../core/data/posts";
+
+import { GeneralServiceService } from "@app/core";
 
 @Component({
   selector: 'app-show',
@@ -11,7 +13,7 @@ export class ShowComponent implements OnInit {
   public post: any; 
   private postId: number;
   
-  constructor() { }
+  constructor(private _generalService: GeneralServiceService) { }
 
   ngOnInit() {
     var posts = Posts;
