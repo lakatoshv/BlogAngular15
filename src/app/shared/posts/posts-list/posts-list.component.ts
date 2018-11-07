@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Posts } from "../../../data/posts";
+import { Posts } from "../../../core/data/posts";
 
 @Component({
   selector: 'app-posts-list',

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Posts } from "../../../core/data/posts";
 
-import { GeneralServiceService } from "@app/core";
+import { ActivatedRoute } from '@angular/router';
+import { GeneralServiceService } from 'src/app/core';
 
 @Component({
   selector: 'app-show',
@@ -13,11 +14,16 @@ export class ShowComponent implements OnInit {
   public post: any; 
   private postId: number;
   
-  constructor(private _generalService: GeneralServiceService) { }
+  constructor(
+    private _generalService: GeneralServiceService,
+    private _activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     var posts = Posts;
-    this.post = posts[3];
+    this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
+    this.post = posts[this.postId];
+
   }
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
