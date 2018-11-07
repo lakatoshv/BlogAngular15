@@ -7,14 +7,12 @@ import { ShowComponent } from './show/show.component';
 const routes: Routes = [
   {
     path: "",
-    component: PostsListComponent,
-    children: [
-      {
-        path: "post/:post-id",
-        loadChildren: './show/show.component'
-      }
-    ]
-  }
+    component: PostsListComponent
+  },
+  { 
+    path: 'post/:post-id', 
+    component: ShowComponent 
+  },
 ];
 
 @NgModule({
