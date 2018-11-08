@@ -23,7 +23,8 @@ export class ShowComponent implements OnInit {
     var posts = Posts;
     this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
     this.post = posts[this.postId];
-
+    this.post.tags = this.post.tags.split(', ');
+    debugger
   }
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
