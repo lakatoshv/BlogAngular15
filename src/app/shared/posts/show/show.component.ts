@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Posts } from "../../../core/data/posts";
+import { Comments } from "../../../core/data/comments";
 
 import { ActivatedRoute } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
@@ -12,6 +13,7 @@ import { GeneralServiceService } from 'src/app/core';
 })
 export class ShowComponent implements OnInit {
   public post: any; 
+  public comments: any;
   private postId: number;
   
   constructor(
@@ -24,10 +26,16 @@ export class ShowComponent implements OnInit {
     this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
     this.post = posts[this.postId];
     this.post.tags = this.post.tags.split(', ');
-    debugger
+    this.getCommentsForCurrentPost();
   }
+
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
+  }
+
+  private getCommentsForCurrentPost(): void{
+    this.comments = Comments.find(item => item.post_id === this.postId);
+    debugger
   }
 
 }
