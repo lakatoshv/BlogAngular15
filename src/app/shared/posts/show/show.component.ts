@@ -34,7 +34,7 @@ export class ShowComponent implements OnInit {
   }
 
   private getCommentsForCurrentPost(): void{
-    this.comments = Comments.find(item => item.post_id === this.postId);
+    this.comments = Comments.filter(item => item.post_id === this.postId);
     debugger
   }
 
