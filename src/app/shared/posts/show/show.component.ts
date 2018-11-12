@@ -26,16 +26,15 @@ export class ShowComponent implements OnInit {
     this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
     this.post = posts[this.postId];
     this.post.tags = this.post.tags.split(', ');
-    this.getCommentsForCurrentPost();
+    this._getCommentsForCurrentPost();
   }
 
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
   }
 
-  private getCommentsForCurrentPost(): void{
+  private _getCommentsForCurrentPost(): void{
     this.comments = Comments.filter(item => item.post_id === this.postId);
-    debugger
   }
 
 }
