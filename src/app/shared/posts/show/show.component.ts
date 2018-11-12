@@ -13,8 +13,7 @@ import { GeneralServiceService } from 'src/app/core';
 })
 export class ShowComponent implements OnInit {
   public post: any; 
-  public comments: any;
-  private postId: number;
+  private _postId: number;
   
   constructor(
     private _generalService: GeneralServiceService,
@@ -23,18 +22,13 @@ export class ShowComponent implements OnInit {
 
   ngOnInit() {
     var posts = Posts;
-    this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
-    this.post = posts[this.postId];
+    this._postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
+    this.post = posts[this._postId];
     this.post.tags = this.post.tags.split(', ');
-    this._getCommentsForCurrentPost();
   }
 
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
-  }
-
-  private _getCommentsForCurrentPost(): void{
-    this.comments = Comments.filter(item => item.post_id === this.postId);
   }
 
 }
