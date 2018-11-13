@@ -4,6 +4,7 @@ import { Comments } from "../../../../core/data/comments";
 
 import { ActivatedRoute } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
+import { AddCommentComponent } from "../add-comment/add-comment.component";
 
 @Component({
   selector: 'app-comments-list',
@@ -13,6 +14,7 @@ import { GeneralServiceService } from 'src/app/core';
 export class CommentsListComponent implements OnInit {
   @Input("post-id") postId: number;
   public comments: any;
+  private _comments: boolean = false;
 
   
   constructor(
@@ -30,6 +32,9 @@ export class CommentsListComponent implements OnInit {
 
   private _getCommentsForCurrentPost(): void{
     this.comments = Comments.filter(item => item.post_id === this.postId);
+    if(this.comments.length > 1){
+      this._comments = true;
+    }
   }
 
 }
