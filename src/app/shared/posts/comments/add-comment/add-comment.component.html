@@ -5,9 +5,9 @@
     <div class="col-lg-12">
       <div class="post_comment_form_container">
         <form action="#">
-          <input type="text" class="comment_input comment_input_name" placeholder="Your Name" required="required">
-          <input type="email" class="comment_input comment_input_email" placeholder="Your Email" required="required">
-          <textarea class="comment_text" placeholder="Your Comment" required="required"></textarea>
+          <input type="text" class="comment_input comment_input_name" placeholder="Your Name" [formControl]="name" required="required">
+          <input type="email" class="comment_input comment_input_email" placeholder="Your Email" [formControl]="content" required="required">
+          <textarea class="comment_text" placeholder="Your Comment" required="required" [formControl]="content"></textarea>
           <button type="submit" class="comment_button">Post Comment</button>
         </form>
       </div>
