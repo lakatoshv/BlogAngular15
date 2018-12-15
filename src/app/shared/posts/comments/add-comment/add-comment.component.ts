@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import { CommentForm } from 'src/app/core/forms/posts/CommentForm';
 
 @Component({
   selector: 'app-add-comment',
@@ -7,12 +8,14 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./add-comment.component.css']
 })
 export class AddCommentComponent implements OnInit {
-  content = new FormControl('');
-  email = new FormControl('');
-  name = new FormControl('');
+  private _commentForm: FormGroup = new CommentForm().commentForm;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  private addComment(): void{
+    
   }
 
 }
