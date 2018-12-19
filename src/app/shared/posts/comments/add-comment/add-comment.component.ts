@@ -14,7 +14,8 @@ export class AddCommentComponent implements OnInit {
   ngOnInit() {
   }
 
-  private addComment(): void{
+  private _addComment(name: string, email: string, comment: string): void{
+    debugger
     
   }
 

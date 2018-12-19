@@ -4,32 +4,36 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="post_comment_form_container">
-        <form [formGroup]="_commentForm" (ngSubmit)="_addComment()">
+        <form [formGroup]="_commentForm" #comment>
           <input 
             type="text" 
             class="comment_input comment_input_name" 
             placeholder="Your Name" 
             formControlName="name" 
-            required="required">
+            required="required"
+            #name>
           
           <input 
             type="email" 
             class="comment_input comment_input_email" 
             placeholder="Your Email" 
-            formControlName="content" 
-            required="required">
+            formControlName="email" 
+            required="required"
+            #email>
           
           <textarea 
             class="comment_text" 
             placeholder="Your Comment" 
             required="required" 
-            formControlName="content">
+            formControlName="content"
+            #content>
           </textarea>
           
           <button 
             type="submit" 
             class="comment_button" 
-            [disabled]="!_commentForm.valid">
+            [disabled]="!_commentForm.valid"
+            (click)="_addComment(name.value, email.value, content.value)">
               Post Comment
           </button>
         </form>
