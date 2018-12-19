@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Comments } from "../../../../core/data/comments";
-
 import { ActivatedRoute } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
 import { AddCommentComponent } from "../add-comment/add-comment.component";
+
+import { Comments } from 'src/app/core/data/comments';
+import { Comment } from 'src/app/core/models/comment';
 
 @Component({
   selector: 'app-comments-list',
@@ -13,6 +14,7 @@ import { AddCommentComponent } from "../add-comment/add-comment.component";
 })
 export class CommentsListComponent implements OnInit {
   @Input("post-id") postId: number;
+  
   public comments: any;
   private _comments: boolean = false;
 
@@ -35,6 +37,10 @@ export class CommentsListComponent implements OnInit {
     if(this.comments.length > 1){
       this._comments = true;
     }
+  }
+
+  private _onAddAction(comment: any){
+    this.comments.unshift(comment);
   }
 
 }
