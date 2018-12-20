@@ -7,6 +7,7 @@ import { PostsListComponent } from './posts-list/posts-list.component';
 import { ShowComponent } from './show/show.component';
 import {CommentsListComponent} from "./comments/comments-list/comments-list.component";
 import {AddCommentComponent} from "./comments/add-comment/add-comment.component";
+import { EditCommentComponent } from './comments/edit-comment/edit-comment.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,12 @@ import {AddCommentComponent} from "./comments/add-comment/add-comment.component"
     PostsRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [PostsListComponent, ShowComponent, CommentsListComponent, AddCommentComponent]
+  declarations: [
+    PostsListComponent, 
+    ShowComponent, 
+    CommentsListComponent, 
+    AddCommentComponent, 
+    EditCommentComponent
+  ]
 })
 export class PostsModule { }
