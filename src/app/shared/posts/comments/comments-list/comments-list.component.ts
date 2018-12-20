@@ -15,8 +15,7 @@ import { Comment } from 'src/app/core/models/comment';
 export class CommentsListComponent implements OnInit {
   @Input("post-id") postId: number;
   
-  public comments: any;
-  private _comments: boolean = false;
+  public comments: any = [];
 
   
   constructor(
@@ -34,9 +33,6 @@ export class CommentsListComponent implements OnInit {
 
   private _getCommentsForCurrentPost(): void{
     this.comments = Comments.filter(item => item.post_id === this.postId);
-    if(this.comments.length > 1){
-      this._comments = true;
-    }
   }
 
   private _onAddAction(comment: any){
