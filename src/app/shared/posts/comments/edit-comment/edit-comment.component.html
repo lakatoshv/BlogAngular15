@@ -1,3 +1,46 @@
-<p>
-  edit-comment works!
-</p>
+<!-- Post Comment -->
+<div class="post_comment">
+  <div class="post_comment_title">Post Comment</div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="post_comment_form_container">
+        <form [formGroup]="_commentForm" #comment>
+          <input 
+            type="text" 
+            class="comment_input comment_input_name" 
+            placeholder="Your Name" 
+            formControlName="name" 
+            required="required"
+            value="{{comment.name}}"
+            #name>
+          
+          <input 
+            type="email" 
+            class="comment_input comment_input_email" 
+            placeholder="Your Email" 
+            formControlName="email" 
+            required="required"
+            value="{{comment.email}}"
+            #email>
+          
+          <textarea 
+            class="comment_text" 
+            placeholder="Your Comment" 
+            required="required" 
+            formControlName="content"
+            value="{{comment.content}}"
+            #content>
+          </textarea>
+          
+          <button 
+            type="button" 
+            class="comment_button" 
+            [disabled]="!_commentForm.valid"
+            (click)="_addComment(name.value, email.value, content.value)">
+              Редагувати
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

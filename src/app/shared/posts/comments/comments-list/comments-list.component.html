@@ -20,13 +20,26 @@
                         <a href="#">{{comment.author}}</a>
                         <span>{{comment.created_at}}</span>
                       </small>
-                      <button type="button" class="reply_button ml-auto">Відповісти</button>
                     </div>
-                    <div class="comment_content">
+                      <div class="comment_content">
                       <p>{{comment.content}}</p>
                     </div>
+                    <p class="pull-right">
+                      <button 
+                        type="button" 
+                        class="btn btn-sm text-white btn-primary"
+                        (click)="_onLoadEditAction(comment)">
+                        <i class="fa fa-edit"></i> 
+                        Редагувати
+                      </button>
+                      <button type="button" class="btn btn-sm text-white btn-danger"><i class="fa fa-trash"></i> Видалити</button>
+                      <button type="button" class="btn btn-sm btn-outline-success ml-2"><i class="fa fa-reply"></i> Відповісти</button>
+                    </p>
                   </div>
-  
+                  <app-edit-comment 
+                    (onEdit)="_onEditAction($event)" 
+                    *ngIf="_isLoadEdit">
+                  </app-edit-comment>
                   <!-- Reply - ->
                   <ul class="comment_list">
                     <li class="comment">

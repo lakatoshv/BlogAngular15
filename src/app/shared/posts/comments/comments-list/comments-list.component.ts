@@ -17,6 +17,8 @@ export class CommentsListComponent implements OnInit {
   
   public comments: any = [];
 
+  private _isLoadEdit: boolean = false; 
+
   
   constructor(
     private _generalService: GeneralServiceService,
@@ -35,7 +37,15 @@ export class CommentsListComponent implements OnInit {
     this.comments = Comments.filter(item => item.post_id === this.postId);
   }
 
+  private _onLoadEditAction(){
+    this._isLoadEdit = true;
+  }
+
   private _onAddAction(comment: any){
+    this.comments.unshift(comment);
+  }
+
+  private _onEditAction(comment: any){
     this.comments.unshift(comment);
   }
 
