@@ -37,6 +37,7 @@
                     </p>
                   </div>
                   <app-edit-comment 
+                    [comment]="comment"
                     (onEdit)="_onEditAction($event)" 
                     *ngIf="_isLoadEdit">
                   </app-edit-comment>

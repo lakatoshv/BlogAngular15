@@ -11,6 +11,7 @@ import { Comment } from "../../../../core/models/comment";
 })
 export class EditCommentComponent implements OnInit {
   @Output() onEdit = new EventEmitter<any>();
+  @Input() comment: any;
 
   private _commentForm: FormGroup = new CommentForm().commentForm;
 
@@ -18,6 +19,14 @@ export class EditCommentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setFormValue();
+  }
+
+  public setFormValue(){
+    debugger;
+    this._commentForm.get('name').setValue(this.comment.author);
+    this._commentForm.get('email').setValue(this.comment.email);
+    this._commentForm.get('content').setValue(this.comment.content);
   }
 
 }
