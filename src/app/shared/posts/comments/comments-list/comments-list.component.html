@@ -32,7 +32,13 @@
                         <i class="fa fa-edit"></i> 
                         Редагувати
                       </button>
-                      <button type="button" class="btn btn-sm text-white btn-danger"><i class="fa fa-trash"></i> Видалити</button>
+                      <button
+                        type="button" 
+                        class="btn btn-sm text-white btn-danger"
+                        (click)="_deleteAction(comment)">
+                          <i class="fa fa-trash"></i> 
+                          Видалити
+                      </button>
                       <button type="button" class="btn btn-sm btn-outline-success ml-2"><i class="fa fa-reply"></i> Відповісти</button>
                     </p>
                   </div>

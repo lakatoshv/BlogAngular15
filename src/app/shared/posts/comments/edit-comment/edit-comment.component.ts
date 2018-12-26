@@ -29,7 +29,6 @@ export class EditCommentComponent implements OnInit {
   }
 
   private _edit(comment){
-    debugger
     comment.id = this.comment.id;
     this.onEdit.emit(comment);
   }
