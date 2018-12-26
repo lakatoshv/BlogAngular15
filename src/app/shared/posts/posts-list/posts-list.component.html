@@ -1,47 +1,47 @@
-
-<div class="text-center" *ngIf="!posts">
-  <b>Дана категорія ще не створена або не має записів</b>
-</div>
-
 <!-- Main Content -->
-<div class="container" *ngIf="posts">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 mx-auto">
-        <div class="post-preview" *ngFor="let post of posts">
-
-          <a href="post/{{post.id}}">
-            <h2 class="post-title">
-              {{post.title}}
-            </h2>
-            <img style="width: 100%; height: 300px;" src="{{post.imgurl}}"/>
-            <h3 class="post-subtitle">
-              {{post.description}}
-            </h3>
-          </a>
-          <p class="post-meta">
-            <span><i class="fa fa-fw fa-eye"></i>  {{post.seen}}</span>  
-            <span><i class="fa fa-fw fa-thumbs-up"></i> {{post.likes}}</span>
-            <span><i class="fa fa-fw fa-thumbs-down"></i> {{post.dislikes}}</span>
-            <!--@php 
-            {{$comments = DB::table("comments")->where("post_id", $post->id)->get();}}
-            @endphp 
-            -->
-            <span><i class="fa fa-fw fa-comment"></i>5</span>
-          </p>
-          <p class="post-meta">Теги:
-            {{post.tags}}
-          </p>
-          <p class="post-meta">
-            Написав: <b><a href="">{{post.author}}</a><i> 
-            10.11.2018</i></b>
-          </p>
-        </div>
-        <hr>
-      
-      <!-- Pager -->
-      <div class="clearfix"> 
-        <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+          <a href="posts/add" class="btn btn-light">Написати пост</a>
+          <div class="text-center" *ngIf="!posts">
+            <b>Дана категорія ще не створена або не має записів</b>
+          </div>
+          <div *ngIf="posts">
+            <div class="post-preview" *ngFor="let post of posts">
+              <a href="post/{{post.id}}">
+                <h2 class="post-title">
+                  {{post.title}}
+                </h2>
+                <img style="width: 100%; height: 300px;" src="{{post.imgurl}}"/>
+                <h3 class="post-subtitle">
+                  {{post.description}}
+                </h3>
+              </a>
+              <p class="post-meta">
+                <span><i class="fa fa-fw fa-eye"></i>  {{post.seen}}</span>  
+                <span><i class="fa fa-fw fa-thumbs-up"></i> {{post.likes}}</span>
+                <span><i class="fa fa-fw fa-thumbs-down"></i> {{post.dislikes}}</span>
+                <!--@php 
+                {{$comments = DB::table("comments")->where("post_id", $post->id)->get();}}
+                @endphp 
+                -->
+                <span><i class="fa fa-fw fa-comment"></i>5</span>
+              </p>
+              <p class="post-meta">Теги:
+                {{post.tags}}
+              </p>
+              <p class="post-meta">
+                Написав: <b><a href="">{{post.author}}</a><i> 
+                10.11.2018</i></b>
+              </p>
+            </div>
+            <hr>
+          
+            <!-- Pager -->
+            <div class="clearfix"> 
+              <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+          </div>
       </div>
     </div>
   </div>
-</div>

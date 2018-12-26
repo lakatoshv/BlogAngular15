@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
-import { ActivatedRoute } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
 import { AddCommentComponent } from "../add-comment/add-comment.component";
 

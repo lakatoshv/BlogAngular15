@@ -8,6 +8,7 @@ import { ShowComponent } from './show/show.component';
 import {CommentsListComponent} from "./comments/comments-list/comments-list.component";
 import {AddCommentComponent} from "./comments/add-comment/add-comment.component";
 import { EditCommentComponent } from './comments/edit-comment/edit-comment.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { EditCommentComponent } from './comments/edit-comment/edit-comment.compo
     ShowComponent, 
     CommentsListComponent, 
     AddCommentComponent, 
-    EditCommentComponent
+    EditCommentComponent, AddPostComponent
   ]
 })
 export class PostsModule { }

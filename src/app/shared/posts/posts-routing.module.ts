@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { ShowComponent } from './show/show.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   { 
     path: 'post/:post-id', 
     component: ShowComponent
+  },
+  { 
+    path: 'posts/add', 
+    component: AddPostComponent
   },
 ];
 
