@@ -23,14 +23,15 @@ export class EditCommentComponent implements OnInit {
   }
 
   public setFormValue(){
-    debugger;
-    this._commentForm.get('name').setValue(this.comment.author);
+    this._commentForm.get('author').setValue(this.comment.author);
     this._commentForm.get('email').setValue(this.comment.email);
     this._commentForm.get('content').setValue(this.comment.content);
   }
 
   private _edit(comment){
-
+    debugger
+    comment.id = this.comment.id;
+    this.onEdit.emit(comment);
   }
 
 }

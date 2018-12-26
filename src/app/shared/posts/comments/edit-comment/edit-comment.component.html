@@ -8,11 +8,12 @@
           #f="ngForm"
           [formGroup]="_commentForm"
           (ngSubmit)="_edit(f.value)">
+          
           <input 
             type="text" 
             class="comment_input comment_input_name" 
             placeholder="Your Name" 
-            formControlName="name" 
+            formControlName="author" 
             required="required">
           
           <input 
@@ -30,10 +31,9 @@
           </textarea>
           
           <button 
-            type="button" 
+            type="submit" 
             class="comment_button" 
-            [disabled]="!_commentForm.valid"
-            (click)="_addComment(name.value, email.value, content.value)">
+            [disabled]="!_commentForm.valid">
               Редагувати
           </button>
         </form>

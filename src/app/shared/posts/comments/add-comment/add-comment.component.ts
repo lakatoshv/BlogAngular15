@@ -20,7 +20,6 @@ export class AddCommentComponent implements OnInit {
   }
 
   private _addComment(name: string, email: string, content: string): void{
-    debugger
     let comment: Comment = new Comment();
     comment.author = email;
     comment.content = content;

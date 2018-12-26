@@ -46,7 +46,9 @@ export class CommentsListComponent implements OnInit {
   }
 
   private _onEditAction(comment: any){
-    this.comments.unshift(comment);
+    let index = this.comments.findIndex(x => x.id === comment.id);
+        if (index > -1)
+            this.comments[index] = comment;
   }
 
 }
