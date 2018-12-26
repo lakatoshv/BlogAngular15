@@ -29,4 +29,8 @@ export class EditCommentComponent implements OnInit {
     this._commentForm.get('content').setValue(this.comment.content);
   }
 
+  private _edit(comment){
+
+  }
+
 }
