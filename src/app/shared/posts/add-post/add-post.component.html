@@ -1,3 +1,152 @@
-<p>
-  add-post works!
-</p>
+<div class="container">
+  <div class="row" data-ref="container">
+    <div class="col-lg-12">
+      <h2 class="text-center" id="form-header">Додати новий пост</h2>
+      <form [formGroup]="_postForm" #comment>
+        <div class="form-group">
+          
+          <label 
+            for="title" 
+            tag="" 
+            class="optional">
+              Тема посту:
+          </label>
+          <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            value="" 
+            class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label 
+            for="description" 
+            tag="" 
+            class="optional">
+              Короткий опис:
+          </label>
+          <textarea 
+            name="description" 
+            id="description" 
+            class="form-control" 
+            rows="10" 
+            cols="80">
+          </textarea>
+        </div>
+        
+        <div class="form-group">
+          <label 
+            for="content" 
+            tag="" 
+            class="optional">
+              Пост:
+          </label>
+          <textarea 
+            name="content" 
+            id="content" 
+            class="form-control" 
+            rows="24" 
+            cols="80">
+          </textarea>
+        </div>
+
+        <label 
+          for="content" 
+          tag="" 
+          class="optional">
+            Основна картинка
+        </label>
+        <!--
+        <div class="radio">
+          <label>
+            <input class="form-check-input" type="radio" name="type" id="upload" value="upload">
+            <label for="upload">Вибрати файл з комп'ютера</label>
+          </label>
+          <div class="upload" style="display: none;">
+            <div id="objects">
+              <div class="form-group" id="add-image1" >
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                <label for="gallery_img" tag="" class="optional">Картинка:</label>
+                <dd>
+                  <input type="hidden" name="MAX_FILE_SIZE" value="2097152" id="MAX_FILE_SIZE">
+                  <input type="file" name="gallery_img" id="gallery_img" class="form-control">
+                </dd>
+              </div>
+            </div>
+            <p id="add-input" class="btn btn-default">Додати ще одну картинку</p>
+          </div>
+        </div>
+        <div class="radio">
+          <label>
+            <input class="form-check-input" type="radio" name="type" id="addurl" value="addurl">
+            <label for="addurl">Вказати URL-адресу</label>
+          </label>
+          <div class="addurl" style="display: none;"> 
+            <div class="form-group">
+              <label for="img_url" tag="" class="optional">URL-адреса:</label>
+              <input type="text" name="img_url" id="img_url" value="" class="form-control">
+              <p>Наприклад: https://some_image.com/example.jpg</p>
+            </div>
+          </div>
+        </div>
+        -->
+        <div class="addurl"> 
+          <div class="form-group">
+            <label 
+              for="img_url" 
+              tag="" 
+              class="optional">
+                URL-адреса:
+            </label>
+            <input 
+              type="text" 
+              name="img_url" 
+              id="img_url" 
+              value="" 
+              class="form-control">
+            <p>Наприклад: https://some_image.com/example.jpg</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label 
+            for="tags" 
+            tag="" 
+            class="optional">
+              Теги:
+          </label>
+          <input 
+            type="text" 
+            name="tags" 
+            id="tags" 
+            value="" 
+            class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label 
+            for="alias" 
+            tag="" 
+            class="optional">
+              Тема посту на англійській і без пропусків(посилання):
+          </label>
+          <input 
+            type="text" 
+            name="alias" 
+            id="alias" 
+            value="" 
+            class="form-control">
+        </div>
+
+        <input 
+          type="submit" 
+          name="submit" 
+          id="submit" 
+          value="Додати" 
+          class="btn btn-default">
+
+      </form>
+    </div>
+  </div>
+</div>
