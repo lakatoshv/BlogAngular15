@@ -11,12 +11,14 @@
             class="optional">
               Тема посту:
           </label>
+          
           <input 
             type="text" 
             name="title" 
             id="title" 
             value="" 
-            class="form-control">
+            class="form-control"
+            formControlName="title">
         </div>
         
         <div class="form-group">
@@ -29,6 +31,7 @@
           <textarea 
             name="description" 
             id="description" 
+            formControlName="description"
             class="form-control" 
             rows="10" 
             cols="80">
@@ -45,6 +48,7 @@
           <textarea 
             name="content" 
             id="content" 
+            formControlName="content"
             class="form-control" 
             rows="24" 
             cols="80">
@@ -103,6 +107,7 @@
               type="text" 
               name="img_url" 
               id="img_url" 
+              formControlName="img_url"
               value="" 
               class="form-control">
             <p>Наприклад: https://some_image.com/example.jpg</p>
@@ -120,6 +125,7 @@
             type="text" 
             name="tags" 
             id="tags" 
+            formControlName="tags"
             value="" 
             class="form-control">
         </div>

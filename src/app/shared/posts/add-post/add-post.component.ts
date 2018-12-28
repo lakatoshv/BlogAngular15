@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CommentForm } from '../../../core/forms/posts/CommentForm';
+import { PostForm } from '../../../core/forms/posts/PostForm';
 
 @Component({
   selector: 'app-add-post',
@@ -8,7 +8,7 @@ import { CommentForm } from '../../../core/forms/posts/CommentForm';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
-  private _postForm: FormGroup = new CommentForm().commentForm;
+  private _postForm: FormGroup = new PostForm().postForm;
 
   constructor() { }
 
