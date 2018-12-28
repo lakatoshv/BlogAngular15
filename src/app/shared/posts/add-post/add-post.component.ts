@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostForm } from '../../../core/forms/posts/PostForm';
+import { Post } from '../../../core/models/post';
 
 @Component({
   selector: 'app-add-post',
@@ -13,6 +14,9 @@ export class AddPostComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  private _addComment(postv): void{
   }
 
 }
