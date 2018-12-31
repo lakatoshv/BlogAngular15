@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Posts } from "../../../core/data/posts";
+import { GeneralServiceService } from 'src/app/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-posts-list',
@@ -8,11 +10,17 @@ import { Posts } from "../../../core/data/posts";
 })
 export class PostsListComponent implements OnInit {
   public posts: any;
-  constructor() {
+  private _post: any;
+  constructor(
+    private _generalService: GeneralServiceService,
+    private _activatedRoute: ActivatedRoute
+  ) {
     this.posts = Posts;
   }
 
   ngOnInit() {
+    debugger
+    this._post = parseInt(this._generalService.getRoutePeram("post", this._activatedRoute))
   }
 
 }

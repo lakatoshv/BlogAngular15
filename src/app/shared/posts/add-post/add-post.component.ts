@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Location } from '@angular/common';
 import { PostForm } from '../../../core/forms/posts/PostForm';
 import { Post } from '../../../core/models/post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-post',
@@ -11,12 +13,15 @@ import { Post } from '../../../core/models/post';
 export class AddPostComponent implements OnInit {
   private _postForm: FormGroup = new PostForm().postForm;
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
   ngOnInit() {
   }
 
-  private _addComment(postv): void{
+  private _add(post): void{
+    this._router.navigate(["/"]);
   }
 
 }

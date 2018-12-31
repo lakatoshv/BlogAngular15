@@ -5,6 +5,7 @@ import { PostsListComponent } from './posts-list/posts-list.component';
 import { ShowComponent } from './show/show.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
   { 
     path: 'posts/add', 
     component: AddPostComponent
-  },
+  }
 ];
 
 @NgModule({
