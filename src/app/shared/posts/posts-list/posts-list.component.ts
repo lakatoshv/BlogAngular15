@@ -19,7 +19,6 @@ export class PostsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger
     this._post = parseInt(this._generalService.getRoutePeram("post", this._activatedRoute))
   }
 
