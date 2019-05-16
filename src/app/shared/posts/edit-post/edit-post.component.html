@@ -5,7 +5,7 @@
       <form
         #f="ngForm"
         [formGroup]="_postForm"
-        (ngSubmit)="_add(f.value)" >
+        (ngSubmit)="_edit(f.value)" >
         <div class="form-group">
           
           <label 
@@ -32,14 +32,13 @@
               Короткий опис:
           </label>
 
-          <textarea 
+          <editor 
+            apiKey="test" 
+            [init]="options"
             name="description" 
             id="description" 
-            formControlName="description"
-            class="form-control" 
-            rows="10" 
-            cols="80">
-          </textarea>
+            formControlName="description">
+          </editor>
         </div>
         
         <div class="form-group">
@@ -50,14 +49,13 @@
               Пост:
           </label>
 
-          <textarea 
+          <editor 
+            apiKey="test" 
+            [init]="options"
             name="content" 
             id="content" 
-            formControlName="content"
-            class="form-control" 
-            rows="24" 
-            cols="80">
-          </textarea>
+            formControlName="content">
+          </editor>
         </div>
 
         <label 
@@ -131,13 +129,13 @@
 
                 <li class="list-group-item" *ngFor="let tag of post.tags">
                   <div class="checkbox">
-                    <label for="checkbox2">
+                    <label>
                       {{tag}}
                     </label>
                   </div>
                   <div class="pull-right action-buttons">
                     <button type="button" (click)="_editTag(tag)"><span class="fa fa-pencil"></span></button>
-                    <button type="button" (click)="_deleteTag(tag)"><span class="fa fa-trash"></span></button>
+                    <button type="button" (click)="_onDeleteTagAction(tag)"><span class="fa fa-trash"></span></button>
                   </div>
                 </li>
                 
@@ -149,16 +147,24 @@
             for="alias" 
             tag="" 
             class="optional">
-              Додати новий тег:
+              {{_tagLabel}}:
           </label>
 
           <input 
             type="text" 
             name="tags" 
             id="tags" 
-            formControlName="tags"
-            value="" 
+            #tag
+            value="{{_selectedTag.value}}" 
             class="form-control">
+
+            <input 
+              type="button" 
+              name="tagAction" 
+              id="tagAction" 
+              value="{{_tagLabel}}" 
+              class="btn btn-default"
+              (click)="_tagAction(tag.value, _action)">
         </div>
 
         <div class="form-group">

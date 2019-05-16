@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout-component.component.css']
 })
 export class LayoutComponentComponent implements OnInit {
+  private _navbarOpen: boolean = false;
+  loggedIn: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+  toggleNavbar() {
+    this._navbarOpen = !this._navbarOpen;
   }
 
 }

@@ -10,12 +10,14 @@ import {AddCommentComponent} from "./comments/add-comment/add-comment.component"
 import { EditCommentComponent } from './comments/edit-comment/edit-comment.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   imports: [
     CommonModule,
     PostsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EditorModule
   ],
   declarations: [
     PostsListComponent, 

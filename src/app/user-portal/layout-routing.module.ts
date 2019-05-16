@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
+import { AuthorizationComponent } from './user/authorization/authorization.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: "",
         loadChildren: '../shared/posts/posts.module#PostsModule'
+      },
+      {
+        path: "authorization",
+        component: AuthorizationComponent
       }
     ]
   }
