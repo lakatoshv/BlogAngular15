@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ReactiveFormsModule,
     EditorModule
   ],
-  declarations: [AuthorizationComponent]
+  declarations: [AuthorizationComponent, RegistrationComponent]
 })
 export class UserModule { }
