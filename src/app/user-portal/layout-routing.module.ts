@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
 import { AuthorizationComponent } from './user/authorization/authorization.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { AboutComponent } from './default-pages/about/about.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: "",
         loadChildren: '../shared/posts/posts.module#PostsModule'
+      },
+      {
+        path: "about",
+        component: AboutComponent
       },
       {
         path: "registration",

@@ -7,6 +7,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AuthorizationComponent } from './user/authorization/authorization.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { AboutComponent } from './default-pages/about/about.component';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({
@@ -17,6 +19,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ReactiveFormsModule,
     EditorModule
   ],
-  declarations: [LayoutComponentComponent, AuthorizationComponent]
+  declarations: [
+    LayoutComponentComponent, 
+    AboutComponent, 
+    RegistrationComponent,
+    AuthorizationComponent
+  ],
 })
 export class LayoutModule { }
