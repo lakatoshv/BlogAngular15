@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AboutComponent } from './default-pages/about/about.component';
+import { ContactsComponent } from './default-pages/contacts/contacts.component';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AboutComponent } from './default-pages/about/about.component';
   declarations: [
     LayoutComponentComponent, 
     AboutComponent, 
+    ContactsComponent,
     RegistrationComponent,
     AuthorizationComponent
   ],

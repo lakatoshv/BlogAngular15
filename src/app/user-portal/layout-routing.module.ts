@@ -5,6 +5,7 @@ import { LayoutComponentComponent } from './layout-component/layout-component.co
 import { AuthorizationComponent } from './user/authorization/authorization.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AboutComponent } from './default-pages/about/about.component';
+import { ContactsComponent } from './default-pages/contacts/contacts.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: "about",
         component: AboutComponent
+      },
+      {
+        path: "contacts",
+        component: ContactsComponent
       },
       {
         path: "registration",
