@@ -36,8 +36,14 @@
         <li class="nav-item">
           <a class="nav-link" href="/contacts">Контакти</a>
         </li>
-        <li class="nav-item"><a href="/authorization" class="nav-link" *ngIf="!loggedIn"><i class="fa fa-sign-in"></i> Ввійти</a></li>
-        <li class="nav-item"><a href="/registration" class="nav-link" *ngIf="!loggedIn"><i class="fa fa-user"></i> Зареєструватись</a></li>
+        <li class="nav-item" *ngIf="!loggedIn"><a href="/authorization" class="nav-link"><i class="fa fa-sign-in"></i> Ввійти</a></li>
+        <li class="nav-item" *ngIf="!loggedIn"><a href="/registration" class="nav-link"><i class="fa fa-user"></i> Зареєструватись</a></li>
+        <li class="nav-item dropdow" *ngIf="loggedIn">
+          <a href="/profile" class="nav-link">
+            {{ user.Email }}
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="loggedIn"><a href="/logout" class="nav-link"><i class="fa fa-sign-in"></i> Вийти</a></li>
         <!--
             <li class="nav-item dropdow">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
