@@ -30,7 +30,6 @@ export class PostsListComponent implements OnInit {
     
     this.users = Users;
     let posts = Posts;
-    debugger
     posts.forEach(post => {
       post.author = this.users[post.authorId];
       this.posts.push(post)

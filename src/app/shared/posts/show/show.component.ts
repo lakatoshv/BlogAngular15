@@ -5,6 +5,8 @@ import { Comments } from "../../../core/data/comments";
 
 import { ActivatedRoute } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
+import { Post } from 'src/app/core/models/post';
+import { Users } from 'src/app/core/data/users';
 
 @Component({
   selector: 'app-show',
@@ -21,14 +23,18 @@ export class ShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var posts = Posts;
     this._postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
-    this.post = posts[this._postId];
-    this.post.tags = this.post.tags.split(', ');
+    this._getPost();
   }
 
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
+  }
+
+  private _getPost(){
+    this.post = Posts[this._postId];
+    this.post.author = Users[this.post.authorId];
+    this.post.tags = this.post.tags.split(', ');
   }
 
 }
