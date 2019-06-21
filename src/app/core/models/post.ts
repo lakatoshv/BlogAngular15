@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Post {
     /*
     id -> int, increment
@@ -16,7 +18,8 @@ export class Post {
     title: string;
     description: string;
     content: string;
-    author: string;
+    authorId: number;
+    author: User;
     seen: number;
     likes: number;
     dislikes: number;
