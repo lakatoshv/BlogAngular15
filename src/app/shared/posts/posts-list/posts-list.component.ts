@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Users } from 'src/app/core/data/users';
 import { Post } from 'src/app/core/models/post';
 import { User } from 'src/app/core/models/user';
+import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
+import { UsersService } from 'src/app/core/services/users/users-service.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -15,15 +17,26 @@ export class PostsListComponent implements OnInit {
   public posts: Post[] = [];
   private _post: any;
   private users: User[] = [];
+  public user: User;
+
+  public loggedIn: boolean = false;
+
   constructor(
+    private _globalService: GlobalService,
     private _generalService: GeneralServiceService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _usersService: UsersService
   ) {
   }
 
   ngOnInit() {
     this._post = parseInt(this._generalService.getRoutePeram("post", this._activatedRoute));
     this._getPosts();
+    this.loggedIn = this._usersService.isLoggedIn();
+    if(this.loggedIn){
+      this._globalService.resetUserData();  
+      this.user = this._globalService._currentUser;
+    }
   }
 
   private _getPosts(){
