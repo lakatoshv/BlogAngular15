@@ -5,6 +5,7 @@ import { PostForm } from '../../../core/forms/posts/PostForm';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/user';
+import { Posts } from 'src/app/core/data/posts';
 
 @Component({
   selector: 'app-edit-post',
@@ -26,7 +27,7 @@ export class EditPostComponent implements OnInit {
   private _postId: number;
 
   private _user: User;
-  
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
@@ -42,8 +43,7 @@ export class EditPostComponent implements OnInit {
   };
 
   ngOnInit() {
-    //this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
-    this._getPost();
+    this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
 
     this.isLoggedIn = this._usersService.isLoggedIn()
     if(this._usersService.isLoggedIn()){
@@ -53,8 +53,12 @@ export class EditPostComponent implements OnInit {
     else {
       this._router.navigateByUrl("/authorization");
     }
+    this._getPost();
   }
   private _getPost(){
+    this.post = Posts[this._postId];
+    if(this.post.authorId !== this._user.Id)
+      this._router.navigateByUrl("/");
   }
 
   private _setFormData(){
