@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostForm } from '../../../core/forms/posts/PostForm';
+import { UsersService } from 'src/app/core/services/users/users-service.service';
+import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-edit-post',
@@ -11,6 +14,7 @@ import { PostForm } from '../../../core/forms/posts/PostForm';
 export class EditPostComponent implements OnInit {
   private _postForm: FormGroup = new PostForm().postForm;
   public post: any;
+  public isLoggedIn: boolean = false;
 
   private _tagLabel: string = "Додати новий тег";
   private _action: string = "add";
@@ -20,9 +24,14 @@ export class EditPostComponent implements OnInit {
   }
 
   private _postId: number;
+
+  private _user: User;
+  
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _usersService: UsersService,
+    private _globalService: GlobalService
   ) {
   }
 
@@ -36,6 +45,14 @@ export class EditPostComponent implements OnInit {
     //this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
     this._getPost();
 
+    this.isLoggedIn = this._usersService.isLoggedIn()
+    if(this._usersService.isLoggedIn()){
+      this._globalService.resetUserData(); 
+      this._user = this._globalService._currentUser;
+    }
+    else {
+      this._router.navigateByUrl("/authorization");
+    }
   }
   private _getPost(){
   }
