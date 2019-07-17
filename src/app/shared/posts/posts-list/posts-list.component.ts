@@ -40,10 +40,12 @@ export class PostsListComponent implements OnInit {
   }
 
   public deleteAction(postId: number){
-    let index = this.posts.findIndex(x => x.id === postId);
-    if (index > -1)
-      this.posts.splice(index, 1);
-    this.posts = this.posts;
+    if(this.loggedIn && this.posts[postId].author.Id === this.user.Id){
+      let index = this.posts.findIndex(x => x.id === postId);
+      if (index > -1)
+        this.posts.splice(index, 1);
+      this.posts = this.posts;
+    }
   }
 
   private _getPosts(){
