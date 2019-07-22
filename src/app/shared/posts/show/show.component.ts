@@ -31,6 +31,14 @@ export class ShowComponent implements OnInit {
     //const index = Data.findIndex(item => item.name === 'John');
   }
 
+  public like(id: number): void{
+    this.post.likes += 1;
+  }
+
+  public dislike(id: number): void{
+    this.post.dislikes += 1;
+  }
+
   private _getPost(){
     this.post = Posts[this._postId];
     this.post.author = Users[this.post.authorId];
