@@ -48,6 +48,14 @@ export class PostsListComponent implements OnInit {
     }
   }
 
+  public like(id: number): void{
+    this.posts[id].likes += 1;
+  }
+
+  public dislike(id: number): void{
+    this.posts[id].dislikes += 1;
+  }
+
   private _getPosts(){
     
     this.users = Users;
