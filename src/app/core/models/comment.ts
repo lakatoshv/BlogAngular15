@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Comment {
     /*
     id -> int, increment
@@ -8,7 +10,8 @@ export class Comment {
     */
     id: number;
     post_id: number;
-    author: string;
+    authorId: number;
+    author: User;
     content: string;
     created_at: Date;
   }
