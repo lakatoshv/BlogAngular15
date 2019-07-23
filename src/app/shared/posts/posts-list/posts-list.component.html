@@ -34,11 +34,7 @@
                 <span><i class="fa fa-fw fa-eye"></i>  {{post.seen}}</span>  
                 <span><i class="fa fa-fw fa-thumbs-up"></i> {{post.likes}}</span>
                 <span><i class="fa fa-fw fa-thumbs-down"></i> {{post.dislikes}}</span>
-                <!--@php 
-                {{$comments = DB::table("comments")->where("post_id", $post->id)->get();}}
-                @endphp 
-                -->
-                <span><i class="fa fa-fw fa-comment"></i>5</span>
+                <span><i class="fa fa-fw fa-comment"></i>{{post.commentsCount}}</span>
               </p>
               <p class="post-meta">Теги:
                 {{post.tags}}

@@ -25,4 +25,5 @@ export class Post {
     dislikes: number;
     imgurl: string;
     tags: string;
+    commentsCount: number;
   }
