@@ -62,6 +62,7 @@ export class PostsListComponent implements OnInit {
     let posts = Posts;
     posts.forEach(post => {
       post.author = this.users[post.authorId];
+      post.commentsCount = Posts.findIndex(item => item.id === post.id);
       this.posts.push(post)
     })
     this.posts;

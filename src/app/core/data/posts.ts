@@ -12,7 +12,8 @@ export const Posts: Post[] = [
         likes: 10,
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
-        tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python"
+        tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 1,
@@ -26,6 +27,7 @@ export const Posts: Post[] = [
         dislikes: 0,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 2,
@@ -39,6 +41,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 3,
@@ -52,6 +55,7 @@ export const Posts: Post[] = [
         dislikes: 0,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 4,
@@ -65,6 +69,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 5,
@@ -78,6 +83,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 6,
@@ -91,6 +97,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 7,
@@ -104,6 +111,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 8,
@@ -117,6 +125,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 9,
@@ -130,6 +139,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 10,
@@ -143,6 +153,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 11,
@@ -156,6 +167,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 12,
@@ -169,6 +181,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 13,
@@ -182,6 +195,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 14,
@@ -195,6 +209,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 15,
@@ -208,6 +223,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 16,
@@ -221,6 +237,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 17,
@@ -234,6 +251,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 18,
@@ -247,6 +265,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 19,
@@ -260,6 +279,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
     { 
         id: 20,
@@ -273,6 +293,7 @@ export const Posts: Post[] = [
         dislikes: 5,
         imgurl: "https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png",
         tags: "Development under Windows, Mathematics, Astronomy, Algorithms, Python",
+        commentsCount: 0
     },
 ];
 
