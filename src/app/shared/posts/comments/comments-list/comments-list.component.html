@@ -24,7 +24,7 @@
                       <div class="comment_content">
                       <p>{{comment.content}}</p>
                     </div>
-                    <p class="pull-right">
+                    <p class="pull-right" *ngIf="loggedIn && comment.author.Id === user.Id">
                       <button 
                         type="button" 
                         class="btn btn-sm text-white btn-primary"

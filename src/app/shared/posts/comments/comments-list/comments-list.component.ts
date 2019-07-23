@@ -37,6 +37,7 @@ export class CommentsListComponent implements OnInit {
 
   ngOnInit() {
     this._getCommentsForCurrentPost();
+    
     this.loggedIn = this._usersService.isLoggedIn();
     if(this.loggedIn){
       this._globalService.resetUserData();  
