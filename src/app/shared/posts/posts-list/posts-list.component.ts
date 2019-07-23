@@ -57,7 +57,6 @@ export class PostsListComponent implements OnInit {
   }
 
   private _getPosts(){
-    
     this.users = Users;
     let posts = Posts;
     posts.forEach(post => {
@@ -65,7 +64,6 @@ export class PostsListComponent implements OnInit {
       post.commentsCount = Posts.findIndex(item => item.id === post.id);
       this.posts.push(post)
     })
-    this.posts;
   }
 
 }

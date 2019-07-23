@@ -21,7 +21,7 @@ export class AddCommentComponent implements OnInit {
 
   private _addComment(name: string, email: string, content: string): void{
     let comment: Comment = new Comment();
-    comment.author = email;
+    comment.authorId = 0;
     comment.content = content;
     this.onAdd.emit(comment);
     
