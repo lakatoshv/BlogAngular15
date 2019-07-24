@@ -62,6 +62,8 @@ export class CommentsListComponent implements OnInit {
   }
 
   private _onAddAction(comment: any){
+    if(comment.authorId !== null)
+      comment.author = this.users[comment.authorId];
     this.comments.unshift(comment);
   }
 
