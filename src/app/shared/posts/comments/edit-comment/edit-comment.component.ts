@@ -45,8 +45,10 @@ export class EditCommentComponent implements OnInit {
   }
 
   private _edit(comment){
-    comment.id = this.comment.id;
-    this.onEdit.emit(comment);
+    if(this.user.Id === this.comment.authorId){
+      comment.id = this.comment.id;
+      this.onEdit.emit(comment);
+    }
   }
 
 }
