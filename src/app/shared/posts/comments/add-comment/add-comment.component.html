@@ -6,19 +6,23 @@
       <div class="post_comment_form_container">
         <form [formGroup]="_commentForm" #comment>
           <input 
+            [ngStyle]="{'display': user !== null ? 'none' : 'block'}"
             type="text" 
             class="comment_input comment_input_name" 
             placeholder="Your Name" 
             formControlName="name" 
             required="required"
+            value=""
             #name>
           
           <input 
+            [ngStyle]="{'display': user !== null ? 'none' : 'block'}"
             type="email" 
             class="comment_input comment_input_email" 
             placeholder="Your Email" 
             formControlName="email" 
             required="required"
+            value=""
             #email>
           
           <textarea 

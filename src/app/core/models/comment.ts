@@ -10,8 +10,10 @@ export class Comment {
     */
     id: number;
     post_id: number;
-    authorId: number;
+    authorId?: number;
     author: User;
+    email?: string;
+    name?: string;
     content: string;
     created_at: Date;
   }
