@@ -11,13 +11,15 @@ import { EditCommentComponent } from './comments/edit-comment/edit-comment.compo
 import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     PostsRoutingModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    NgxPaginationModule
   ],
   declarations: [
     PostsListComponent, 

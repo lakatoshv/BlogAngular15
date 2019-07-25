@@ -18,6 +18,11 @@ export class PostsListComponent implements OnInit {
   private _post: any;
   private users: User[] = [];
   public user: User;
+  public pageInfo: any = {
+    pageSize: 10,
+    pageNumber: 0,
+    totalItems: 0
+  }
 
   public loggedIn: boolean = false;
 
@@ -56,6 +61,10 @@ export class PostsListComponent implements OnInit {
     this.posts[id].dislikes += 1;
   }
 
+  public paginate(page: number){
+    this.pageInfo.pageNumber = page;
+  }
+
   private _getPosts(){
     this.users = Users;
     let posts = Posts;
@@ -64,6 +73,7 @@ export class PostsListComponent implements OnInit {
       post.commentsCount = Posts.findIndex(item => item.id === post.id);
       this.posts.push(post)
     })
+    this.pageInfo.totalItems = posts.length;
   }
 
 }

@@ -74,9 +74,11 @@ export class CommentsListComponent implements OnInit {
   }
 
   private _deleteAction(comment){
-    let index = this.comments.findIndex(x => x.id === comment.id);
-        if (index > -1)
-            this.comments.splice(index, 1);
+    if(this.user.Id === comment.authorId){
+      let index = this.comments.findIndex(x => x.id === comment.id);
+      if (index > -1)
+        this.comments.splice(index, 1);
+    }
   }
 
 }
