@@ -3,7 +3,7 @@ import { Post } from '../models/post';
 export const Posts: Post[] = [
     { 
         id: 0,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python1",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 0,
@@ -17,7 +17,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 1,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python2",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 0,
@@ -31,7 +31,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 2,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python3",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 0,
@@ -45,7 +45,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 3,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python4",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 0,
@@ -59,7 +59,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 4,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python5",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 1,
@@ -73,7 +73,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 5,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python6",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 1,
@@ -87,7 +87,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 6,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python7",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 1,
@@ -101,7 +101,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 7,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python8",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 2,
@@ -115,7 +115,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 8,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python9",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 4,
@@ -129,7 +129,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 9,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python10",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 4,
@@ -143,7 +143,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 10,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python11",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 3,
@@ -157,7 +157,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 11,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python12",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 3,
@@ -171,7 +171,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 12,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python13",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 3,
@@ -185,7 +185,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 13,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python14",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 3,
@@ -199,7 +199,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 14,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python15",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 3,
@@ -213,7 +213,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 15,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python16",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 2,
@@ -227,7 +227,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 16,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python17",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 2,
@@ -241,7 +241,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 17,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python28",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 2,
@@ -255,7 +255,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 18,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python19",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 1,
@@ -269,7 +269,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 19,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python20",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 1,
@@ -283,7 +283,7 @@ export const Posts: Post[] = [
     },
     { 
         id: 20,
-        title: "Building the orbits of celestial bodies using Python",
+        title: "Building the orbits of celestial bodies using Python21",
         description: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).",
         content: "To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial). Using this assumption, let us consider the motion of one and the same point in two different reference frames K and K ', of which the second moves relative to the first with an arbitrary speed",
         authorId: 1,
