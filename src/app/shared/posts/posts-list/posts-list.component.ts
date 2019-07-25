@@ -51,6 +51,8 @@ export class PostsListComponent implements OnInit {
         this.posts.splice(index, 1);
       this.posts = this.posts;
     }
+    
+    this.pageInfo.totalItems -= 1;
   }
 
   public like(id: number): void{
