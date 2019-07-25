@@ -12,7 +12,9 @@
             <div class="comments_container">
   
               <ul class="comment_list" *ngIf="comments">
-                <li class="comment" *ngFor="let comment of comments">
+                <li class="comment" *ngFor="let comment of comments | paginate: { itemsPerPage: pageInfo.pageSize,
+                  currentPage: pageInfo.pageNumber,
+                  totalItems: pageInfo.totalItems }">
                   <div class="comment_body">
                     <div class="comment_panel d-flex flex-row align-items-center justify-content-start">
                       <span><I class="fa fa-3x fa-user-circle"></I></span>
@@ -78,6 +80,8 @@
                 </li>
                 <hr>
               </ul>
+              
+              <pagination-controls (pageChange)="paginate($event)"></pagination-controls>
             </div>
           </div>
         </div>

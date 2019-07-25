@@ -22,6 +22,11 @@ export class CommentsListComponent implements OnInit {
   private users: User[] = [];
   public comments: any = [];
   public user: User;
+  public pageInfo: any = {
+    pageSize: 10,
+    pageNumber: 0,
+    totalItems: 0
+  }
 
   public loggedIn: boolean = false;
 
@@ -45,6 +50,10 @@ export class CommentsListComponent implements OnInit {
     }
   }
 
+  public paginate(page: number){
+    this.pageInfo.pageNumber = page;
+  }
+
   public findByValue(){
     //const index = Data.findIndex(item => item.name === 'John');
   }
@@ -55,6 +64,8 @@ export class CommentsListComponent implements OnInit {
       comment.author = this.users[comment.authorId];
       this.comments.push(comment);
     })
+    
+    this.pageInfo.totalItems = this.comments.length;
   }
 
   private _onLoadEditAction(){
@@ -65,6 +76,8 @@ export class CommentsListComponent implements OnInit {
     if(comment.authorId !== null)
       comment.author = this.users[comment.authorId];
     this.comments.unshift(comment);
+    
+    this.pageInfo.totalItems += 1; 
   }
 
   private _onEditAction(comment: any){
@@ -79,6 +92,8 @@ export class CommentsListComponent implements OnInit {
       if (index > -1)
         this.comments.splice(index, 1);
     }
+    
+    this.pageInfo.totalItems -= 1; 
   }
 
 }
