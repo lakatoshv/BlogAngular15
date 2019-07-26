@@ -7,6 +7,7 @@ import { Post } from 'src/app/core/models/post';
 import { User } from 'src/app/core/models/user';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
+import { Comments } from 'src/app/core/data/comments';
 
 @Component({
   selector: 'app-posts-list',
@@ -47,9 +48,13 @@ export class PostsListComponent implements OnInit {
   public deleteAction(postId: number){
     if(this.loggedIn && this.posts[postId].author.Id === this.user.Id){
       let index = this.posts.findIndex(x => x.id === postId);
-      if (index > -1)
+      if (index > -1){
         this.posts.splice(index, 1);
-      this.posts = this.posts;
+        var comments = Comments.filter(comment => comment.post_id === postId).forEach(comment => {
+          Comments.splice(comment.id, 1)
+        })
+      }
+      this._getPosts();
     }
     
     this.pageInfo.totalItems -= 1;
