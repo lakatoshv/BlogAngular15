@@ -3,7 +3,6 @@ import { Angular2TokenService } from 'angular2-token';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { GlobalService } from '../global-service/global-service.service';
 import { Users } from '../../data/users';
-import { Observable } from 'rxjs';
 import { User } from '../../models/User';
 
 @Injectable({

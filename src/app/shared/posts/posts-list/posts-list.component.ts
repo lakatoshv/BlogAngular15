@@ -8,6 +8,9 @@ import { User } from 'src/app/core/models/user';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { Comments } from 'src/app/core/data/comments';
+import { FormGroup } from '@angular/forms';
+import { SearchForm } from 'src/app/core/forms/SearchForm';
+import {debounceTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-posts-list',
@@ -16,6 +19,9 @@ import { Comments } from 'src/app/core/data/comments';
 })
 export class PostsListComponent implements OnInit {
   public posts: Post[] = [];
+  
+  public searchForm: FormGroup = new SearchForm().searchForm;
+
   private _post: any;
   private users: User[] = [];
   public user: User;
@@ -70,6 +76,10 @@ export class PostsListComponent implements OnInit {
 
   public paginate(page: number){
     this.pageInfo.pageNumber = page;
+  }
+
+  public search(search: string){
+    this.posts = Posts.filter(post => post.title.includes(search));
   }
 
   private _getPosts(){
