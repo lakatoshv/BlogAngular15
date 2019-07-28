@@ -7,6 +7,24 @@
             <b>Дана категорія ще не створена або не має записів</b>
           </div>
           <div *ngIf="posts">
+            <form
+              #f="ngForm"
+              [formGroup]="searchForm"
+              (ngSubmit)="search(f.value.search)" >
+                <div class="input-group md-form form-sm form-2 pl-0 col-5">
+                    <input 
+                      class="form-control search" 
+                      type="text" 
+                      placeholder="Search" 
+                      aria-label="Search" 
+                      formControlName="search" 
+                      id="search">
+    
+                    <button class="input-group-append" type="submit" id="search-btn">
+                        <span class="input-group-text"><i class="fa fa-search text-grey" aria-hidden="true"></i></span>
+                    </button>
+                </div>
+            </form>
             <div class="post-preview" *ngFor="let post of posts | paginate: { itemsPerPage: pageInfo.pageSize,
               currentPage: pageInfo.pageNumber,
               totalItems: pageInfo.totalItems }">
