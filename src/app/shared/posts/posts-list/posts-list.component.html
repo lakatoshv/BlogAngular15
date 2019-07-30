@@ -25,6 +25,30 @@
                     </button>
                 </div>
             </form>
+            <ul class="list-inline left">
+              <li>Сортувати</li>
+              <li>за:</li>
+              <li>
+                  <select id="sort-by" [(ngModel)]="sortBy">
+                      <option value="createdAt">Датою</option>
+                      <option value="title">Назвою</option>
+                      <option value="author">Автором</option>
+                      <option value="likes">Лайками</option>
+                      <option value="dislikes">Дизлайками</option>
+                  </select>
+              </li>
+              <li>тип сортування:</li>
+              <li>
+                  <select id="order-by" [(ngModel)]="orderBy">
+                      <option value="asc">За зростанням</option>
+                      <option value="desc">За спаданням</option>
+                  </select>
+              </li>
+              <li>
+                  <a id="sorting" class="btn btn-default button-background" (click)="sort()">Сортувати</a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
             <div class="post-preview" *ngFor="let post of posts | paginate: { itemsPerPage: pageInfo.pageSize,
               currentPage: pageInfo.pageNumber,
               totalItems: pageInfo.totalItems }">

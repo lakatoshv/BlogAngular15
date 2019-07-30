@@ -11,6 +11,7 @@ import { Comments } from 'src/app/core/data/comments';
 import { FormGroup } from '@angular/forms';
 import { SearchForm } from 'src/app/core/forms/SearchForm';
 import {debounceTime} from "rxjs/operators";
+import { sortBy } from 'lodash';
 
 @Component({
   selector: 'app-posts-list',
@@ -21,6 +22,9 @@ export class PostsListComponent implements OnInit {
   public posts: Post[] = [];
   
   public searchForm: FormGroup = new SearchForm().searchForm;
+
+  public sortBy: string = 'title';
+  public orderBy: string = "asc";
 
   private _post: any;
   private users: User[] = [];
@@ -80,6 +84,10 @@ export class PostsListComponent implements OnInit {
 
   public search(search: string){
     this.posts = Posts.filter(post => post.title.includes(search));
+  }
+
+  public sort(){
+    this.posts = sortBy(Object.values(Posts), [this.sortBy])
   }
 
   private _getPosts(){

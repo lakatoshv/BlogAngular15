@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostsListComponent } from './posts-list/posts-list.component';
@@ -17,6 +17,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
   imports: [
     CommonModule,
     PostsRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     EditorModule,
     NgxPaginationModule
