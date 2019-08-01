@@ -6,6 +6,7 @@ import { AuthorizationComponent } from './user/authorization/authorization.compo
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AboutComponent } from './default-pages/about/about.component';
 import { ContactsComponent } from './default-pages/contacts/contacts.component';
+import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,15 @@ const routes: Routes = [
       {
         path: "authorization",
         component: AuthorizationComponent
-      }
+      },
+      {
+        path: "profile",
+        loadChildren: '../user-portal/profile/profile.module#ProfileModule'
+      },
+      /*{
+        path: "my-profile",
+        component: ProfilePageComponent
+      },*/
     ]
   }
 ];

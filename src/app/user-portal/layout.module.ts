@@ -10,6 +10,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AboutComponent } from './default-pages/about/about.component';
 import { ContactsComponent } from './default-pages/contacts/contacts.component';
+import { ProfileModule } from './profile/profile.module';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({
@@ -18,14 +19,15 @@ import { ContactsComponent } from './default-pages/contacts/contacts.component';
     LayoutRoutingModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    ProfileModule
   ],
   declarations: [
     LayoutComponentComponent, 
     AboutComponent, 
     ContactsComponent,
     RegistrationComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
   ],
 })
 export class LayoutModule { }
