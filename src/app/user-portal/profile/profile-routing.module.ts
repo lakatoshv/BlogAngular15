@@ -4,7 +4,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: ":profile-id",
     component: ProfilePageComponent
   },
 ];
