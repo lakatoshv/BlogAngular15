@@ -7,16 +7,16 @@
       <div class="row">
         <div class="col-md-3 col-lg-3 ">
           <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar" class="img-circle img-responsive"><br>
-          <h3>Test Test</h3>
+          <h3>{{user.FirstName + " " + user.LastName}}</h3>
         </div>
         <div class=" col-md-9 col-lg-9">
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#main-info">Осовна інформація</a></li>
-            <li><a data-toggle="tab" href="#posts">Пости</a></li>
-            <li><a data-toggle="tab" href="#comments">Коментарі</a></li>
+            <li class="active"><a data-toggle="tab" (click)="selectTab('main-info', 'top')">Осовна інформація</a></li>
+            <li><a data-toggle="tab" (click)="selectTab('posts', 'top')">Пости</a></li>
+            <li><a data-toggle="tab" (click)="selectTab('comments', 'top')">Коментарі</a></li>
           </ul>
           <div class="tab-content">
-            <div class="tab-pane active" id="main-info">
+            <div *ngIf="topTab === 'main-info'" [ngClass]="{'active': topTab === 'main-info'}" class="tab-pane active" id="main-info">
               <table class="table table-user-information">
                 <tbody>
                   <tr>
@@ -27,15 +27,15 @@
                   </tr>
                   <tr>
                     <td>Ім'я:</td>
-                    <td><b>Test</b></td>
+                    <td><b>{{user.FirstName}}</b></td>
                   </tr>
                   <tr>
                     <td>Фамілія:</td>
-                    <td><b>Test</b></td>
+                    <td><b>{{user.LastName}}</b></td>
                   </tr>
                   <tr>
                     <td>Електронна пошта:</td>
-                    <td><b><a href="mailto:test@test.test">test@test.test</a></b></td>
+                    <td><b><a href="mailto:test@test.test">{{user.Email}}</a></b></td>
                   </tr>
                   <tr>
                     <td>Адреса:</td>
@@ -43,7 +43,7 @@
                   </tr>
                   <tr>
                     <td>Номер телефону:</td>
-                    <td><b>0123456789</b></td>
+                    <td><b>{{user.PhoneNumber}}</b></td>
                   </tr>
                   <tr>
                     <td>Статус:</td>
@@ -53,23 +53,17 @@
               </table>
               <div class="bs-callout bs-callout-danger">
                 <h4>Про мене:</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta liberavisse ea quo, te vel vidit mollis complectitur. Quis verear mel ne. Munere vituperata vis cu,
-                  te pri duis timeam scaevola, nam postea diceret ne. Cum ex quod aliquip mediocritatem, mei habemus persecuti mediocritatem ei.
-                </p>
-                <p>
-                  Odio recteque expetenda eum ea, cu atqui maiestatis cum. Te eum nibh laoreet, case nostrud nusquam an vis.
-                  Clita debitis apeirian et sit, integre iudicabit elaboraret duo ex. Nihil causae adipisci id eos.
-                </p>
+                <div [innerHTML]="user.About">
+                </div>
               </div>
             </div>
-            <div class="tab-pane" id="posts">
+            <div *ngIf="topTab === 'posts'" [ngClass]="{'active': topTab === 'posts'}" class="tab-pane" id="posts">
               <p><b>Статистика</b></p>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
                     <td>Мої пости:</td>
-                    <td><b>10</b></td>
+                    <td><b>{{posts.length}}</b></td>
                   </tr>
                   <tr>
                     <td>Збережені пости:</td>
@@ -78,11 +72,11 @@
                 </tbody>
               </table>
               <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#my">Пости</a></li>
-                <li><a data-toggle="tab" href="#saved">Збережені пости</a></li>
+                <li class="active"><a data-toggle="tab" (click)="selectTab('my', 'posts')">Пости</a></li>
+                <li><a data-toggle="tab" (click)="selectTab('saved', 'posts')">Збережені пости</a></li>
               </ul>
               <div class="tab-content">
-                <div class="tab-pane active" id="my">
+                <div *ngIf="postsTab === 'my'" [ngClass]="{'active': postsTab === 'my'}" class="tab-pane active" id="my">
                   <p><b>Пости</b></p>
                   <table class="table table-hover table-condensed">
                     <thead>
@@ -96,185 +90,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr *ngFor="let post of posts">
                         <td>
-                          <a href="/pathURL">Test title</a>
+                          <a href="/posts/show/{{post.id}}">{{post.title}}</a>
                         </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
-                        <td class="actions" data-th="">
-                          <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
-                          <button
-                            type="button"
-                            class="btn btn-sm text-white btn-danger"
-                            id="1"
-                            >
-                              <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <a href="/pathURL">Test title</a>
-                        </td>
-                        <td>100</td>
-                        <td>15</td>
-                        <td>3</td>
-                        <td>27.05.2019</td>
+                        <td>{{post.seen}}</td>
+                        <td>{{post.likes}}</td>
+                        <td>{{post.dislikes}}</td>
+                        <td>12.12.2019</td>
                         <td class="actions" data-th="">
                           <a class="btn btn-primary" href="/edit"><i class="fa fa-edit"></i></a>
                           <button
@@ -289,7 +112,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="tab-pane" id="saved">
+                <div *ngIf="postsTab === 'saved'" [ngClass]="{'active': postsTab === 'saved'}" class="tab-pane" id="saved">
                   Збережені пости
                 </div>
               </div>
@@ -299,10 +122,10 @@
       </div>
     </div>
     <div class="panel-footer">
-      <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+      <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i></a>
       <span class="pull-right">
-        <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-        <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+        <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+        <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>
       </span>
     </div>
   </div>

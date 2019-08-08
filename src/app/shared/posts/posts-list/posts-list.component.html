@@ -84,7 +84,7 @@
                 {{post.tags}}
               </p>
               <p class="post-meta">
-                Написав: <b><a href="">{{post.author.FirstName + " " + post.author.LastName}}</a><i> 
+                Написав: <b><a href="/profile/{{post.authorId}}">{{post.author.FirstName + " " + post.author.LastName}}</a><i> 
                 10.11.2018</i></b>
               </p>
               <button class="btn btn-xs btn-info" (click)="like(post.id)"><span class="fa fa-thumbs-up"></span> Подобається</button>

@@ -9,6 +9,7 @@ export class User {
         public PhoneNumber?: string,
         //public ProfileImg?: string,
         public Roles: Array<string> = [],
-        public Password?: string
+        public Password?: string,
+        public About?: string
     ) { }
 }

@@ -20,7 +20,7 @@
       </p>
       <p class="text-justify">{{post.content}}</p>
       <p class="post-meta">
-        Написав: <b><a href="#">{{post.author.FirstName + " " + post.author.LastName}}</a><i>, 10.11.2018</i></b>
+        Написав: <b><a href="/profile/{{post.authorId}}">{{post.author.FirstName + " " + post.author.LastName}}</a><i>, 10.11.2018</i></b>
       </p>
       <button class="btn btn-xs btn-info" (click)="like(post.id)"><span class="fa fa-thumbs-up"></span> Подобається</button>
       <button class="btn btn-sm btn-danger" (click)="dislike(post.id)"><span class="fa fa-thumbs-down"></span> Неподобається</button>
