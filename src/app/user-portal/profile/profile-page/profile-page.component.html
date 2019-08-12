@@ -21,8 +21,8 @@
                 <tbody>
                   <tr>
                     <td></td>
-                    <td class="pull-right">
-                      <a class="" href="/editProfile"><i class="fa fa-edit"> Редагувати</i></a>
+                    <td *ngIf="isForCurrentUser" class="pull-right">
+                      <a class="" href="/my-profile/edit"><i class="fa fa-edit"> Редагувати</i></a>
                     </td>
                   </tr>
                   <tr>

@@ -4,7 +4,6 @@ import { ActivatedRoute, Router, Route } from '@angular/router';
 import { User } from 'src/app/core/models/user';
 import { Users } from 'src/app/core/data/users';
 import { Posts } from 'src/app/core/data/posts';
-import { post } from 'selenium-webdriver/http';
 import { Comments } from 'src/app/core/data/comments';
 import { Post } from 'src/app/core/models/post';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
@@ -34,10 +33,15 @@ export class ProfilePageComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    this.isForCurrentUser = this._router.url.includes('/my-profile');
+    this._userId = parseInt(this._generalService.getRoutePeram("profile-id", this._activatedRoute));
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if(this._usersService.isLoggedIn()){
+      this._globalService.resetUserData(); 
+      this.user = this._globalService._currentUser;
+    }
+    this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user.Id === this._userId);
     
     if(!this.isForCurrentUser){
-      this._userId = parseInt(this._generalService.getRoutePeram("profile-id", this._activatedRoute))
       if(this._userId !== null){
         this.user = Users.find(user => user.Id === this._userId);
         this._getPosts();
@@ -46,15 +50,8 @@ export class ProfilePageComponent implements OnInit {
         this._router.navigateByUrl("/");
       }
     }
-    else{
-      this.isLoggedIn = this._usersService.isLoggedIn()
-      if(this._usersService.isLoggedIn()){
-        this._globalService.resetUserData(); 
-        this.user = this._globalService._currentUser;
-      }
-      else {
-        this._router.navigateByUrl("/authorization");
-      }
+    else if(!this.isLoggedIn) {
+      this._router.navigateByUrl("/authorization");
     }
   }
   private _getPosts(){
