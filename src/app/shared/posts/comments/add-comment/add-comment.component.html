@@ -4,9 +4,13 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="post_comment_form_container">
-        <form [formGroup]="_commentForm" #comment>
+        <form 
+          [formGroup]="_commentForm" 
+          #comment 
+          (ngSubmit)="_addComment()">
+
           <input 
-            [ngStyle]="{'display': user !== null ? 'none' : 'block'}"
+            [ngStyle]="{'display': (user !== null || user !== undefined) ? 'none' : 'block'}"
             type="text" 
             class="comment_input comment_input_name" 
             placeholder="Your Name" 
@@ -34,10 +38,8 @@
           </textarea>
           
           <button 
-            type="button" 
-            class="comment_button" 
-            [disabled]="!_commentForm.valid"
-            (click)="_addComment(name.value, email.value, content.value)">
+            type="submit" 
+            class="comment_button" >
               Post Comment
           </button>
         </form>

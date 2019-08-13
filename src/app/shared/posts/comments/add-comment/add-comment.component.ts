@@ -30,14 +30,15 @@ export class AddCommentComponent implements OnInit {
     }
   }
 
-  private _addComment(name: string, email: string, content: string): void{
+  private _addComment(): void{
     let comment: Comment = new Comment();
-    comment.content = content;
+    comment.content = this._commentForm.get("content").value;
+    comment.created_at = new Date();
     if(this.user)
       comment.authorId = this.user.Id;
     else{
-      comment.email = email;
-      comment.name = name;
+      comment.email = this._commentForm.get("email").value;
+      comment.name = this._commentForm.get("name").value;
     }
     this.onAdd.emit(comment);
   }
