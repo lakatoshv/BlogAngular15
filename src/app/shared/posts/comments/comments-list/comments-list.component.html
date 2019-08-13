@@ -23,26 +23,26 @@
                         <span>{{comment.created_at}}</span>
                       </small>
                     </div>
-                      <div class="comment_content">
+                    <div class="comment_content">
                       <p>{{comment.content}}</p>
+                      <p class="pull-right buttons" *ngIf="loggedIn && comment.author.Id === user.Id">
+                        <button 
+                          type="button" 
+                          class="btn btn-sm text-white btn-primary"
+                          [routerLink]="['comment/add']" 
+                          title="Редагувати">
+                          <i class="fa fa-edit"></i> 
+                        </button>
+                        <button
+                          type="button" 
+                          class="btn btn-sm text-white btn-danger"
+                          (click)="_deleteAction(comment)" 
+                          title="Видалити">
+                            <i class="fa fa-trash"></i> 
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-success ml-2"><i class="fa fa-reply"></i> Відповісти</button>
+                      </p>
                     </div>
-                    <p class="pull-right" *ngIf="loggedIn && comment.author.Id === user.Id">
-                      <button 
-                        type="button" 
-                        class="btn btn-sm text-white btn-primary"
-                        [routerLink]="['comment/add']">
-                        <i class="fa fa-edit"></i> 
-                        Редагувати
-                      </button>
-                      <button
-                        type="button" 
-                        class="btn btn-sm text-white btn-danger"
-                        (click)="_deleteAction(comment)">
-                          <i class="fa fa-trash"></i> 
-                          Видалити
-                      </button>
-                      <button type="button" class="btn btn-sm btn-outline-success ml-2"><i class="fa fa-reply"></i> Відповісти</button>
-                    </p>
                   </div>
                   <app-edit-comment 
                     [comment]="comment"
