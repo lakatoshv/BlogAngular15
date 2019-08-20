@@ -5,6 +5,21 @@
         <h2 class="post-title text-center">
           {{post.title}}
         </h2>
+        <div class="pull-right" *ngIf="loggedIn && post.author.Id === user.Id">
+          <a 
+            class="btn btn-sm text-white btn-primary"
+            href="post/{{post.id}}/edit">
+              <i class="fa fa-edit"></i> 
+              Редагувати
+          </a>
+          <button
+            type="button" 
+            class="btn btn-sm text-white btn-danger"
+            (click)="deleteAction(post.id)">
+              <i class="fa fa-trash"></i> 
+              Видалити
+          </button>
+        </div>
         <img style="width: 100%; height: 300px;" src="{{post.imgurl}}"/>
         <h3 class="post-subtitle text-center">
           {{post.description}}
