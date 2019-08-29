@@ -6,6 +6,7 @@ import { ShowComponent } from './show/show.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { MyPostsComponent } from './my-posts/my-posts.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   { 
     path: 'posts/edit/:post-id', 
     component: EditPostComponent
+  },
+  {
+    path: "my-posts",
+    component: MyPostsComponent
   },
 ];
 

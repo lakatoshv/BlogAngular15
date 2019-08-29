@@ -8,6 +8,7 @@ import { AboutComponent } from './default-pages/about/about.component';
 import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { MyPostsComponent } from '../shared/posts/my-posts/my-posts.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,7 @@ const routes: Routes = [
       {
         path: "my-profile/edit",
         component: EditProfileComponent
-      },
+      }
     ]
   }
 ];
