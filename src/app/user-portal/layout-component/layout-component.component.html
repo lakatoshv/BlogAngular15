@@ -30,6 +30,7 @@
       [ngClass]="{ 'show': _navbarOpen }">
       
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="loggedIn"><a href="/my-posts" class="nav-link"> Мої пости</a></li>
         <li class="nav-item">
           <a class="nav-link" href="/about">Про нас</a>
         </li>

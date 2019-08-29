@@ -11,6 +11,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { AboutComponent } from './default-pages/about/about.component';
 import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { ProfileModule } from './profile/profile.module';
+import { PostsModule } from '../shared/posts/posts.module';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({

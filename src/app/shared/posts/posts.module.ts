@@ -12,6 +12,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { MyPostsComponent } from './my-posts/my-posts.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ShowComponent, 
     CommentsListComponent, 
     AddCommentComponent, 
-    EditCommentComponent, AddPostComponent, EditPostComponent
+    EditCommentComponent, AddPostComponent, EditPostComponent, MyPostsComponent
   ]
 })
 export class PostsModule { }
