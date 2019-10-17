@@ -55,7 +55,7 @@
             <a href="post/{{post.id}}">
               <h2 class="post-title" [innerHTML]="post.title"></h2>
             </a>
-            <div class="pull-right" *ngIf="loggedIn && post.author.Id === user.Id">
+            <div class="pull-right" *ngIf="isLoggedIn && post.author.Id === user.Id">
               <a 
                 class="btn btn-sm text-white btn-primary"
                 href="post/{{post.id}}/edit">
