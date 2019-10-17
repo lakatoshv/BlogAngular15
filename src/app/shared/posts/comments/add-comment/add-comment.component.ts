@@ -16,7 +16,7 @@ export class AddCommentComponent implements OnInit {
   @Input() user: User = null;
 
   @Output() onAdd = new EventEmitter<any>();
-  private _commentForm: FormGroup = new CommentForm().commentForm;
+  commentForm: FormGroup = new CommentForm().commentForm;
   
   constructor(
     private _globalService: GlobalService,
@@ -25,20 +25,20 @@ export class AddCommentComponent implements OnInit {
 
   ngOnInit() {
     if(this.user){
-      this._commentForm.get("name").setValue(this.user.FirstName + " " + this.user.LastName);
-      this._commentForm.get("email").setValue(this.user.Email);
+      this.commentForm.get("name").setValue(this.user.FirstName + " " + this.user.LastName);
+      this.commentForm.get("email").setValue(this.user.Email);
     }
   }
 
-  private _addComment(): void{
+  addComment(): void{
     let comment: Comment = new Comment();
-    comment.content = this._commentForm.get("content").value;
+    comment.content = this.commentForm.get("content").value;
     comment.created_at = new Date();
     if(this.user)
       comment.authorId = this.user.Id;
     else{
-      comment.email = this._commentForm.get("email").value;
-      comment.name = this._commentForm.get("name").value;
+      comment.email = this.commentForm.get("email").value;
+      comment.name = this.commentForm.get("name").value;
     }
     this.onAdd.emit(comment);
   }

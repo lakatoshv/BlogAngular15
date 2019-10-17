@@ -19,7 +19,7 @@ export class EditCommentComponent implements OnInit {
   public loggedIn: boolean = false;
   public user: User = null;
 
-  private _commentForm: FormGroup = new CommentForm().commentForm;
+  commentForm: FormGroup = new CommentForm().commentForm;
 
   constructor(
     private _usersService: UsersService,
@@ -39,12 +39,12 @@ export class EditCommentComponent implements OnInit {
   }
 
   public setFormValue(){
-    this._commentForm.get('author').setValue(this.comment.author);
-    this._commentForm.get('email').setValue(this.comment.email);
-    this._commentForm.get('content').setValue(this.comment.content);
+    this.commentForm.get('author').setValue(this.comment.author);
+    this.commentForm.get('email').setValue(this.comment.email);
+    this.commentForm.get('content').setValue(this.comment.content);
   }
 
-  private _edit(comment){
+  edit(comment){
     if(this.user.Id === this.comment.authorId){
       comment.id = this.comment.id;
       this.onEdit.emit(comment);

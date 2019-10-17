@@ -30,7 +30,7 @@ export class CommentsListComponent implements OnInit {
 
   public loggedIn: boolean = false;
 
-  private _isLoadEdit: boolean = false; 
+  isLoadEdit: boolean = false; 
 
   
   constructor(
@@ -58,21 +58,7 @@ export class CommentsListComponent implements OnInit {
     //const index = Data.findIndex(item => item.name === 'John');
   }
 
-  private _getCommentsForCurrentPost(): void{
-    this.users = Users;
-    var comments = Comments.filter(item => item.post_id === this.postId).forEach(comment => {
-      comment.author = this.users[comment.authorId];
-      this.comments.push(comment);
-    })
-    
-    this.pageInfo.totalItems = this.comments.length;
-  }
-
-  private _onLoadEditAction(){
-    this._isLoadEdit = true;
-  }
-
-  private _onAddAction(comment: any){
+  onAddAction(comment: any){
     if(comment.authorId !== null)
       comment.author = this.users[comment.authorId];
     this.comments.unshift(comment);
@@ -80,13 +66,13 @@ export class CommentsListComponent implements OnInit {
     this.pageInfo.totalItems += 1; 
   }
 
-  private _onEditAction(comment: any){
+  onEditAction(comment: any){
     let index = this.comments.findIndex(x => x.id === comment.id);
-        if (index > -1)
-            this.comments[index] = comment;
+    if (index > -1)
+      this.comments[index] = comment;
   }
 
-  private _deleteAction(comment){
+  deleteAction(comment){
     if(this.user.Id === comment.authorId){
       let index = this.comments.findIndex(x => x.id === comment.id);
       if (index > -1)
@@ -96,4 +82,17 @@ export class CommentsListComponent implements OnInit {
     this.pageInfo.totalItems -= 1; 
   }
 
+  private _getCommentsForCurrentPost(): void {
+    this.users = Users;
+    Comments.filter(item => item.post_id === this.postId).forEach(comment => {
+      comment.author = this.users[comment.authorId];
+      this.comments.push(comment);
+    });
+    
+    this.pageInfo.totalItems = this.comments.length;
+  }
+
+  private _onLoadEditAction() {
+    this._isLoadEdit = true;
+  }
 }
