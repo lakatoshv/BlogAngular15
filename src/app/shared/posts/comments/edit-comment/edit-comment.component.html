@@ -6,8 +6,8 @@
       <div class="post_comment_form_container">
         <form 
           #f="ngForm"
-          [formGroup]="_commentForm"
-          (ngSubmit)="_edit(f.value)">
+          [formGroup]="commentForm"
+          (ngSubmit)="edit(f.value)">
           
           <input 
             type="text" 

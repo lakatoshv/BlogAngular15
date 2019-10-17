@@ -5,9 +5,9 @@
     <div class="col-lg-12">
       <div class="post_comment_form_container">
         <form 
-          [formGroup]="_commentForm" 
+          [formGroup]="commentForm" 
           #comment 
-          (ngSubmit)="_addComment()">
+          (ngSubmit)="addComment()">
 
           <input 
             [ngStyle]="{'display': (user !== null || user !== undefined) ? 'none' : 'block'}"
