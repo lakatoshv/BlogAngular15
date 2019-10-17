@@ -4,8 +4,8 @@
       <h2 class="text-center" id="form-header">Редагувати пост</h2>
       <form
         #f="ngForm"
-        [formGroup]="_postForm"
-        (ngSubmit)="_edit(f.value)" >
+        [formGroup]="postForm"
+        (ngSubmit)="edit(f.value)" >
         <div class="form-group">
           
           <label 
@@ -134,8 +134,8 @@
                     </label>
                   </div>
                   <div class="pull-right action-buttons">
-                    <button type="button" (click)="_editTag(tag)"><span class="fa fa-pencil"></span></button>
-                    <button type="button" (click)="_onDeleteTagAction(tag)"><span class="fa fa-trash"></span></button>
+                    <button type="button" (click)="editTag(tag)"><span class="fa fa-pencil"></span></button>
+                    <button type="button" (click)="onDeleteTagAction(tag)"><span class="fa fa-trash"></span></button>
                   </div>
                 </li>
                 
@@ -147,7 +147,7 @@
             for="alias" 
             tag="" 
             class="optional">
-              {{_tagLabel}}:
+              {{tagLabel}}:
           </label>
 
           <input 
@@ -155,16 +155,16 @@
             name="tags" 
             id="tags" 
             #tag
-            value="{{_selectedTag.value}}" 
+            value="{{selectedTag.value}}" 
             class="form-control">
 
             <input 
               type="button" 
               name="tagAction" 
               id="tagAction" 
-              value="{{_tagLabel}}" 
+              value="{{tagLabel}}" 
               class="btn btn-default"
-              (click)="_tagAction(tag.value, _action)">
+              (click)="tagAction(tag.value, action)">
         </div>
 
         <div class="form-group">

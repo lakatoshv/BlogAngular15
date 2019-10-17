@@ -21,7 +21,7 @@ export class ShowComponent implements OnInit {
 
   public loggedIn: boolean = false;
 
-  private _postId: number;
+  public postId: number;
   
   constructor(
     private _generalService: GeneralServiceService,

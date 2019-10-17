@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
-  private _postForm: FormGroup = new PostForm().postForm;
+  postForm: FormGroup = new PostForm().postForm;
 
   constructor(
     private _router: Router
@@ -20,7 +20,7 @@ export class AddPostComponent implements OnInit {
   ngOnInit() {
   }
 
-  private _add(post): void{
+  add(post: Post): void{
     this._router.navigate(["/"]);
   }
 

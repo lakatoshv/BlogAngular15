@@ -13,20 +13,20 @@ import { Posts } from 'src/app/core/data/posts';
   styleUrls: ['./edit-post.component.css']
 })
 export class EditPostComponent implements OnInit {
-  private _postForm: FormGroup = new PostForm().postForm;
-  public post: any;
-  public isLoggedIn: boolean = false;
+  postForm: FormGroup = new PostForm().postForm;
+  post: any;
+  isLoggedIn = false;
 
-  private _tagLabel: string = "Додати новий тег";
-  private _action: string = "add";
-  private _selectedTag = {
-    value: "",
+  tagLabel = 'Додати новий тег';
+  action = 'add';
+  selectedTag = {
+    value: '',
     id: null
-  }
+  };
+
+  user: User;
 
   private _postId: number;
-
-  private _user: User;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -37,74 +37,75 @@ export class EditPostComponent implements OnInit {
   }
 
   public options: Object = {
-    plugins: "media autolink autoresize autoresize charmap code textcolor colorpicker contextmenu directionality emoticons fullscreen help hr image imagetools importcss insertdatetime legacyoutput link lists noneditable pagebreak paste preview print save searchreplace tabfocus table template textcolor textpattern toc visualblocks visualchars wordcount",
-    menubar: "insert tools view format edit file table",
-    toolbar: "media charmap code forecolor backcolor ltr rtl emoticons fullscreen help image insertdatetime link numlist bullist pagebreak paste preview print save searchreplace table template textcolor toc visualblocks visualchars"
+    plugins: 'media autolink autoresize autoresize charmap code textcolor colorpicker contextmenu directionality emoticons fullscreen help hr image imagetools importcss insertdatetime legacyoutput link lists noneditable pagebreak paste preview print save searchreplace tabfocus table template textcolor textpattern toc visualblocks visualchars wordcount',
+    menubar: 'insert tools view format edit file table',
+    toolbar: 'media charmap code forecolor backcolor ltr rtl emoticons fullscreen help image insertdatetime link numlist bullist pagebreak paste preview print save searchreplace table template textcolor toc visualblocks visualchars'
   };
 
   ngOnInit() {
     this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
 
-    this.isLoggedIn = this._usersService.isLoggedIn()
-    if(this._usersService.isLoggedIn()){
-      this._globalService.resetUserData(); 
-      this._user = this._globalService._currentUser;
-    }
-    else {
-      this._router.navigateByUrl("/authorization");
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    } else {
+      this._router.navigateByUrl('/authorization');
     }
     this._getPost();
   }
-  private _getPost(){
+
+  tagAction(tag: string, action: string): void {
+    if (action === 'add') { this._onAddTagAction(tag); }
+    if (action === 'edit') { this._onEditTagAction(tag); }
+  }
+
+  edit(post) {}
+  
+  private _getPost() {
     this.post = Posts[this._postId];
-    if(this.post.authorId !== this._user.Id)
+    if (this.post.authorId !== this.user.Id) {
       this._router.navigateByUrl("/");
+    }
   }
 
-  private _setFormData(){
-    this._postForm.get('id').setValue(this.post.id);
-    this._postForm.get('title').setValue(this.post.title);
-    this._postForm.get('description').setValue(this.post.description);
-    this._postForm.get('content').setValue(this.post.content);
-    this._postForm.get('imgUrl').setValue(this.post.imgUrl);
+  private _setFormData() {
+    this.postForm.get('id').setValue(this.post.id);
+    this.postForm.get('title').setValue(this.post.title);
+    this.postForm.get('description').setValue(this.post.description);
+    this.postForm.get('content').setValue(this.post.content);
+    this.postForm.get('imgUrl').setValue(this.post.imgUrl);
   }
 
-  private clearFormData(){
-    this._tagLabel = "Додати новий тег";
-    this._action = "add";
-    this._selectedTag.value = "";
-    this._selectedTag.id = null;
+  private clearFormData() {
+    this.tagLabel = 'Додати новий тег';
+    this.action = 'add';
+    this.selectedTag.value = '';
+    this.selectedTag.id = null;
   }
 
-  private _editTag(tag: string): void {
-    this._selectedTag.value = tag;
-    this._selectedTag.id = this.post.tags.indexOf(tag);
-    this._action = "edit";
-    this._tagLabel = "Редагувати тег";
+  editTag(tag: string): void {
+    this.selectedTag.value = tag;
+    this.selectedTag.id = this.post.tags.indexOf(tag);
+    this.action = 'edit';
+    this.tagLabel = 'Редагувати тег';
   }
 
-  private _onAddTagAction(tag: any){
+  onAddTagAction(tag: any) {
     this.post.tags.unshift(tag);
     this.clearFormData();
   }
-  private _onEditTagAction(tag){
-    let index = this._selectedTag.id;
-    if (index > -1){
+  onEditTagAction(tag) {
+    const index = this.selectedTag.id;
+    if (index > -1) {
       this.post.tags[index] = tag;
       this.clearFormData();
     }
   }
-  private _onDeleteTagAction(tag){
-    let index = this.post.tags.indexOf(tag);
-    if (index > -1)
+  onDeleteTagAction(tag) {
+    const index = this.post.tags.indexOf(tag);
+    if (index > -1) {
       this.post.tags.splice(index, 1);
-  }
-  
-  private _tagAction(tag: string, action: string): void {
-    if(action === "add") this._onAddTagAction(tag);
-    if(action === "edit") this._onEditTagAction(tag);
-  }
-
-  private _edit(post){
+    }
   }
 }
