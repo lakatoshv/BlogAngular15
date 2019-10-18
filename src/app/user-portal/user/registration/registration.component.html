@@ -6,8 +6,8 @@
       <p id="profile-name" class="profile-name-card"></p>
       <form 
         #registration="ngForm"
-        [formGroup]="_registrationForm"
-        (ngSubmit)="_register()"
+        [formGroup]="registrationForm"
+        (ngSubmit)="register()"
         class="form-signin">
           <div class="form-group">
               <input 
