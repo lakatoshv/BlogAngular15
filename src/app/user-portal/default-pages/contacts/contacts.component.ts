@@ -8,7 +8,7 @@ import { MessageForm } from '../../../core/forms/Message';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  private _messageForm: FormGroup = new MessageForm().messageForm;
+  messageForm: FormGroup = new MessageForm().messageForm;
   constructor() { }
 
   ngOnInit() {
