@@ -6,8 +6,8 @@
       <p id="profile-name" class="profile-name-card"></p>
       <form 
         #registration="ngForm"
-        [formGroup]="_authorizationForm"
-        (ngSubmit)="_authorization(f.value)"
+        [formGroup]="authorizationForm"
+        (ngSubmit)="authorization(f.value)"
         #f="ngForm"
         class="form-signin">
           <span id="reauth-email" class="reauth-email"></span>

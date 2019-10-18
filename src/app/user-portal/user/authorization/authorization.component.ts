@@ -11,7 +11,7 @@ import { JwtToken } from 'src/app/core/models/JwtToken';
   styleUrls: ['./authorization.component.css']
 })
 export class AuthorizationComponent implements OnInit {
-  private _authorizationForm: FormGroup = new AuthorizationForm().authorizationForm;
+  authorizationForm: FormGroup = new AuthorizationForm().authorizationForm;
   
   constructor(
     private _router: Router,
@@ -21,8 +21,8 @@ export class AuthorizationComponent implements OnInit {
   ngOnInit() {
   }
 
-  private _authorization(dataForAuthorize){
-    if (this._authorizationForm.valid) {
+  authorization(dataForAuthorize){
+    if (this.authorizationForm.valid) {
       var user = this._usersService.login(dataForAuthorize);
       if(user)
         this.succesLogin(user)
