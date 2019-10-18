@@ -36,19 +36,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  private _setFormData(){
-    this.profileForm.get('userName').setValue(this.user.FirstName + " " + this.user.LastName);
-    this.profileForm.get('email').setValue(this.user.Email);
-    this.profileForm.get('firstName').setValue(this.user.FirstName);
-    this.profileForm.get('lastName').setValue(this.user.LastName);
-    this.profileForm.get('phoneNumber').setValue(this.user.PhoneNumber);
-    this.profileForm.get('about').setValue(this.user.About);
-  }
-
-  private clearFormData(){
-  }
-
-  private _edit(profileModel){
+  edit(profileModel){
     if(profileModel.oldPassword !== null && profileModel.newPassword !== null){
       if(profileModel.oldPassword === this._globalService._currentUser.Password)
         this._globalService._currentUser.Password = profileModel.newPassword;
@@ -61,6 +49,18 @@ export class EditProfileComponent implements OnInit {
     this._globalService._currentUser.PhoneNumber = profileModel.phoneNumber;
     this._globalService._currentUser.About = profileModel.about;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+  }
+
+  private _setFormData(){
+    this.profileForm.get('userName').setValue(this.user.FirstName + " " + this.user.LastName);
+    this.profileForm.get('email').setValue(this.user.Email);
+    this.profileForm.get('firstName').setValue(this.user.FirstName);
+    this.profileForm.get('lastName').setValue(this.user.LastName);
+    this.profileForm.get('phoneNumber').setValue(this.user.PhoneNumber);
+    this.profileForm.get('about').setValue(this.user.About);
+  }
+
+  private clearFormData(){
   }
 
 }
