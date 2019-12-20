@@ -93,6 +93,6 @@ export class CommentsListComponent implements OnInit {
   }
 
   private _onLoadEditAction() {
-    this._isLoadEdit = true;
+    this.isLoadEdit = true;
   }
 }

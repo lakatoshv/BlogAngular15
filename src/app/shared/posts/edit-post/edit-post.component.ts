@@ -56,8 +56,8 @@ export class EditPostComponent implements OnInit {
   }
 
   tagAction(tag: string, action: string): void {
-    if (action === 'add') { this._onAddTagAction(tag); }
-    if (action === 'edit') { this._onEditTagAction(tag); }
+    if (action === 'add') { this.onAddTagAction(tag); }
+    if (action === 'edit') { this.onEditTagAction(tag); }
   }
 
   edit(post) {}

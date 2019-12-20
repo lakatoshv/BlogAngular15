@@ -32,7 +32,7 @@ export class ShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
+    this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
     this._getPost();
     this.loggedIn = this._usersService.isLoggedIn();
     if(this.loggedIn){
@@ -60,7 +60,7 @@ export class ShowComponent implements OnInit {
   }
 
   private _getPost(){
-    this.post = Posts[this._postId];
+    this.post = Posts[this.postId];
     this.post.author = Users[this.post.authorId];
     this.post.tags = this.post.tags.split(', ');
   }
