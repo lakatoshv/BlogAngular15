@@ -6,7 +6,13 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: "",
-    component: LayoutComponentComponent
+    component: LayoutComponentComponent,
+    children: [
+      {
+        path: "",
+        loadChildren: './default-pages/default-pages.module#DefaultPagesModule'
+      }
+    ]
   }
 ];
 
