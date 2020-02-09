@@ -15,7 +15,7 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     AppRoutingModule,
     A2tUiModule,
-    HttpModule,
+    HttpModule
   ],
   providers:    [ Angular2TokenService ],
   bootstrap: [AppComponent]

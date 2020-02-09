@@ -1,3 +1,4 @@
+import { DefaultPagesModule } from './default-pages/default-pages.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminPortalRoutingModule } from './admin-portal-routing.module';
@@ -6,7 +7,8 @@ import { LayoutComponentComponent } from './layout-component/layout-component.co
 @NgModule({
   imports: [
     CommonModule,
-    AdminPortalRoutingModule
+    AdminPortalRoutingModule,
+    DefaultPagesModule
   ],
   declarations: [LayoutComponentComponent]
 })
