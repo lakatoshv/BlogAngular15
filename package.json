@@ -31,7 +31,7 @@
     "contentful": "^7.0.5",
     "core-js": "^2.5.4",
     "d3": "^5.15.0",
-    "marked": "^0.5.1",
+    "marked": "^0.6.1",
     "ngx-pagination": "^4.1.0",
     "rxjs": "^6.5.2",
     "zone.js": "~0.8.26"
