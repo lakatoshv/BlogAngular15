@@ -1,0 +1,12 @@
+<!-- Area Chart Example-->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-chart-area"></i> Створення постів
+    </div>
+    <div class="card-body" #pbgChartContainer>
+        <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="data" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [autoScale]="true" [timeline]="data" (select)="onSelect($event)">
+        </ngx-charts-line-chart>
+
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
