@@ -1,19 +1,19 @@
+import { UsersModule } from './../users/users.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { DefaultPagesRoutingModule } from './default-pages-routing.module';
 import { IndexComponent } from './index/index.component';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PostsModule } from '../posts/posts.module';
+import { IconsCardsComponent } from './icons-cards/icons-cards.component';
 
 @NgModule({
   imports: [
     CommonModule,
     DefaultPagesRoutingModule,
-    NgxChartsModule
+    PostsModule,
+    UsersModule
   ],
-  declarations: [IndexComponent],
+  declarations: [IndexComponent, IconsCardsComponent],
   exports: [IndexComponent]
 })
 export class DefaultPagesModule { }
