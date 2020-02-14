@@ -11,7 +11,11 @@ const routes: Routes = [
       {
         path: "",
         loadChildren: './default-pages/default-pages.module#DefaultPagesModule'
-      }
+      },
+      {
+        path: "posts",
+        loadChildren: './posts/posts.module#PostsModule'
+      },
     ]
   }
 ];
