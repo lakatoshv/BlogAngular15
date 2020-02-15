@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultPagesRoutingModule } from './default-pages-routing.module';
 import { IndexComponent } from './index/index.component';
-import { PostsModule } from '../posts/posts.module';
+import { AdminPostsModule } from '../admin-posts/admin-posts.module';
 import { IconsCardsComponent } from './icons-cards/icons-cards.component';
 
 @NgModule({
   imports: [
     CommonModule,
     DefaultPagesRoutingModule,
-    PostsModule,
+    AdminPostsModule,
     UsersModule
   ],
   declarations: [IndexComponent, IconsCardsComponent],
