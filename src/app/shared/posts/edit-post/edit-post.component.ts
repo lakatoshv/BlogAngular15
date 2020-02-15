@@ -63,6 +63,7 @@ export class EditPostComponent implements OnInit {
   edit(post) {}
   
   private _getPost() {
+    debugger
     this.post = Posts[this._postId];
     if (this.post.authorId !== this.user.Id) {
       this._router.navigateByUrl("/");
