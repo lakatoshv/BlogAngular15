@@ -29,6 +29,10 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
     CommentsListComponent, 
     AddCommentComponent, 
     EditCommentComponent, AddPostComponent, EditPostComponent, MyPostsComponent
+  ],
+  exports: [
+    AddPostComponent,
+    EditPostComponent
   ]
 })
 export class PostsModule { }

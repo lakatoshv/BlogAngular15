@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: "posts",
-        loadChildren: './posts/posts.module#PostsModule'
+        loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
       },
     ]
   }
