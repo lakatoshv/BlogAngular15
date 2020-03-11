@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/core/models/user';
-import { Post } from 'src/app/core/models/post';
-import { GeneralServiceService } from 'src/app/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/core/models/User';
+import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { FormGroup } from '@angular/forms';
 import { ProfileForm } from 'src/app/core/forms/user/ProfileForm';
+import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
+import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,35 +14,62 @@ import { ProfileForm } from 'src/app/core/forms/user/ProfileForm';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
+  /**
+   * @param user User
+   */
   public user: User = null;
-  public isLoggedIn: boolean = false;
+
+  /**
+   * @param isLoggedIn boolean
+   */
+  public isLoggedIn = false;
+
+  /**
+   * @param profileForm FormGroup
+   */
   public profileForm: FormGroup = new ProfileForm().profileForm;
 
+  /**
+   * @param tinyMCEOptions TinyMCEOptionsObject
+   */
+  public tinyMCEOptions: TinyMCEOptionsObject = TinyMCEOptions;
+
+  /**
+   * @param _router Router
+   * @param _globalService GlobalService
+   * @param _usersService UsersService
+   */
   constructor(
     private _router: Router,
     private _globalService: GlobalService,
     private _usersService: UsersService
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   public ngOnInit() {
-    this.isLoggedIn = this._usersService.isLoggedIn()
-    if(this._usersService.isLoggedIn()){
-      this._globalService.resetUserData(); 
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
       this._setFormData();
-    }
-    else {
-      this._router.navigateByUrl("/authorization");
+    } else {
+      this._router.navigateByUrl('/authorization');
     }
   }
 
-  edit(profileModel){
-    if(profileModel.oldPassword !== null && profileModel.newPassword !== null){
-      if(profileModel.oldPassword === this._globalService._currentUser.Password)
+  /**
+   * 
+   * @param profileModel any
+   */
+  edit(profileModel: any): void {
+    if (profileModel.oldPassword !== null && profileModel.newPassword !== null) {
+      if (profileModel.oldPassword === this._globalService._currentUser.Password) {
         this._globalService._currentUser.Password = profileModel.newPassword;
-      else console.error("Different passwords");
+      } else { console.error('Different passwords'); }
     }
-    this._globalService._currentUser.UserName = profileModel.firstName + " " + profileModel.lastName;
+    this._globalService._currentUser.UserName = profileModel.firstName + ' ' + profileModel.lastName;
     this._globalService._currentUser.Email = profileModel.email;
     this._globalService._currentUser.FirstName = profileModel.firstName;
     this._globalService._currentUser.LastName = profileModel.lastName;
@@ -51,8 +78,11 @@ export class EditProfileComponent implements OnInit {
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
   }
 
-  private _setFormData(){
-    this.profileForm.get('userName').setValue(this.user.FirstName + " " + this.user.LastName);
+  /**
+   * Set form data.
+   */
+  private _setFormData() {
+    this.profileForm.get('userName').setValue(this.user.FirstName + ' ' + this.user.LastName);
     this.profileForm.get('email').setValue(this.user.Email);
     this.profileForm.get('firstName').setValue(this.user.FirstName);
     this.profileForm.get('lastName').setValue(this.user.LastName);
@@ -60,7 +90,10 @@ export class EditProfileComponent implements OnInit {
     this.profileForm.get('about').setValue(this.user.About);
   }
 
-  private clearFormData(){
+  /**
+   * Clear form data
+   */
+  private clearFormData() {
   }
 
 }

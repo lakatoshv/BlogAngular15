@@ -1,29 +1,51 @@
-import { User } from "./user";
+import { User } from "./User";
 
+/**
+ * Post model.
+ */
 export class Post {
-    /*
-    id -> int, increment
-    title -> string
-    description -> string/text
-    content -> string/text
-    author  -> string/text
-    seen -> int
-    likes -> int
-    dislikes -> int
-    tags -> string
-    imgurl -> string
-    //access -> string
-    */
-    id: number;
-    title: string;
-    description: string;
-    content: string;
-    authorId: number;
-    author: User;
-    seen: number;
-    likes: number;
-    dislikes: number;
-    imgurl: string;
-    tags: string;
-    commentsCount: number;
+  /*
+  //access -> string
+  */
+  /**
+   * Post Id 
+   * @param Id number
+   * Post Title
+   * @param Title string
+   * Post Description
+   * @param Description string
+   * Post Content
+   * @param Content string
+   * Post Author Id
+   * @param AuthorId number
+   * Post Author
+   * @param Author User
+   * Post Seen
+   * @param Seen number
+   * Post Likes
+   * @param Likes number
+   * Post Dislikes
+   * @param Dislikes number
+   * Post Image Url
+   * @param ImageUrl string
+   * Post Tags
+   * @param Tags string
+   * Post Comments Count
+   * @param CommentsCount number
+   */
+  constructor (
+    public Id: number,
+    public Title: string,
+    public Description: string,
+    public Content: string,
+    public AuthorId: number,
+    public Author: User,
+    public Seen: number,
+    public Likes: number,
+    public Dislikes: number,
+    public ImageUrl: string,
+    public Tags: string,
+    public CommentsCount: number
+  ) {}
   }
+  

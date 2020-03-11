@@ -13,7 +13,10 @@ import { IconsCardsComponent } from './icons-cards/icons-cards.component';
     AdminPostsModule,
     UsersModule
   ],
-  declarations: [IndexComponent, IconsCardsComponent],
+  declarations: [
+    IndexComponent,
+    IconsCardsComponent
+  ],
   exports: [IndexComponent]
 })
 export class DefaultPagesModule { }

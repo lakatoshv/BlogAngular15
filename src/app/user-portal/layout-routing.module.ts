@@ -8,43 +8,42 @@ import { AboutComponent } from './default-pages/about/about.component';
 import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
-import { MyPostsComponent } from '../shared/posts/my-posts/my-posts.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: LayoutComponentComponent,
     children: [
       {
-        path: "",
+        path: '',
         loadChildren: '../shared/posts/posts.module#PostsModule'
       },
       {
-        path: "about",
+        path: 'about',
         component: AboutComponent
       },
       {
-        path: "contacts",
+        path: 'contacts',
         component: ContactsComponent
       },
       {
-        path: "registration",
+        path: 'registration',
         component: RegistrationComponent
       },
       {
-        path: "authorization",
+        path: 'authorization',
         component: AuthorizationComponent
       },
       {
-        path: "profile",
+        path: 'profile',
         loadChildren: '../user-portal/profile/profile.module#ProfileModule'
       },
       {
-        path: "my-profile",
+        path: 'my-profile',
         component: ProfilePageComponent
       },
       {
-        path: "my-profile/edit",
+        path: 'my-profile/edit',
         component: EditProfileComponent
       }
     ]

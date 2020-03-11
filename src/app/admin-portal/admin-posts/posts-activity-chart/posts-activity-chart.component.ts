@@ -1,4 +1,6 @@
-import { ChartData } from './../../../core/data/chartdata';
+import { ChartOptions } from '../../../core/models/chart/ChartOptions';
+import { ChartOptionsData } from './../../../core/data/chart/ChartOptionsData';
+import { ChartData } from '../../../core/data/chart/ChartData';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -7,39 +9,49 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./posts-activity-chart.component.css']
 })
 export class PostsActivityChartComponent implements OnInit {
+  /**
+   * @param pbgChartContainer ElementRef
+   */
   @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef;
 
-  data: any[] = ChartData;
-  view: any[] = [1600, 300];
+  /**
+   * @param chartOptions ChartOptions
+   */
+  chartOptions: ChartOptions = ChartOptionsData;
 
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  showYAxisLabel = true;
-  timeline = true;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
+  /**
+   * @inheritdoc
+   */
   ngOnInit(): void {
-  } 
+  }
 
+  /**
+   * @inheritdoc
+   */
   constructor() {
   }
 
-  onSelect(data): void {
+  /**
+   * Select chart item event.
+   * @param data any
+   */
+  onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
-  onActivate(data): void {
+  /**
+   * Activate chart item event.
+   * @param data any
+   */
+  onActivate(data: any): void {
     console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
-  onDeactivate(data): void {
+  /**
+   * Deactivate chart item event.
+   * @param data any
+   */
+  onDeactivate(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }

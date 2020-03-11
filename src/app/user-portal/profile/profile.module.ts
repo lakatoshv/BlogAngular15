@@ -15,7 +15,10 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ReactiveFormsModule,
     EditorModule,
   ],
-  declarations: [ProfilePageComponent, EditProfileComponent],
+  declarations: [
+    ProfilePageComponent,
+    EditProfileComponent
+  ],
   exports: [ProfilePageComponent]
 })
 export class ProfileModule { }

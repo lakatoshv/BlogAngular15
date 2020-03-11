@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./icons-cards.component.css']
 })
 export class IconsCardsComponent implements OnInit {
-
+  /**
+   * @inheritdoc
+   */
   constructor() { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
   }
-
 }

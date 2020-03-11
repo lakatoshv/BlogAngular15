@@ -2,8 +2,8 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommentForm } from 'src/app/core/forms/posts/CommentForm';
 
-import { Comment } from "../../../../core/models/comment";
-import { User } from 'src/app/core/models/user';
+import { Comment } from '../../../../core/models/Comment';
+import { User } from 'src/app/core/models/User';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 
@@ -13,42 +13,74 @@ import { GlobalService } from 'src/app/core/services/global-service/global-servi
   styleUrls: ['./edit-comment.component.css']
 })
 export class EditCommentComponent implements OnInit {
-  @Output() onEdit = new EventEmitter<any>();
+  /**
+   * @param onEdit EventEmitter<any>
+   */
+  @Output() onEdit: EventEmitter<any> = new EventEmitter<any>();
+
+  /**
+   * @param comment Comment
+   */
   @Input() comment: Comment;
 
-  public loggedIn: boolean = false;
+  /**
+   * @param loggedIn boolean
+   */
+  public loggedIn = false;
+
+  /**
+   * @param user User
+   */
   public user: User = null;
 
+  /**
+   * @param commentForm FormGroup
+   */
   commentForm: FormGroup = new CommentForm().commentForm;
 
+  /**
+   * @param _usersService UsersService
+   * @param _globalService GlobalService
+   */
   constructor(
     private _usersService: UsersService,
     private _globalService: GlobalService
-  ) { 
-  }
+  ) { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
     this.loggedIn = this._usersService.isLoggedIn();
 
-    if(this.loggedIn){
-      this._globalService.resetUserData();  
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
-    if(this.user.Id === this.comment.authorId)
+    if (this.user.Id === this.comment.AuthorId) {
       this.setFormValue();
+    }
   }
 
-  public setFormValue(){
-    this.commentForm.get('author').setValue(this.comment.author);
-    this.commentForm.get('email').setValue(this.comment.email);
-    this.commentForm.get('content').setValue(this.comment.content);
+  /**
+   * Sets form value
+   * @returns void
+   */
+  public setFormValue(): void {
+    this.commentForm.get('author').setValue(this.comment.Author);
+    this.commentForm.get('email').setValue(this.comment.Email);
+    this.commentForm.get('content').setValue(this.comment.Content);
   }
 
-  edit(comment){
-    if(this.user.Id === this.comment.authorId){
-      comment.id = this.comment.id;
+  /**
+   * Edit comment
+   * @param comment Comment
+   * @returns void
+   */
+  public edit(comment: Comment): void {
+    if (this.user.Id === this.comment.AuthorId) {
+      comment.Id = this.comment.Id;
       this.onEdit.emit(comment);
     }
   }
-
 }

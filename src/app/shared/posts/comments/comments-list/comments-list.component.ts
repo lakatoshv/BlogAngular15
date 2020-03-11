@@ -1,15 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { GeneralServiceService } from 'src/app/core';
-import { AddCommentComponent } from "../add-comment/add-comment.component";
 
-import { Comments } from 'src/app/core/data/comments';
-import { Comment } from 'src/app/core/models/comment';
+import { Comments } from 'src/app/core/data/CommentsList';
+import { Comment } from 'src/app/core/models/Comment';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
-import { User } from 'src/app/core/models/user';
-import { Users } from 'src/app/core/data/users';
+import { User } from 'src/app/core/models/User';
+import { Users } from 'src/app/core/data/UsersList';
 
 @Component({
   selector: 'app-comments-list',
@@ -17,22 +16,51 @@ import { Users } from 'src/app/core/data/users';
   styleUrls: ['./comments-list.component.css']
 })
 export class CommentsListComponent implements OnInit {
+  /**
+   * @param postId number
+   */
   @Input("post-id") postId: number;
 
-  private users: User[] = [];
-  public comments: any = [];
+  /**
+   * @param comments Comment[]
+   */
+  public comments: Comment[] = [];
+
+  /**
+   * @param user User
+   */
   public user: User;
+
+  /**
+   * @param pageInfo Object
+   */
   public pageInfo: any = {
     pageSize: 10,
     pageNumber: 0,
     totalItems: 0
-  }
+  };
 
-  public loggedIn: boolean = false;
+  /**
+   * @param loggedIn boolean
+   */
+  public loggedIn = false;
 
-  isLoadEdit: boolean = false; 
+  /**
+   * @param isLoadEdit boolean
+   */
+  isLoadEdit = false;
 
-  
+  /**
+   * @param users User[]
+   */
+  private users: User[] = [];
+
+  /**
+   * @param _generalService GeneralServiceService
+   * @param _activatedRoute ActivatedRoute
+   * @param _usersService UsersService
+   * @param _globalService GlobalService
+   */
   constructor(
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
@@ -40,59 +68,100 @@ export class CommentsListComponent implements OnInit {
     private _globalService: GlobalService
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
     this._getCommentsForCurrentPost();
-    
+
     this.loggedIn = this._usersService.isLoggedIn();
-    if(this.loggedIn){
-      this._globalService.resetUserData();  
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
   }
 
-  public paginate(page: number){
+  /**
+   * Comments pagination.
+   *
+   * @param page number
+   * @returns void
+   */
+  public paginate(page: number): void {
     this.pageInfo.pageNumber = page;
   }
 
-  public findByValue(){
-    //const index = Data.findIndex(item => item.name === 'John');
+  /**
+   * Find comment by value
+   * TODO Find comment by value
+   * @returns void
+   */
+  public findByValue() {
+    // const index = Data.findIndex(item => item.name === 'John');
   }
 
-  onAddAction(comment: any){
-    if(comment.authorId !== null)
-      comment.author = this.users[comment.authorId];
-    this.comments.unshift(comment);
-    
-    this.pageInfo.totalItems += 1; 
-  }
-
-  onEditAction(comment: any){
-    let index = this.comments.findIndex(x => x.id === comment.id);
-    if (index > -1)
-      this.comments[index] = comment;
-  }
-
-  deleteAction(comment){
-    if(this.user.Id === comment.authorId){
-      let index = this.comments.findIndex(x => x.id === comment.id);
-      if (index > -1)
-        this.comments.splice(index, 1);
+  /**
+   * Add comment event
+   * @param comment Comment
+   * @returns void
+   */
+  onAddAction(comment: Comment): void {
+    if (comment.AuthorId !== null) {
+      comment.Author = this.users[comment.AuthorId];
     }
-    
-    this.pageInfo.totalItems -= 1; 
+    this.comments.unshift(comment);
+
+    this.pageInfo.totalItems += 1;
   }
 
+  /**
+   * Edit comment event
+   * @param comment Comment
+   * @returns void
+   */
+  onEditAction(comment: Comment): void {
+    const index = this.comments.findIndex(x => x.Id === comment.Id);
+    if (index > -1) {
+      this.comments[index] = comment;
+    }
+  }
+
+  /**
+   * Delete comment event
+   * @param comment Comment
+   * @returns void
+   */
+  deleteAction(comment: Comment): void {
+    if (this.user.Id === comment.AuthorId) {
+      const index = this.comments.findIndex(x => x.Id === comment.Id);
+      if (index > -1) {
+        this.comments.splice(index, 1);
+      }
+    }
+
+    this.pageInfo.totalItems -= 1;
+  }
+
+  /**
+   * Get comments for current post.
+   *
+   * @returns void
+   */
   private _getCommentsForCurrentPost(): void {
     this.users = Users;
-    Comments.filter(item => item.post_id === this.postId).forEach(comment => {
-      comment.author = this.users[comment.authorId];
+    Comments.filter(item => item.PostId === this.postId).forEach(comment => {
+      comment.Author = this.users[comment.AuthorId];
       this.comments.push(comment);
     });
-    
+
     this.pageInfo.totalItems = this.comments.length;
   }
 
-  private _onLoadEditAction() {
+  /**
+   * Load edit component event
+   * @returns void
+   */
+  private _onLoadEditAction(): void {
     this.isLoadEdit = true;
   }
 }

@@ -6,17 +6,18 @@ import { CommentsRoutingModule } from './comments-routing.module';
 import { CommentsListComponent } from './comments-list/comments-list.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { EditCommentComponent } from './edit-comment/edit-comment.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     CommentsRoutingModule,
-    AddCommentComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   exports: [
-    CommentsListComponent, 
-    AddCommentComponent, 
+    CommentsListComponent,
+    AddCommentComponent,
     EditCommentComponent
   ],
   declarations: [
