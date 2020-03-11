@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { AdminPostsRoutingModule } from './admin-posts-routing.module';
 import { PostsTableComponent } from './posts-table/posts-table.component';
 import { PostsActivityChartComponent } from './posts-activity-chart/posts-activity-chart.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PostsListComponent } from './posts-list/posts-list.component';
 
 @NgModule({
@@ -16,7 +15,14 @@ import { PostsListComponent } from './posts-list/posts-list.component';
     NgxChartsModule,
     PostsModule
   ],
-  declarations: [PostsTableComponent, PostsActivityChartComponent, PostsListComponent],
-  exports: [PostsTableComponent, PostsActivityChartComponent]
+  declarations: [
+    PostsTableComponent,
+    PostsActivityChartComponent,
+    PostsListComponent
+  ],
+  exports: [
+    PostsTableComponent,
+    PostsActivityChartComponent
+  ]
 })
 export class AdminPostsModule { }

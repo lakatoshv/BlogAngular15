@@ -10,23 +10,23 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: PostsListComponent
   },
-  { 
-    path: 'post/:post-id', 
+  {
+    path: 'post/:post-id',
     component: ShowComponent
   },
-  { 
-    path: 'posts/add', 
+  {
+    path: 'posts/add',
     component: AddPostComponent
   },
-  { 
-    path: 'posts/edit/:post-id', 
+  {
+    path: 'posts/edit/:post-id',
     component: EditPostComponent
   },
   {
-    path: "my-posts",
+    path: 'my-posts',
     component: MyPostsComponent
   },
 ];

@@ -5,6 +5,7 @@
                 <th><b>Назва:</b></th>
                 <th><b>Теги:</b></th>
                 <th><b>Автор:</b></th>
+                <th><b>Статус</b></th>
                 <th><b>Кількість переглядів:</b></th>
                 <th><b>Кількість лайків:</b></th>
                 <th><b>Кількість дизлайків:</b></th>
@@ -18,6 +19,7 @@
                 <th><b>Назва:</b></th>
                 <th><b>Теги:</b></th>
                 <th><b>Автор:</b></th>
+                <th><b>Статус</b></th>
                 <th><b>Кількість переглядів:</b></th>
                 <th><b>Кількість лайків:</b></th>
                 <th><b>Кількість дизлайків:</b></th>
@@ -27,14 +29,22 @@
             </tr>
         </tfoot>
         <tbody>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
+            <tr *ngFor="let post of posts">
+                <td><a routerLink="show/{{post.id}}">{{post.title}}</a></td>
+                <td>{{post.tags}}</td>
+                <td><a routerLink="/blog/profile/{{post.authorId}}">{{post.author.FirstName + " " + post.author.LastName}}</a></td>
+                <td>
+                    <select>
+                        <option value="null">Виберіть статус</option>
+                        <option value="0">Підтверджено</option>
+                        <option value="1">Непідтверджено</option>
+                    </select>
+                    <button class="btn btn-sm btn-success btn-@item.Post.Id">Зберегти</button>
+                </td>
+                <td>{{post.seen}}</td>
+                <td>{{post.likes}}</td>
+                <td>{{post.dislikes}}</td>
+                <td>{{post.commentsCount}}</td>
                 <td>2011/04/25</td>
                 <td class="actions" data-th="">
                     <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
@@ -42,244 +52,6 @@
                         <i class="fa fa-trash"></i>
                     </button>
                 </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-                <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
-            </tr>
-            <tr>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>System Architect, Cpp, ssss, saaa</td>
-                <td><a routerLink="show/0">Tiger Nixon</a></td>
-                <td>61</td>
-                <td>15</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2011/04/25</td>
             </tr>
         </tbody>
     </table>

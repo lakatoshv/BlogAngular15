@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralServiceService } from 'src/app/core';
-import { ActivatedRoute, Router, Route } from '@angular/router';
-import { User } from 'src/app/core/models/user';
-import { Users } from 'src/app/core/data/users';
-import { Posts } from 'src/app/core/data/posts';
-import { Comments } from 'src/app/core/data/comments';
-import { Post } from 'src/app/core/models/post';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/core/models/User';
+import { Users } from 'src/app/core/data/UsersList';
+import { Posts } from 'src/app/core/data/PostsList';
+import { Comments } from 'src/app/core/data/CommentsList';
+import { Post } from 'src/app/core/models/Post';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 
@@ -15,15 +15,48 @@ import { UsersService } from 'src/app/core/services/users/users-service.service'
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
+  /**
+   * @param user User
+   */
   public user: User = null;
-  public posts: Post[] = [];
-  public topTab: string = "main-info";
-  public postsTab: string = "my";
-  public isForCurrentUser: boolean = false;
-  public isLoggedIn: boolean = false;
 
+  /**
+   * @param posts Post[]
+   */
+  public posts: Post[] = [];
+
+  /**
+   * @param topTab string
+   */
+  public topTab = 'main-info';
+
+  /**
+   * @param postsTab string
+   */
+  public postsTab = 'my';
+
+  /**
+   * @param isForCurrentUser boolean
+   */
+  public isForCurrentUser = false;
+
+  /**
+   * @param isLoggedIn boolean
+   */
+  public isLoggedIn = false;
+
+  /**
+   * @param _userId number
+   */
   private _userId?: number;
 
+  /**
+   * @param _generalService GeneralServiceService
+   * @param _activatedRoute ActivatedRoute
+   * @param _router Router
+   * @param _globalService GlobalService
+   * @param _usersService UsersService
+   */
   constructor(
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
@@ -32,44 +65,54 @@ export class ProfilePageComponent implements OnInit {
     private _usersService: UsersService
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   public ngOnInit() {
-    this._userId = parseInt(this._generalService.getRoutePeram("profile-id", this._activatedRoute));
+    this._userId = parseInt(this._generalService.getRoutePeram('profile-id', this._activatedRoute), null);
     this.isLoggedIn = this._usersService.isLoggedIn();
-    if(this._usersService.isLoggedIn()){
-      this._globalService.resetUserData(); 
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
     this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user.Id === this._userId);
-    
-    if(!this.isForCurrentUser){
-      if(this._userId !== null){
+
+    if (!this.isForCurrentUser) {
+      if (this._userId !== null) {
         this.user = Users.find(user => user.Id === this._userId);
         this._getPosts();
+      } else{
+        this._router.navigateByUrl('/');
       }
-      else{
-        this._router.navigateByUrl("/");
-      }
-    }
-    else if(!this.isLoggedIn) {
-      this._router.navigateByUrl("/authorization");
+    } else if (!this.isLoggedIn) {
+      this._router.navigateByUrl('/authorization');
     }
   }
-  private _getPosts(){
-    Posts.filter(post => post.authorId = this.user.Id).forEach(post => {
-      post.commentsCount = Comments.filter(comment => comment.authorId = this.user.Id).length;
+
+  /**
+   * Get all posts
+   * @returns void
+   */
+  private _getPosts(): void {
+    Posts.filter(post => post.AuthorId = this.user.Id).forEach(post => {
+      post.CommentsCount = Comments.filter(comment => comment.AuthorId = this.user.Id).length;
       this.posts.push(post);
     });
   }
 
-  public selectTab(selectedTab: string, level: string){
-    switch(level){
-      case "top": 
+  /**
+   * Select tab
+   * @param selectedTab string
+   * @param level string
+   */
+  public selectTab(selectedTab: string, level: string): void {
+    switch (level) {
+      case 'top':
         this.topTab = selectedTab;
         break;
-      case "posts":
+      case 'posts':
         this.postsTab = selectedTab;
         break;
     }
   }
-
 }

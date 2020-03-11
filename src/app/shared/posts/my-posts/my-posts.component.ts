@@ -1,14 +1,16 @@
+import { PageInfo } from './../../../core/models/PageInfo';
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { SearchForm } from 'src/app/core/forms/SearchForm';
 import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/core/models/user';
+import { User } from 'src/app/core/models/User';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
-import { Posts } from 'src/app/core/data/posts';
-import { Users } from 'src/app/core/data/users';
+import { Posts } from 'src/app/core/data/PostsList';
+import { Users } from 'src/app/core/data/UsersList';
 import { sortBy } from 'lodash';
-import { Comments } from 'src/app/core/data/comments';
+import { Comments } from 'src/app/core/data/CommentsList';
+import { Post } from 'src/app/core/models/Post';
 
 @Component({
   selector: 'app-my-posts',
@@ -16,24 +18,71 @@ import { Comments } from 'src/app/core/data/comments';
   styleUrls: ['./my-posts.component.css']
 })
 export class MyPostsComponent implements OnInit {
-  public posts: any = [];
-  public user: User;
-  public pageInfo: any = {
-    pageSize: 10,
-    pageNumber: 0,
-    totalItems: 0
-  }
-  public isLoggedIn: boolean = false;
-  public isLoaded: boolean = false;
-  public isCurrentUserPosts: boolean = false;
+  /**
+   * @param posts Post[]
+   */
+  public posts: Post[] = [];
 
-  public displayType: string = 'list';
-  public sortBy: string = 'title';
-  public orderBy: string = "asc";
-  
+  /**
+   * @param user User
+   */
+  public user: User;
+
+  /**
+   * @param pageInfo PageInfo
+   */
+  public pageInfo: PageInfo = {
+    PageSize: 10,
+    PageNumber: 0,
+    TotalItems: 0
+  };
+
+  /**
+   * @param isLoggedIn boolean
+   */
+  public isLoggedIn = false;
+
+  /**
+   * @param isLoaded boolean
+   */
+  public isLoaded = false;
+
+  /**
+   * @param isCurrentUserPosts boolean
+   */
+  public isCurrentUserPosts = false;
+
+  /**
+   * @param displayType string
+   */
+  public displayType = 'list';
+
+  /**
+   * @param sortBy string
+   */
+  public sortBy = 'title';
+
+  /**
+   * @param orderBy string
+   */
+  public orderBy = 'asc';
+
+  /**
+   * @param searchForm FormGroup
+   */
   public searchForm: FormGroup = new SearchForm().searchForm;
 
-  private _userId: any;
+  /**
+   * @param _userId number
+   */
+  private _userId: number;
+
+  /**
+   * @param _globalService GlobalService
+   * @param _router Router
+   * @param _activatedRoute ActivatedRoute
+   * @param _usersService UsersService
+   */
   constructor(
     private _globalService: GlobalService,
     private _router: Router,
@@ -42,76 +91,115 @@ export class MyPostsComponent implements OnInit {
   ) {
   }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
-    this.isLoggedIn = this._usersService.isLoggedIn()
-    if(this._usersService.isLoggedIn()){
-      this._globalService.resetUserData(); 
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
-    }
-    else {
-      this._router.navigateByUrl("/authorization");
+    } else {
+      this._router.navigateByUrl('/authorization');
     }
 
-    if(this._router.url.includes('/my-posts')){
+    if (this._router.url.includes('/my-posts')) {
       this._userId = this.user.Id;
       this.isCurrentUserPosts = true;
-    }
-    else{
-      this._userId = this._globalService.getRouteParam('user-id', this._activatedRoute);
+    } else {
+      this._userId = parseInt(this._globalService.getRouteParam('user-id', this._activatedRoute), null);
       this.isCurrentUserPosts = false;
     }
     this._getPosts();
-    
   }
 
-  public deleteAction(postId: number){
-    if(this.isLoggedIn && this.posts[postId].author.Id === this.user.Id){
-      let index = this.posts.findIndex(x => x.id === postId);
-      if (index > -1){
+  /**
+   * Delete post event.
+   * @param postId number
+   * @returns void
+   */
+  public deleteAction(postId: number): void {
+    if (this.isLoggedIn && this.posts[postId].Author.Id === this.user.Id) {
+      const index = this.posts.findIndex(x => x.Id === postId);
+      if (index > -1) {
         this.posts.splice(index, 1);
-        var comments = Comments.filter(comment => comment.post_id === postId).forEach(comment => {
-          Comments.splice(comment.id, 1)
-        })
+        const comments = Comments.filter(comment => comment.PostId === postId).forEach(comment => {
+          Comments.splice(comment.Id, 1);
+        });
       }
       this._getPosts();
     }
-    
-    this.pageInfo.totalItems -= 1;
+
+    this.pageInfo.TotalItems -= 1;
   }
 
-  public like(id: number): void{
-    this.posts[id].likes += 1;
+  /**
+   * Like post event.
+   * @param id number
+   * @returns void
+   */
+  public like(id: number): void {
+    this.posts[id].Likes += 1;
   }
 
-  public dislike(id: number): void{
-    this.posts[id].dislikes += 1;
+  /**
+   * Dislike post event.
+   * @param id number
+   * @returns void
+   */
+  public dislike(id: number): void {
+    this.posts[id].Dislikes += 1;
   }
 
-  public paginate(page: number){
-    this.pageInfo.pageNumber = page;
+  /**
+   * Post pagination.
+   * @param page number
+   * @returns void
+   */
+  public paginate(page: number): void {
+    this.pageInfo.PageNumber = page;
   }
 
-  public search(search: string){
-    this.posts = Posts.filter(post => post.title.includes(search));
+  /**
+   * Search post by Title
+   * @param search string
+   * @returns void
+   */
+  public search(search: string): void {
+    this.posts = Posts.filter(post => post.Title.includes(search));
   }
 
-  public sort(){
+  /**
+   * Sort posts by parameter.
+   * @returns void
+   */
+  public sort(): void {
     this.posts = sortBy(Object.values(Posts), [this.sortBy])
   }
 
-  private _getPosts(){
-    let posts = Posts.filter(user => user.id === this._userId).forEach(post => {
-      post.author = Users[this._userId];
-      post.commentsCount = Posts.findIndex(item => item.id === post.id);
-      this.posts.push(post)
+  /**
+   * Get all posts.
+   * @returns void
+   */
+  private _getPosts(): void {
+    const posts = Posts.filter(user => user.Id === this._userId).forEach(post => {
+      post.Author = Users[this._userId];
+      post.CommentsCount = Posts.findIndex(item => item.Id === post.Id);
+      this.posts.push(post);
     })
-    this.pageInfo.totalItems = this.posts.length;
+    this.pageInfo.TotalItems = this.posts.length;
   }
 
-  private _onDeleteCommentAction(post){
-    let index = this.posts.findIndex(x => x.id === post.id);
-    if (index > -1)
+  /**
+   * Delete post event.
+   * @param post Post
+   * @returns void
+   */
+  private _onDeleteCommentAction(post: Post): void {
+    const index = this.posts.findIndex(x => x.Id === post.Id);
+    if (index > -1) {
       this.posts.splice(index, 1);
+    }
     this.posts = this.posts;
   }
 }

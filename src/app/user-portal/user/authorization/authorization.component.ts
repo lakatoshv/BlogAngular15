@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { AuthorizationForm } from 'src/app/core/forms/user/AuthorizationForm';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
-import { JwtToken } from 'src/app/core/models/JwtToken';
 
 @Component({
   selector: 'app-authorization',
@@ -11,25 +10,45 @@ import { JwtToken } from 'src/app/core/models/JwtToken';
   styleUrls: ['./authorization.component.css']
 })
 export class AuthorizationComponent implements OnInit {
+  /**
+   * @param authorizationForm FormGroup
+   */
   authorizationForm: FormGroup = new AuthorizationForm().authorizationForm;
-  
+
+  /**
+   * @param _router Router
+   * @param _usersService UsersService
+   */
   constructor(
     private _router: Router,
     private _usersService: UsersService
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
   }
 
-  authorization(dataForAuthorize){
+  /**
+   * Authorization event
+   * @param dataForAuthorize any
+   * @returns void
+   */
+  authorization(dataForAuthorize: any): void {
     if (this.authorizationForm.valid) {
-      var user = this._usersService.login(dataForAuthorize);
-      if(user)
-        this.succesLogin(user)
+      const user = this._usersService.login(dataForAuthorize);
+      if (user) {
+        this.successLogin(user);
+      }
     }
   }
 
-  public succesLogin(user: string): void {
+  /**
+   * Save user data if login success
+   * @param user string
+   */
+  public successLogin(user: string): void {
     this._usersService.saveUser(user);
     /*
     const initializeSubscription = this._accountService.initialize(this._globalService._currentUser.Id).subscribe(
@@ -40,5 +59,5 @@ export class AuthorizationComponent implements OnInit {
         (errorMessage) => {}
     );
     */
-}
+  }
 }

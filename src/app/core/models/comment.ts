@@ -1,19 +1,35 @@
-import { User } from "./user";
+import { User } from './User';
 
+/**
+ * Comment model.
+ */
 export class Comment {
-    /*
-    id -> int, increment
-    post_id -> int
-    author -> string
-    content -> text
-    created_at -> date
-    */
-    id: number;
-    post_id: number;
-    authorId?: number;
-    author: User;
-    email?: string;
-    name?: string;
-    content: string;
-    created_at: Date;
-  }
+  /**
+   * Post Comment Id
+   * @param Id number
+   * Post Comment PostId
+   * @param PostId number
+   * Post Comment AuthorId
+   * @param AuthorId number
+   * Post Comment User
+   * @param Author User
+   * Post Comment Email
+   * @param Email string
+   * Post Comment string
+   * @param Name string
+   * Post Comment Content
+   * @param Content string
+   * Post Comment Created At
+   * @param CreatedAt Date
+   */
+  constructor(
+    public Id: number = 0,
+    public PostId?: number,
+    public AuthorId?: number,
+    public Author?: User,
+    public Email?: string,
+    public Name?: string,
+    public Content: string = '',
+    public CreatedAt?: Date
+  ) {}
+}

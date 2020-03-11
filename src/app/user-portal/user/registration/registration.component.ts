@@ -8,15 +8,24 @@ import { RegistrationForm } from '../../../core/forms/user/RegistrationForm';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  /**
+   * @param registrationForm FormGroup
+   */
   registrationForm: FormGroup = new RegistrationForm().registrationForm;
-  
+
   constructor(
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
   }
 
-  register(){
+  /**
+   * Register user event
+   */
+  register() {
     if (this.registrationForm.value.password === this.registrationForm.value.confirmPassword) {
     }
   }

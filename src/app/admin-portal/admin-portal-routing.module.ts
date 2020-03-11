@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: LayoutComponentComponent,
     children: [
       {
-        path: "",
+        path: '',
         loadChildren: './default-pages/default-pages.module#DefaultPagesModule'
       },
       {
-        path: "posts",
+        path: 'posts',
         loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
       },
     ]

@@ -5,20 +5,39 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
   providedIn: 'root'
 })
 export class GeneralServiceService {
-
+  /**
+   * @inheritdoc
+   */
   constructor() { }
+
+  /**
+   * Return property value by URL
+   * @param paramName string
+   * @param activatedRoute ActivatedRoute
+   */
   public getRoutePeram(paramName: string, activatedRoute: ActivatedRoute): string {
-    var snapshot = activatedRoute.snapshot;
+    const snapshot = activatedRoute.snapshot;
     return this._getParamValue(paramName, snapshot);
   }
-  private _getParamValue(paramName: string, routeObject: ActivatedRouteSnapshot): string{
-    if(!routeObject)
+
+  /**
+   * Return property value by URL
+   * @param paramName string
+   * @param routeObject ActivatedRouteSnapshot
+   */
+  private _getParamValue(paramName: string, routeObject: ActivatedRouteSnapshot): string {
+    if (!routeObject) {
       return null;
-    if(paramName === null)
+    }
+
+    if (paramName === null) {
       return null;
-    if(routeObject.paramMap.get(paramName) !== null)
+    }
+
+    if (routeObject.paramMap.get(paramName) !== null) {
       return routeObject.paramMap.get(paramName);
-    else
+    } else {
       return this._getParamValue(paramName, routeObject.parent);
+    }
   }
 }

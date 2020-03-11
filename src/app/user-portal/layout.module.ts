@@ -1,17 +1,13 @@
+import { UserModule } from './user/user.module';
+import { DefaultPagesModule } from './../admin-portal/default-pages/default-pages.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
-import { SharedModule } from '../shared';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { AuthorizationComponent } from './user/authorization/authorization.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { RegistrationComponent } from './user/registration/registration.component';
-import { AboutComponent } from './default-pages/about/about.component';
-import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { ProfileModule } from './profile/profile.module';
-import { PostsModule } from '../shared/posts/posts.module';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({
@@ -21,14 +17,12 @@ import { PostsModule } from '../shared/posts/posts.module';
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     EditorModule,
-    ProfileModule
+    ProfileModule,
+    DefaultPagesModule,
+    UserModule
   ],
   declarations: [
-    LayoutComponentComponent, 
-    AboutComponent, 
-    ContactsComponent,
-    RegistrationComponent,
-    AuthorizationComponent,
+    LayoutComponentComponent,
   ],
 })
 export class LayoutModule { }

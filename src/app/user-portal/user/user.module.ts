@@ -14,6 +14,13 @@ import { RegistrationComponent } from './registration/registration.component';
     ReactiveFormsModule,
     EditorModule
   ],
-  declarations: [AuthorizationComponent, RegistrationComponent]
+  declarations: [
+    AuthorizationComponent,
+    RegistrationComponent
+  ],
+  exports: [
+    AuthorizationComponent,
+    RegistrationComponent
+  ]
 })
 export class UserModule { }
