@@ -27,6 +27,11 @@ export class CommentsListComponent implements OnInit {
   public comments: Comment[] = [];
 
   /**
+   * @param comment Comment
+   */
+  public comment: Comment;
+
+  /**
    * @param user User
    */
   public user: User;
@@ -44,6 +49,11 @@ export class CommentsListComponent implements OnInit {
    * @param loggedIn boolean
    */
   public loggedIn = false;
+
+  /**
+   * @param editPostId number
+   */
+  public editPostId: number;
 
   /**
    * @param isLoadEdit boolean
@@ -124,6 +134,17 @@ export class CommentsListComponent implements OnInit {
     if (index > -1) {
       this.comments[index] = comment;
     }
+  }
+
+  /**
+   * Edit comment event
+   * @param comment Comment
+   * @returns void
+   */
+  editAction(comment: Comment): void {
+    this.editPostId = comment.Id;
+    this.comment = comment;
+    this.isLoadEdit = true;
   }
 
   /**

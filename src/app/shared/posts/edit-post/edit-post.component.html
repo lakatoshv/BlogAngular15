@@ -68,11 +68,11 @@
                 -->
                 <div class="addurl">
                     <div class="form-group">
-                        <label for="img_url" tag="" class="optional">
+                        <label for="imageUrl" tag="" class="optional">
                             URL-адреса:
                         </label>
 
-                        <input type="text" name="img_url" id="img_url" formControlName="imgUrl" value="" class="form-control">
+                        <input type="text" name="imageUrl" id="imageUrl" formControlName="imageUrl" value="" class="form-control">
 
                         <p>Наприклад: https://some_image.com/example.jpg</p>
                     </div>
@@ -85,8 +85,14 @@
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
-
-                                <li class="list-group-item" *ngFor="let tag of post['tags']">
+                                <li class="list-group-item">
+                                    <div class="checkbox">
+                                        <label class="optional" (click)="addTagLabel()">
+                                          Додати новий тег
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" *ngFor="let tag of post.TagsList">
                                     <div class="checkbox">
                                         <label>
                                           {{tag}}
@@ -109,13 +115,6 @@
                     <input type="text" name="tags" id="tags" #tag value="{{selectedTag['value']}}" class="form-control">
 
                     <input type="button" name="tagAction" id="tagAction" value="{{tagLabel}}" class="btn btn-default" (click)="tagAction(tag.value, action)">
-                </div>
-
-                <div class="form-group">
-                    <label for="alias" tag="" class="optional">
-                        Тема посту на англійській і без пропусків(посилання):
-                    </label>
-                    <input type="text" name="alias" id="alias" value="" class="form-control">
                 </div>
 
                 <input type="submit" name="submit" id="submit" value="Додати" class="btn btn-default">

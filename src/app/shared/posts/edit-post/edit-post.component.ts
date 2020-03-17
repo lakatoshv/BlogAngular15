@@ -113,15 +113,71 @@ export class EditPostComponent implements OnInit {
    */
   edit(post: Post): void {}
 
+
+  /**
+   * Add tag event
+   * @returns void
+   */
+  addTagLabel(): void {
+    this.clearFormData();
+  }
+  /**
+   * Edit tag event
+   * @param tag string
+   * @returns void
+   */
+  editTag(tag: string): void {
+    this.selectedTag['value'] = tag;
+    this.selectedTag['id'] = this.post.TagsList.indexOf(tag);
+    this.action = 'edit';
+    this.tagLabel = 'Редагувати тег';
+  }
+
+  /**
+   * Add tag event
+   * @param tag string
+   * @returns void
+   */
+  onAddTagAction(tag: string): void {
+    this.post.TagsList.unshift(tag);
+    this.clearFormData();
+  }
+
+  /**
+   * Edit tag event
+   * @param tag any
+   * @returns void
+   */
+  onEditTagAction(tag: any): void {
+    const index = this.selectedTag['id'];
+    if (index > -1) {
+      this.post.TagsList[index] = tag;
+      this.clearFormData();
+    }
+  }
+
+  /**
+   * Delete tag event
+   * @param tag any
+   */
+  onDeleteTagAction(tag: any): void {
+    const index = this.post.TagsList.indexOf(tag);
+    if (index > -1) {
+      this.post.TagsList.splice(index, 1);
+    }
+  }
+
   /**
    * Get post.
    * @returns void
    */
   private _getPost(): void {
     this.post = Posts[this._postId];
+    this.post.TagsList = this.post.Tags.split(', ');
     if (this.post.AuthorId !== this.user.Id) {
       this._router.navigateByUrl('/');
     }
+    this._setFormData();
   }
 
   /**
@@ -129,11 +185,10 @@ export class EditPostComponent implements OnInit {
    * @returns void
    */
   private _setFormData(): void {
-    this.postForm.get('id').setValue(this.post.Id);
     this.postForm.get('title').setValue(this.post.Title);
     this.postForm.get('description').setValue(this.post.Description);
     this.postForm.get('content').setValue(this.post.Content);
-    this.postForm.get('imgUrl').setValue(this.post.ImageUrl);
+    this.postForm.get('imageUrl').setValue(this.post.ImageUrl);
   }
 
   /**
@@ -145,40 +200,5 @@ export class EditPostComponent implements OnInit {
     this.action = 'add';
     this.selectedTag['value'] = '';
     this.selectedTag['id'] = null;
-  }
-
-  /**
-   * Edit tag event
-   * @param tag string
-   * @returns void
-   */
-  editTag(tag: string): void {
-    this.selectedTag['value'] = tag;
-    this.selectedTag['id'] = this.post['tags'].indexOf(tag);
-    this.action = 'edit';
-    this.tagLabel = 'Редагувати тег';
-  }
-
-  /**
-   * Add tag event
-   * @param tag string
-   * @returns void
-   */
-  onAddTagAction(tag: string): void {
-    this.post['tags'].unshift(tag);
-    this.clearFormData();
-  }
-  onEditTagAction(tag) {
-    const index = this.selectedTag['id'];
-    if (index > -1) {
-      this.post['tags'][index] = tag;
-      this.clearFormData();
-    }
-  }
-  onDeleteTagAction(tag) {
-    const index = this.post['tags'].indexOf(tag);
-    if (index > -1) {
-      this.post['tags'].splice(index, 1);
-    }
   }
 }

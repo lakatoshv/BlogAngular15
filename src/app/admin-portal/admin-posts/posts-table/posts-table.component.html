@@ -30,9 +30,9 @@
         </tfoot>
         <tbody>
             <tr *ngFor="let post of posts">
-                <td><a routerLink="show/{{post.id}}">{{post.title}}</a></td>
-                <td>{{post.tags}}</td>
-                <td><a routerLink="/blog/profile/{{post.authorId}}">{{post.author.FirstName + " " + post.author.LastName}}</a></td>
+                <td><a routerLink="show/{{post.Id}}">{{post.Title}}</a></td>
+                <td>{{post.Tags}}</td>
+                <td><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
                 <td>
                     <select>
                         <option value="null">Виберіть статус</option>
@@ -41,13 +41,13 @@
                     </select>
                     <button class="btn btn-sm btn-success btn-@item.Post.Id">Зберегти</button>
                 </td>
-                <td>{{post.seen}}</td>
-                <td>{{post.likes}}</td>
-                <td>{{post.dislikes}}</td>
-                <td>{{post.commentsCount}}</td>
+                <td>{{post.Seen}}</td>
+                <td>{{post.Likes}}</td>
+                <td>{{post.Dislikes}}</td>
+                <td>{{post.CommentsCount}}</td>
                 <td>2011/04/25</td>
                 <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="edit/1"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary" routerLink="post/edit/1"><i class="fa fa-edit"></i></a>
                     <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
                         <i class="fa fa-trash"></i>
                     </button>

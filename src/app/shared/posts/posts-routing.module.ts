@@ -22,7 +22,7 @@ const routes: Routes = [
     component: AddPostComponent
   },
   {
-    path: 'posts/edit/:post-id',
+    path: 'post/edit/:post-id',
     component: EditPostComponent
   },
   {

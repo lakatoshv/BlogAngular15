@@ -9,17 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-    DefaultPagesRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    DefaultPagesRoutingModule
   ],
-  declarations: [
-    AboutComponent,
-    ContactsComponent
-  ],
-  exports: [
-    AboutComponent,
-    ContactsComponent
-  ]
+  declarations: [AboutComponent, ContactsComponent]
 })
 export class DefaultPagesModule { }

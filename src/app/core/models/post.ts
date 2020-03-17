@@ -30,6 +30,8 @@ export class Post {
    * @param ImageUrl string
    * Post Tags
    * @param Tags string
+   * Post Tags List
+   * @param TagsList string
    * Post Comments Count
    * @param CommentsCount number
    */
@@ -45,7 +47,7 @@ export class Post {
     public Dislikes: number,
     public ImageUrl: string,
     public Tags: string,
-    public CommentsCount: number
+    public CommentsCount: number,
+    public TagsList?: string[],
   ) {}
-  }
-  
+}

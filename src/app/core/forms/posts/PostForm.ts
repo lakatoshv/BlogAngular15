@@ -21,9 +21,9 @@ export class PostForm {
         content: new FormControl(''),
 
         /**
-         * ImageUrl input field.
+         * imageUrl input field.
          */
-        img_url: new FormControl(''),
+        imageUrl: new FormControl(''),
 
         /**
          * Tags input field.

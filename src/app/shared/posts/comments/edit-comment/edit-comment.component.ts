@@ -67,8 +67,8 @@ export class EditCommentComponent implements OnInit {
    * @returns void
    */
   public setFormValue(): void {
-    this.commentForm.get('author').setValue(this.comment.Author);
-    this.commentForm.get('email').setValue(this.comment.Email);
+    this.commentForm.get('name').setValue(this.comment.Author.FirstName + ' ' + this.comment.Author.LastName);
+    this.commentForm.get('email').setValue(this.comment.Author.Email);
     this.commentForm.get('content').setValue(this.comment.Content);
   }
 
@@ -77,10 +77,11 @@ export class EditCommentComponent implements OnInit {
    * @param comment Comment
    * @returns void
    */
-  public edit(comment: Comment): void {
+  public edit(): void {
+    debugger
     if (this.user.Id === this.comment.AuthorId) {
-      comment.Id = this.comment.Id;
-      this.onEdit.emit(comment);
+      this.comment.Content = this.commentForm.get('content').value;
+      this.onEdit.emit(this.comment);
     }
   }
 }

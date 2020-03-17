@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AngularTokenService, AngularTokenModule } from 'angular-token';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    AngularTokenModule,
+    HttpClientModule,
+    AngularTokenModule.forRoot({}),
     HttpModule
   ],
   providers:    [ AngularTokenService ],

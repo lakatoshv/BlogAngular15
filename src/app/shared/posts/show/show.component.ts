@@ -9,6 +9,7 @@ import { Users } from 'src/app/core/data/UsersList';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/User';
+import { Post } from 'src/app/core/models/Post';
 
 @Component({
   selector: 'app-show',
@@ -16,7 +17,7 @@ import { User } from 'src/app/core/models/User';
   styleUrls: ['./show.component.css']
 })
 export class ShowComponent implements OnInit {
-  public post: any; 
+  public post: Post
   public user: User;
 
   public loggedIn: boolean = false;
@@ -46,23 +47,23 @@ export class ShowComponent implements OnInit {
   }
 
   public like(id: number): void{
-    this.post.likes += 1;
+    this.post.Likes += 1;
   }
 
   public dislike(id: number): void{
-    this.post.dislikes += 1;
+    this.post.Dislikes += 1;
   }
 
   public deleteAction(){
-    if(this.loggedIn && this.post.author.Id === this.user.Id){
-      this._router.navigateByUrl("/");
+    if (this.loggedIn && this.post.Author.Id === this.user.Id) {
+      this._router.navigateByUrl('/blog');
     }
   }
 
-  private _getPost(){
+  private _getPost() {
     this.post = Posts[this.postId];
-    this.post.author = Users[this.post.authorId];
-    this.post.tags = this.post.tags.split(', ');
+    this.post.Author = Users[this.post.AuthorId];
+    this.post.TagsList = this.post.Tags.split(', ');
   }
 
 }

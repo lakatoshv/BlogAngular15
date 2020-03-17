@@ -9,8 +9,7 @@ import { EditCommentComponent } from './edit-comment/edit-comment.component';
 const routes: Routes = [
   {
     path: '',
-    component: CommentsListComponent,
-    loadChildren: './add-comment/add-comment.component',
+    component: CommentsListComponent
   },
   {
     path: 'add',

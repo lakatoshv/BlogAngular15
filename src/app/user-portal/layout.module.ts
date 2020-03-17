@@ -8,6 +8,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ProfileModule } from './profile/profile.module';
+import { AboutComponent } from './default-pages/about/about.component';
+import { ContactsComponent } from './default-pages/contacts/contacts.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { AuthorizationComponent } from './user/authorization/authorization.component';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({
@@ -17,12 +21,14 @@ import { ProfileModule } from './profile/profile.module';
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     EditorModule,
-    ProfileModule,
-    DefaultPagesModule,
-    UserModule
+    ProfileModule
   ],
   declarations: [
-    LayoutComponentComponent,
+    LayoutComponentComponent, 
+    AboutComponent, 
+    ContactsComponent,
+    RegistrationComponent,
+    AuthorizationComponent,
   ],
 })
 export class LayoutModule { }
