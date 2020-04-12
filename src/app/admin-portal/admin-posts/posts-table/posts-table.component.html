@@ -34,12 +34,7 @@
                 <td>{{post.Tags}}</td>
                 <td><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
                 <td>
-                    <select>
-                        <option value="null">Виберіть статус</option>
-                        <option value="0">Підтверджено</option>
-                        <option value="1">Непідтверджено</option>
-                    </select>
-                    <button class="btn btn-sm btn-success btn-@item.Post.Id">Зберегти</button>
+                    <app-change-status [status]="null" (onChanged)="onChangeStatusAction(post.id, $event)"></app-change-status>
                 </td>
                 <td>{{post.Seen}}</td>
                 <td>{{post.Likes}}</td>

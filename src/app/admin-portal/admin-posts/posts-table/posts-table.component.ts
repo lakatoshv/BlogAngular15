@@ -27,6 +27,13 @@ export class PostsTableComponent implements OnInit {
   }
 
   /**
+   * Change post status action.
+   * @param postId number
+   * @param status string
+   */
+  onChangeStatusAction(postId: number, status: string) {}
+
+  /**
    * Get all posts
    */
   private _getPosts() {
