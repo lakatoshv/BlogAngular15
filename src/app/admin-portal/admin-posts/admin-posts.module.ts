@@ -7,6 +7,7 @@ import { AdminPostsRoutingModule } from './admin-posts-routing.module';
 import { PostsTableComponent } from './posts-table/posts-table.component';
 import { PostsActivityChartComponent } from './posts-activity-chart/posts-activity-chart.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
+import { ChangeStatusComponent } from './posts-table/change-status/change-status.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { PostsListComponent } from './posts-list/posts-list.component';
   declarations: [
     PostsTableComponent,
     PostsActivityChartComponent,
-    PostsListComponent
+    PostsListComponent,
+    ChangeStatusComponent,
   ],
   exports: [
     PostsTableComponent,

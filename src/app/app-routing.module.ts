@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '', redirectTo: 'blog', pathMatch: 'full'
+  },
+  {
     path: 'blog',
     loadChildren: './user-portal/layout.module#LayoutModule'
   },

@@ -2,6 +2,7 @@ import { Posts } from 'src/app/core/data/PostsList';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/core/models/Post';
 import { Users } from 'src/app/core/data/UsersList';
+import { Comments } from 'src/app/core/data/CommentsList';
 
 @Component({
   selector: 'app-posts-table',
@@ -24,6 +25,29 @@ export class PostsTableComponent implements OnInit {
    */
   ngOnInit() {
     this._getPosts();
+  }
+
+  /**
+   * Change post status action.
+   * @param postId number
+   * @param status string
+   */
+  onChangeStatusAction(postId: number, status: string) {}
+
+  /**
+   * Delete event
+   * @param postId number
+   * @returns void
+   */
+  public deleteAction(postId: number): void {
+    const index = this.posts.findIndex(x => x.Id === postId);
+    if (index > -1) {
+      this.posts.splice(index, 1);
+      const comments = Comments.filter(comment => comment.PostId === postId).forEach(comment => {
+        Comments.splice(comment.Id, 1);
+      });
+      this.posts = this.posts;
+    }
   }
 
   /**
