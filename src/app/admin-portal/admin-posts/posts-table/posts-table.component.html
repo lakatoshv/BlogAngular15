@@ -34,7 +34,7 @@
                 <td>{{post.Tags}}</td>
                 <td><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
                 <td>
-                    <app-change-status [status]="null" (onChanged)="onChangeStatusAction(post.id, $event)"></app-change-status>
+                    <app-change-status [status]="null" (onChanged)="onChangeStatusAction(post.Id, $event)"></app-change-status>
                 </td>
                 <td>{{post.Seen}}</td>
                 <td>{{post.Likes}}</td>
@@ -43,7 +43,7 @@
                 <td>2011/04/25</td>
                 <td class="actions" data-th="">
                     <a class="btn btn-primary" routerLink="post/edit/1"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" onclick="setDeletePostValues(this.id)" data-toggle="modal" data-target="#delete-post">
+                    <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" (click)="deleteAction(post.Id)" data-toggle="modal" data-target="#delete-post">
                         <i class="fa fa-trash"></i>
                     </button>
                 </td>
