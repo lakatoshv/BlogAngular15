@@ -47,7 +47,7 @@ export class AddCommentComponent implements OnInit {
    * Add Comment
    * @returns void
    */
-  addComment(): void{
+  addComment(): void {
     const comment: Comment = new Comment();
     comment.Content = this.commentForm.get('content').value;
     comment.CreatedAt = new Date();

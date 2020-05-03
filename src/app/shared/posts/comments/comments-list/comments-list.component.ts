@@ -1,3 +1,4 @@
+import { CommentsService } from './../../../../core/services/posts-services/comments.service';
 import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -75,7 +76,8 @@ export class CommentsListComponent implements OnInit {
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
-    private _globalService: GlobalService
+    private _globalService: GlobalService,
+    private _commentsService: CommentsService,
   ) { }
 
   /**
@@ -117,7 +119,7 @@ export class CommentsListComponent implements OnInit {
    */
   onAddAction(comment: Comment): void {
     if (comment.AuthorId !== null) {
-      comment.Author = this.users[comment.AuthorId];
+      comment.Author = this._usersService.getUserById(comment.AuthorId);
     }
     this.comments.unshift(comment);
 
@@ -130,7 +132,7 @@ export class CommentsListComponent implements OnInit {
    * @returns void
    */
   onEditAction(comment: Comment): void {
-    const index = this.comments.findIndex(x => x.Id === comment.Id);
+    const index = this._commentsService.getCommentPositionById(comment.Id);
     if (index > -1) {
       this.comments[index] = comment;
     }
@@ -154,7 +156,7 @@ export class CommentsListComponent implements OnInit {
    */
   deleteAction(comment: Comment): void {
     if (this.user.Id === comment.AuthorId) {
-      const index = this.comments.findIndex(x => x.Id === comment.Id);
+      const index = this._commentsService.getCommentPositionById(comment.Id);
       if (index > -1) {
         this.comments.splice(index, 1);
       }
@@ -170,11 +172,7 @@ export class CommentsListComponent implements OnInit {
    */
   private _getCommentsForCurrentPost(): void {
     this.users = Users;
-    Comments.filter(item => item.PostId === this.postId).forEach(comment => {
-      comment.Author = this.users[comment.AuthorId];
-      this.comments.push(comment);
-    });
-
+    this.comments = this._commentsService.getCommentsByPostId(this.postId);
     this.pageInfo.totalItems = this.comments.length;
   }
 

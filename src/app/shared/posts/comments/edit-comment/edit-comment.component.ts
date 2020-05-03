@@ -78,7 +78,6 @@ export class EditCommentComponent implements OnInit {
    * @returns void
    */
   public edit(): void {
-    debugger
     if (this.user.Id === this.comment.AuthorId) {
       this.comment.Content = this.commentForm.get('content').value;
       this.onEdit.emit(this.comment);
