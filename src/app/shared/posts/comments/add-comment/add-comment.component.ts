@@ -1,3 +1,4 @@
+import { CommentsService } from './../../../../core/services/posts-services/comments.service';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommentForm } from 'src/app/core/forms/posts/CommentForm';
@@ -14,14 +15,18 @@ import { User } from 'src/app/core/models/User';
 })
 export class AddCommentComponent implements OnInit {
   /**
+   * @param postId number
+   */
+  @Input() postId: number;
+
+  /**
    * @param user User
    */
   @Input() user: User = null;
 
   /**
-   * @param onAdd EventEmitter<any>
+   * @param commentForm FormGroup
    */
-  @Output() onAdd: EventEmitter<any> = new EventEmitter<any>();
   commentForm: FormGroup = new CommentForm().commentForm;
 
   /**
@@ -30,7 +35,8 @@ export class AddCommentComponent implements OnInit {
    */
   constructor(
     private _globalService: GlobalService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _commentsService: CommentsService
   ) { }
 
   /**
@@ -51,12 +57,13 @@ export class AddCommentComponent implements OnInit {
     const comment: Comment = new Comment();
     comment.Content = this.commentForm.get('content').value;
     comment.CreatedAt = new Date();
+    comment.PostId = this.postId;
     if (this.user) {
       comment.AuthorId = this.user.Id;
     } else {
       comment.Email = this.commentForm.get('email').value;
       comment.Name = this.commentForm.get('name').value;
     }
-    this.onAdd.emit(comment);
+    this._commentsService.addComment(comment);
   }
 }

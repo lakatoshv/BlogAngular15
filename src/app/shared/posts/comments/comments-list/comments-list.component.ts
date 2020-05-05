@@ -52,9 +52,9 @@ export class CommentsListComponent implements OnInit {
   public loggedIn = false;
 
   /**
-   * @param editPostId number
+   * @param editCommentId number
    */
-  public editPostId: number;
+  public editCommentId: number;
 
   /**
    * @param isLoadEdit boolean
@@ -91,6 +91,13 @@ export class CommentsListComponent implements OnInit {
       this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
+    this._commentsService.commentChanged.subscribe(
+      () => {
+        this.comments = this._commentsService.getCommentsByPostId(this.postId);
+        this.pageInfo.totalItems = this.comments.length;
+        this.isLoadEdit = false;
+      }
+    );
   }
 
   /**
@@ -113,38 +120,12 @@ export class CommentsListComponent implements OnInit {
   }
 
   /**
-   * Add comment event
-   * @param comment Comment
-   * @returns void
-   */
-  onAddAction(comment: Comment): void {
-    if (comment.AuthorId !== null) {
-      comment.Author = this._usersService.getUserById(comment.AuthorId);
-    }
-    this.comments.unshift(comment);
-
-    this.pageInfo.totalItems += 1;
-  }
-
-  /**
-   * Edit comment event
-   * @param comment Comment
-   * @returns void
-   */
-  onEditAction(comment: Comment): void {
-    const index = this._commentsService.getCommentPositionById(comment.Id);
-    if (index > -1) {
-      this.comments[index] = comment;
-    }
-  }
-
-  /**
    * Edit comment event
    * @param comment Comment
    * @returns void
    */
   editAction(comment: Comment): void {
-    this.editPostId = comment.Id;
+    this.editCommentId = comment.Id;
     this.comment = comment;
     this.isLoadEdit = true;
   }
@@ -156,10 +137,7 @@ export class CommentsListComponent implements OnInit {
    */
   deleteAction(comment: Comment): void {
     if (this.user.Id === comment.AuthorId) {
-      const index = this._commentsService.getCommentPositionById(comment.Id);
-      if (index > -1) {
-        this.comments.splice(index, 1);
-      }
+      this._commentsService.deleteComment(comment);
     }
 
     this.pageInfo.totalItems -= 1;

@@ -2,7 +2,7 @@
     <!-- Similar Posts -->
     <div class="similar_posts">
 
-        <app-add-comment [user]="user" (onAdd)="onAddAction($event)"></app-add-comment>
+        <app-add-comment [user]="user" [postId]="postId"></app-add-comment>
 
         <!-- Comments -->
         <div class="comments" *ngIf="comments">
@@ -34,7 +34,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <app-edit-comment [comment]="comment" (onEdit)="onEditAction($event)" *ngIf="isLoadEdit && editPostId === comment.Id">
+                                <app-edit-comment [comment]="comment" *ngIf="isLoadEdit && editCommentId === comment.Id">
                                 </app-edit-comment>
                                 <!-- Reply - ->
                                   <ul class="comment_list">
