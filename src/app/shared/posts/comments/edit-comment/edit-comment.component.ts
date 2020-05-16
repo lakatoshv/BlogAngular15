@@ -1,3 +1,4 @@
+import { CommentsService } from './../../../../core/services/posts-services/comments.service';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommentForm } from 'src/app/core/forms/posts/CommentForm';
@@ -13,11 +14,6 @@ import { GlobalService } from 'src/app/core/services/global-service/global-servi
   styleUrls: ['./edit-comment.component.css']
 })
 export class EditCommentComponent implements OnInit {
-  /**
-   * @param onEdit EventEmitter<any>
-   */
-  @Output() onEdit: EventEmitter<any> = new EventEmitter<any>();
-
   /**
    * @param comment Comment
    */
@@ -44,7 +40,8 @@ export class EditCommentComponent implements OnInit {
    */
   constructor(
     private _usersService: UsersService,
-    private _globalService: GlobalService
+    private _globalService: GlobalService,
+    private _commentsService: CommentsService
   ) { }
 
   /**
@@ -78,10 +75,9 @@ export class EditCommentComponent implements OnInit {
    * @returns void
    */
   public edit(): void {
-    debugger
     if (this.user.Id === this.comment.AuthorId) {
       this.comment.Content = this.commentForm.get('content').value;
-      this.onEdit.emit(this.comment);
+      this._commentsService.editComment(this.comment);
     }
   }
 }

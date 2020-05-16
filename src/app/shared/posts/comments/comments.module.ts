@@ -1,3 +1,4 @@
+import { CoreModule } from './../../../core/core.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CommonModule,
     CommentsRoutingModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CoreModule
   ],
   exports: [
     CommentsListComponent,

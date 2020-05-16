@@ -1,14 +1,18 @@
+import { Users } from './../../data/UsersList';
 import { Injectable } from '@angular/core';
 import { AngularTokenService } from 'angular-token';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { GlobalService } from '../global-service/global-service.service';
-import { Users } from '../../data/UsersList';
 import { User } from '../../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  /**
+   * @param _users User[]
+   */
+  private _users = Users;
   /**
    * @param _jwt JwtHelperService
    */
@@ -84,5 +88,9 @@ export class UsersService {
    */
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  public getUserById(id: number): User {
+    return this._users[id];
   }
 }

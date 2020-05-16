@@ -1,3 +1,4 @@
+import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -64,7 +65,8 @@ export class AddPostComponent implements OnInit {
   constructor(
     private _router: Router,
     private _usersService: UsersService,
-    private _globalService: GlobalService
+    private _globalService: GlobalService,
+    private _postsService: PostsService
   ) { }
 
   /**
@@ -151,6 +153,8 @@ export class AddPostComponent implements OnInit {
    * @returns void
    */
   add(post: Post): void {
+    post.AuthorId = this.user.Id;
+    this._postsService.addPost(post);
     this._router.navigate(['/blog']);
   }
 

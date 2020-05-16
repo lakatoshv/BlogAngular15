@@ -44,10 +44,10 @@
               currentPage: pageInfo.PageNumber,
               totalItems: pageInfo.TotalItems }">
                     <a routerLink="/blog/post/{{post.Id}}">
-                        <h2 class="post-title" [innerHTML]="post.title"></h2>
+                        <h2 class="post-title" [innerHTML]="post.Title"></h2>
                     </a>
                     <div class="pull-right" *ngIf="loggedIn && post.Author.Id === user.Id">
-                        <a class="btn btn-sm text-white btn-primary" routerLink="/blogpost/{{post.Id}}/edit">
+                        <a class="btn btn-sm text-white btn-primary" routerLink="/blog/post/{{post.Id}}/edit">
                             <i class="fa fa-edit"></i> Редагувати
                         </a>
                         <button type="button" class="btn btn-sm text-white btn-danger" (click)="deleteAction(post.Id)">
@@ -55,7 +55,7 @@
                     Видалити
                 </button>
                     </div>
-                    <a routerLink="/blogpost/{{post.Id}}">
+                    <a routerLink="/blog/post/{{post.Id}}">
                         <img style="width: 100%; height: 300px;" src="{{post.ImageUrl}}" />
                         <h3 class="post-subtitle" [innerHTML]="post.Description"></h3>
                     </a>

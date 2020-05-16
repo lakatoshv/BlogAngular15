@@ -1,11 +1,7 @@
+import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit } from '@angular/core';
-
-import { Posts } from "../../../core/data/PostsList";
-import { Comments } from "../../../core/data/CommentsList";
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
-import { Users } from 'src/app/core/data/UsersList';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/User';
@@ -17,53 +13,97 @@ import { Post } from 'src/app/core/models/Post';
   styleUrls: ['./show.component.css']
 })
 export class ShowComponent implements OnInit {
-  public post: Post
+  /**
+   * @param post Post
+   */
+  public post: Post;
+
+  /**
+   * @param user User
+   */
   public user: User;
 
-  public loggedIn: boolean = false;
+  /**
+   * @param loggedIn boolean
+   */
+  public loggedIn = false;
 
+  /**
+   * @param postId number
+   */
   public postId: number;
-  
+
+  /**
+   * @param _generalService GeneralServiceService
+   * @param _activatedRoute ActivatedRoute
+   * @param _usersService UsersService
+   * @param _globalService GlobalService
+   * @param _router Router
+   * @param _postsService PostsService
+   */
   constructor(
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
     private _globalService: GlobalService,
-    private _router: Router
+    private _router: Router,
+    private _postsService: PostsService
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
-    this.postId = parseInt(this._generalService.getRoutePeram("post-id", this._activatedRoute))
+    this.postId = parseInt(this._generalService.getRoutePeram('post-id', this._activatedRoute), null);
     this._getPost();
     this.loggedIn = this._usersService.isLoggedIn();
-    if(this.loggedIn){
-      this._globalService.resetUserData();  
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
+
+    this._postsService.postChanged.subscribe(
+      () => {
+        this._getPost();
+      }
+    );
   }
 
-  public findByValue(){
-    //const index = Data.findIndex(item => item.name === 'John');
+  /**
+   * Like post.
+   * @param id number
+   * @returns void
+   */
+  public like(id: number): void {
+    this._postsService.like(id);
   }
 
-  public like(id: number): void{
-    this.post.Likes += 1;
+  /**
+   * Dislike post.
+   * @param id number
+   * @returns void
+   */
+  public dislike(id: number): void {
+    this._postsService.dislike(id);
   }
 
-  public dislike(id: number): void{
-    this.post.Dislikes += 1;
-  }
-
-  public deleteAction(){
+  /**
+   * Delete post.
+   * @returns void
+   */
+  public deleteAction(): void {
     if (this.loggedIn && this.post.Author.Id === this.user.Id) {
+      this._postsService.deletePost(this.postId);
       this._router.navigateByUrl('/blog');
     }
   }
 
-  private _getPost() {
-    this.post = Posts[this.postId];
-    this.post.Author = Users[this.post.AuthorId];
-    this.post.TagsList = this.post.Tags.split(', ');
+  /**
+   * Get posts.
+   * @returns void
+   */
+  private _getPost(): void {
+    this.post = this._postsService.getPost(this.postId);
   }
 
 }

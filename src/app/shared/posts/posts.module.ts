@@ -1,8 +1,8 @@
+import { CoreModule } from './../../core/core.module';
 import { CommentsModule } from './comments/comments.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { ShowComponent } from './show/show.component';
@@ -20,7 +20,8 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
     ReactiveFormsModule,
     EditorModule,
     NgxPaginationModule,
-    CommentsModule
+    CommentsModule,
+    CoreModule
   ],
   declarations: [
     PostsListComponent,

@@ -1,3 +1,4 @@
+import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -69,7 +70,8 @@ export class EditPostComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _usersService: UsersService,
-    private _globalService: GlobalService
+    private _globalService: GlobalService,
+    private _postsService: PostsService
   ) { }
 
   /**
@@ -111,7 +113,9 @@ export class EditPostComponent implements OnInit {
    * @param post Post
    * @returns void
    */
-  edit(post: Post): void {}
+  edit(post: Post): void {
+    this._postsService.editPost(this._postId, post);
+  }
 
 
   /**
@@ -172,8 +176,7 @@ export class EditPostComponent implements OnInit {
    * @returns void
    */
   private _getPost(): void {
-    this.post = Posts[this._postId];
-    this.post.TagsList = this.post.Tags.split(', ');
+    this.post = this._postsService.getPost(this._postId);
     if (this.post.AuthorId !== this.user.Id) {
       this._router.navigateByUrl('/');
     }

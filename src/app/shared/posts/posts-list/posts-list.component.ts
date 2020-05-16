@@ -1,3 +1,4 @@
+import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit } from '@angular/core';
 import { Posts } from '../../../core/data/PostsList';
 import { GeneralServiceService } from 'src/app/core';
@@ -71,12 +72,14 @@ export class PostsListComponent implements OnInit {
    * @param _generalService GeneralServiceService
    * @param _activatedRoute ActivatedRoute
    * @param _usersService UsersService
+   * @param _postsService PostsService
    */
   constructor(
     private _globalService: GlobalService,
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _postsService: PostsService
   ) {
   }
 
@@ -91,6 +94,13 @@ export class PostsListComponent implements OnInit {
       this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
+
+    this._postsService.postChanged.subscribe(
+      () => {
+        this.posts = this._postsService.getPosts();
+        this.pageInfo.TotalItems = this.paginate.length;
+      }
+    );
   }
 
   /**
@@ -102,15 +112,9 @@ export class PostsListComponent implements OnInit {
     if (this.loggedIn && this.posts[postId].Author.Id === this.user.Id) {
       const index = this.posts.findIndex(x => x.Id === postId);
       if (index > -1) {
-        this.posts.splice(index, 1);
-        const comments = Comments.filter(comment => comment.PostId === postId).forEach(comment => {
-          Comments.splice(comment.Id, 1);
-        });
+        this._postsService.deletePost(postId);
       }
-      this._getPosts();
     }
-
-    this.pageInfo.TotalItems -= 1;
   }
 
    /**
@@ -119,7 +123,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   public like(id: number): void {
-    this.posts[id].Likes += 1;
+    this._postsService.like(id);
   }
 
   /**
@@ -128,7 +132,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   public dislike(id: number): void {
-    this.posts[id].Dislikes += 1;
+    this._postsService.dislike(id);
   }
 
   /**
@@ -146,7 +150,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   public search(search: string): void {
-    this.posts = Posts.filter(post => post.Title.includes(search));
+    this.posts = this._postsService.getPosts(search);
   }
 
   /**
@@ -154,7 +158,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   public sort(): void {
-    this.posts = sortBy(Object.values(Posts), [this.sortBy]);
+    this.posts = this._postsService.sort(this.sortBy);
   }
 
   /**
@@ -162,13 +166,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   private _getPosts(): void {
-    this.users = Users;
-    const posts = Posts;
-    posts.forEach(post => {
-      post.Author = this.users[post.AuthorId];
-      post.CommentsCount = Posts.findIndex(item => item.Id === post.Id);
-      this.posts.push(post);
-    });
-    this.pageInfo.TotalItems = posts.length;
+    this.posts = this._postsService.getPosts();
+    this.pageInfo.TotalItems = this.posts.length;
   }
 }

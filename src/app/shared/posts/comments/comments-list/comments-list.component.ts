@@ -1,8 +1,7 @@
+import { CommentsService } from './../../../../core/services/posts-services/comments.service';
 import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-
 import { GeneralServiceService } from 'src/app/core';
-
 import { Comments } from 'src/app/core/data/CommentsList';
 import { Comment } from 'src/app/core/models/Comment';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
@@ -51,9 +50,9 @@ export class CommentsListComponent implements OnInit {
   public loggedIn = false;
 
   /**
-   * @param editPostId number
+   * @param editCommentId number
    */
-  public editPostId: number;
+  public editCommentId: number;
 
   /**
    * @param isLoadEdit boolean
@@ -75,7 +74,8 @@ export class CommentsListComponent implements OnInit {
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
-    private _globalService: GlobalService
+    private _globalService: GlobalService,
+    private _commentsService: CommentsService,
   ) { }
 
   /**
@@ -89,6 +89,13 @@ export class CommentsListComponent implements OnInit {
       this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
+    this._commentsService.commentChanged.subscribe(
+      () => {
+        this.comments = this._commentsService.getCommentsByPostId(this.postId);
+        this.pageInfo.totalItems = this.comments.length;
+        this.isLoadEdit = false;
+      }
+    );
   }
 
   /**
@@ -111,38 +118,12 @@ export class CommentsListComponent implements OnInit {
   }
 
   /**
-   * Add comment event
-   * @param comment Comment
-   * @returns void
-   */
-  onAddAction(comment: Comment): void {
-    if (comment.AuthorId !== null) {
-      comment.Author = this.users[comment.AuthorId];
-    }
-    this.comments.unshift(comment);
-
-    this.pageInfo.totalItems += 1;
-  }
-
-  /**
-   * Edit comment event
-   * @param comment Comment
-   * @returns void
-   */
-  onEditAction(comment: Comment): void {
-    const index = this.comments.findIndex(x => x.Id === comment.Id);
-    if (index > -1) {
-      this.comments[index] = comment;
-    }
-  }
-
-  /**
    * Edit comment event
    * @param comment Comment
    * @returns void
    */
   editAction(comment: Comment): void {
-    this.editPostId = comment.Id;
+    this.editCommentId = comment.Id;
     this.comment = comment;
     this.isLoadEdit = true;
   }
@@ -154,13 +135,8 @@ export class CommentsListComponent implements OnInit {
    */
   deleteAction(comment: Comment): void {
     if (this.user.Id === comment.AuthorId) {
-      const index = this.comments.findIndex(x => x.Id === comment.Id);
-      if (index > -1) {
-        this.comments.splice(index, 1);
-      }
+      this._commentsService.deleteComment(comment);
     }
-
-    this.pageInfo.totalItems -= 1;
   }
 
   /**
@@ -170,11 +146,7 @@ export class CommentsListComponent implements OnInit {
    */
   private _getCommentsForCurrentPost(): void {
     this.users = Users;
-    Comments.filter(item => item.PostId === this.postId).forEach(comment => {
-      comment.Author = this.users[comment.AuthorId];
-      this.comments.push(comment);
-    });
-
+    this.comments = this._commentsService.getCommentsByPostId(this.postId);
     this.pageInfo.totalItems = this.comments.length;
   }
 
