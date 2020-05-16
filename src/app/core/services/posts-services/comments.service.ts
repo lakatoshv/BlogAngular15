@@ -86,4 +86,16 @@ export class CommentsService {
     }
     this.commentChanged.emit(true);
   }
+
+  /**
+   * Delete comment by post id.
+   * @param postId number
+   * @returns void
+   */
+  public deleteCommentsByPostId(postId: number): void {
+    const comments = this._comments.filter(comment => comment.PostId === postId).forEach(comment => {
+      this._comments.splice(comment.Id, 1);
+    });
+    this.commentChanged.emit(true);
+  }
 }

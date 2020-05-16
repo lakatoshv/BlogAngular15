@@ -44,7 +44,7 @@
               currentPage: pageInfo.PageNumber,
               totalItems: pageInfo.TotalItems }">
                     <a routerLink="/blog/post/{{post.Id}}">
-                        <h2 class="post-title" [innerHTML]="post.title"></h2>
+                        <h2 class="post-title" [innerHTML]="post.Title"></h2>
                     </a>
                     <div class="pull-right" *ngIf="loggedIn && post.Author.Id === user.Id">
                         <a class="btn btn-sm text-white btn-primary" routerLink="/blog/post/{{post.Id}}/edit">

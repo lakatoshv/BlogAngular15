@@ -1,3 +1,5 @@
+import { CommentsService } from './../../../core/services/posts-services/comments.service';
+import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { PageInfo } from './../../../core/models/PageInfo';
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
@@ -82,12 +84,15 @@ export class MyPostsComponent implements OnInit {
    * @param _router Router
    * @param _activatedRoute ActivatedRoute
    * @param _usersService UsersService
+   * @param _postsService PostsService
+   * @param _commentsService CommentsService
    */
   constructor(
     private _globalService: GlobalService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _postsService: PostsService
   ) {
   }
 
@@ -111,6 +116,13 @@ export class MyPostsComponent implements OnInit {
       this.isCurrentUserPosts = false;
     }
     this._getPosts();
+
+    this._postsService.postChanged.subscribe(
+      () => {
+        this.posts = this._postsService.getUserPosts(this._userId);
+        this.pageInfo.TotalItems = this.paginate.length;
+      }
+    );
   }
 
   /**
@@ -120,14 +132,7 @@ export class MyPostsComponent implements OnInit {
    */
   public deleteAction(postId: number): void {
     if (this.isLoggedIn && this.posts[postId].Author.Id === this.user.Id) {
-      const index = this.posts.findIndex(x => x.Id === postId);
-      if (index > -1) {
-        this.posts.splice(index, 1);
-        const comments = Comments.filter(comment => comment.PostId === postId).forEach(comment => {
-          Comments.splice(comment.Id, 1);
-        });
-      }
-      this._getPosts();
+      this._postsService.deletePost(postId);
     }
 
     this.pageInfo.TotalItems -= 1;
@@ -139,7 +144,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   public like(id: number): void {
-    this.posts[id].Likes += 1;
+    this._postsService.like(id);
   }
 
   /**
@@ -148,7 +153,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   public dislike(id: number): void {
-    this.posts[id].Dislikes += 1;
+    this._postsService.dislike(id);
   }
 
   /**
@@ -166,7 +171,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   public search(search: string): void {
-    this.posts = Posts.filter(post => post.Title.includes(search));
+    this.posts = this._postsService.getUserPosts(this._userId, search);
   }
 
   /**
@@ -174,7 +179,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   public sort(): void {
-    this.posts = sortBy(Object.values(Posts), [this.sortBy])
+    this.posts = this._postsService.sort(this.sortBy);
   }
 
   /**
@@ -182,24 +187,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   private _getPosts(): void {
-    const posts = Posts.filter(user => user.Id === this._userId).forEach(post => {
-      post.Author = Users[this._userId];
-      post.CommentsCount = Posts.findIndex(item => item.Id === post.Id);
-      this.posts.push(post);
-    })
+    this.posts = this._postsService.getUserPosts(this._userId);
     this.pageInfo.TotalItems = this.posts.length;
-  }
-
-  /**
-   * Delete post event.
-   * @param post Post
-   * @returns void
-   */
-  private _onDeleteCommentAction(post: Post): void {
-    const index = this.posts.findIndex(x => x.Id === post.Id);
-    if (index > -1) {
-      this.posts.splice(index, 1);
-    }
-    this.posts = this.posts;
   }
 }

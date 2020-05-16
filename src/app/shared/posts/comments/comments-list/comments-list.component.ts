@@ -1,9 +1,7 @@
 import { CommentsService } from './../../../../core/services/posts-services/comments.service';
 import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-
 import { GeneralServiceService } from 'src/app/core';
-
 import { Comments } from 'src/app/core/data/CommentsList';
 import { Comment } from 'src/app/core/models/Comment';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
@@ -139,8 +137,6 @@ export class CommentsListComponent implements OnInit {
     if (this.user.Id === comment.AuthorId) {
       this._commentsService.deleteComment(comment);
     }
-
-    this.pageInfo.totalItems -= 1;
   }
 
   /**
