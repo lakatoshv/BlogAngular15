@@ -9,6 +9,8 @@ import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { ChangeEmailComponent } from './personal-info/change-email/change-email.component';
+import { ChangePasswordComponent } from './personal-info/change-password/change-password.component';
+import { ChangePhoneNumberComponent } from './personal-info/change-phone-number/change-phone-number.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,14 @@ const routes: Routes = [
         path: 'my-profile/personal-info/change-email',
         component: ChangeEmailComponent
       },
+      {
+        path: 'my-profile/personal-info/change-password',
+        component: ChangePasswordComponent
+      },
+      {
+        path: 'my-profile/personal-info/change-phone-number',
+        component: ChangePhoneNumberComponent
+      }
     ]
   }
 ];

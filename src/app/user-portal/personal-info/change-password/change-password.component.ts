@@ -53,7 +53,6 @@ export class ChangePasswordComponent implements OnInit {
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
-      this._setFormData();
     } else {
       this._router.navigateByUrl('/authorization');
     }
@@ -71,18 +70,6 @@ export class ChangePasswordComponent implements OnInit {
         this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
       } else { console.error('Different passwords'); }
     }
-  }
-
-  /**
-   * Set form data.
-   * @returns void
-   */
-  private _setFormData(): void {
-    this.profileForm.get('userName').setValue(this.user.FirstName + ' ' + this.user.LastName);
-    this.profileForm.get('firstName').setValue(this.user.FirstName);
-    this.profileForm.get('lastName').setValue(this.user.LastName);
-    this.profileForm.get('phoneNumber').setValue(this.user.PhoneNumber);
-    this.profileForm.get('about').setValue(this.user.About);
   }
 
   /**

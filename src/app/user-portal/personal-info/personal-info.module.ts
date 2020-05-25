@@ -6,12 +6,12 @@ import { ChangePhoneNumberComponent } from './change-phone-number/change-phone-n
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ChangePasswordComponent, ChangeEmailComponent],
+  declarations: [ChangePasswordComponent, ChangeEmailComponent, ChangePhoneNumberComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [ChangePasswordComponent, ChangeEmailComponent]
+  exports: [ChangePasswordComponent, ChangeEmailComponent, ChangePhoneNumberComponent]
 })
 export class PersonalInfoModule { }
