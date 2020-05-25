@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/User';
-import { Router } from '@angular/router';
-import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
-import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { FormGroup } from '@angular/forms';
 import { ProfileForm } from 'src/app/core/forms/user/ProfileForm';
 import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
 import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
+import { Router } from '@angular/router';
+import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
+import { UsersService } from 'src/app/core/services/users/users-service.service';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  selector: 'app-change-email',
+  templateUrl: './change-email.component.html',
+  styleUrls: ['./change-email.component.css']
 })
-export class EditProfileComponent implements OnInit {
-  /**
+export class ChangeEmailComponent implements OnInit {
+/**
    * @param user User
    */
   public user: User = null;
@@ -65,16 +65,7 @@ export class EditProfileComponent implements OnInit {
    * @returns void
    */
   edit(profileModel: any): void {
-    if (profileModel.oldPassword !== null && profileModel.newPassword !== null) {
-      if (profileModel.oldPassword === this._globalService._currentUser.Password) {
-        this._globalService._currentUser.Password = profileModel.newPassword;
-      } else { console.error('Different passwords'); }
-    }
-    this._globalService._currentUser.UserName = profileModel.firstName + ' ' + profileModel.lastName;
-    this._globalService._currentUser.FirstName = profileModel.firstName;
-    this._globalService._currentUser.LastName = profileModel.lastName;
-    this._globalService._currentUser.PhoneNumber = profileModel.phoneNumber;
-    this._globalService._currentUser.About = profileModel.about;
+    this._globalService._currentUser.Email = profileModel.email;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
   }
 
@@ -83,18 +74,13 @@ export class EditProfileComponent implements OnInit {
    * @returns void
    */
   private _setFormData(): void {
-    this.profileForm.get('userName').setValue(this.user.FirstName + ' ' + this.user.LastName);
-    this.profileForm.get('firstName').setValue(this.user.FirstName);
-    this.profileForm.get('lastName').setValue(this.user.LastName);
-    this.profileForm.get('phoneNumber').setValue(this.user.PhoneNumber);
-    this.profileForm.get('about').setValue(this.user.About);
+    this.profileForm.get('email').setValue(this.user.Email);
   }
 
   /**
    * Clear form data.
    * @returns void
    */
-  private clearFormData(): void {
+  private clearFormData() {
   }
-
 }
