@@ -90,17 +90,6 @@ export class ProfilePageComponent implements OnInit {
   }
 
   /**
-   * Get all posts
-   * @returns void
-   */
-  private _getPosts(): void {
-    Posts.filter(post => post.AuthorId = this.user.Id).forEach(post => {
-      post.CommentsCount = Comments.filter(comment => comment.AuthorId = this.user.Id).length;
-      this.posts.push(post);
-    });
-  }
-
-  /**
    * Select tab
    * @param selectedTab string
    * @param level string
@@ -114,5 +103,25 @@ export class ProfilePageComponent implements OnInit {
         this.postsTab = selectedTab;
         break;
     }
+  }
+
+  /**
+   * Confirm phone number.
+   * @returns void
+   */
+  public confirmPhoneNumber(): void {
+    this._globalService._currentUser.PhoneNumberConfirmed = true;
+    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+  }
+
+  /**
+   * Get all posts
+   * @returns void
+   */
+  private _getPosts(): void {
+    Posts.filter(post => post.AuthorId = this.user.Id).forEach(post => {
+      post.CommentsCount = Comments.filter(comment => comment.AuthorId = this.user.Id).length;
+      this.posts.push(post);
+    });
   }
 }

@@ -11,7 +11,7 @@ import { UsersService } from 'src/app/core/services/users/users-service.service'
 @Component({
   selector: 'app-change-phone-number',
   templateUrl: './change-phone-number.component.html',
-  styleUrls: ['./change-phone-number.component.css']
+  styleUrls: ['./change-phone-number.component.scss']
 })
 export class ChangePhoneNumberComponent implements OnInit {
 /**
@@ -66,6 +66,16 @@ export class ChangePhoneNumberComponent implements OnInit {
    */
   edit(profileModel: any): void {
     this._globalService._currentUser.PhoneNumber = profileModel.phoneNumber;
+    this._globalService._currentUser.PhoneNumberConfirmed = false;
+    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+  }
+
+  /**
+   * Confirm phone number.
+   * @returns void
+   */
+  public confirmPhoneNumber(): void {
+    this._globalService._currentUser.PhoneNumberConfirmed = true;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
   }
 

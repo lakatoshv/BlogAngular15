@@ -64,8 +64,12 @@ export class ChangePasswordComponent implements OnInit {
    * @returns void
    */
   edit(profileModel: any): void {
-    if (profileModel.oldPassword !== null && profileModel.newPassword !== null) {
-      if (profileModel.oldPassword === this._globalService._currentUser.Password) {
+    if (profileModel.oldPassword !== null
+        && profileModel.newPassword !== null
+        && profileModel.confirmPassword != null) {
+
+      if (profileModel.oldPassword === this._globalService._currentUser.Password
+        && profileModel.newPassword === profileModel.confirmPassword) {
         this._globalService._currentUser.Password = profileModel.newPassword;
         this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
       } else { console.error('Different passwords'); }
