@@ -1,3 +1,4 @@
+import { PersonalInfoModule } from './personal-info/personal-info.module';
 import { UserModule } from './user/user.module';
 import { DefaultPagesModule } from './../admin-portal/default-pages/default-pages.module';
 import { NgModule } from '@angular/core';
@@ -21,11 +22,12 @@ import { AuthorizationComponent } from './user/authorization/authorization.compo
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     EditorModule,
-    ProfileModule
+    ProfileModule,
+    PersonalInfoModule
   ],
   declarations: [
-    LayoutComponentComponent, 
-    AboutComponent, 
+    LayoutComponentComponent,
+    AboutComponent,
     ContactsComponent,
     RegistrationComponent,
     AuthorizationComponent,
