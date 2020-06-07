@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row" data-ref="container">
         <div class="col-lg-12">
-            <h2 class="text-center" id="form-header">Редагувати пост</h2>
+            <h2 class="text-center" id="form-header">Змінити пошту</h2>
             <form #f="ngForm" [formGroup]="profileForm" (ngSubmit)="edit(f.value)">
 
                 <div class="form-group">
@@ -11,7 +11,20 @@
 
                     <input type="email" name="email" id="email" value="" class="form-control" formControlName="email">
                 </div>
-                <a class="btn btn-default">Підтвердити</a>
+
+                <div class="col-12" *ngIf="user.EmailConfirmed">
+                    <div class="success-checkmark">
+                        <div class="check-icon">
+                            <span class="icon-line line-tip"></span>
+                            <span class="icon-line line-long"></span>
+                            <div class="icon-circle"></div>
+                            <div class="icon-fix"></div>
+                            <p class="text-center" style="margin-left: 100px;">Підтверджено</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="btn btn-default" (click)="confirmEmail()">Підтвердити</a>
                 <input type="submit" name="submit" id="submit" value="Редагувати" class="btn btn-default">
             </form>
         </div>

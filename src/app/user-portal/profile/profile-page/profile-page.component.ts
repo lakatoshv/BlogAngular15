@@ -115,6 +115,15 @@ export class ProfilePageComponent implements OnInit {
   }
 
   /**
+   * Confirm email.
+   * @returns void
+   */
+  public confirmEmail(): void {
+    this._globalService._currentUser.EmailConfirmed = true;
+    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+  }
+
+  /**
    * Get all posts
    * @returns void
    */

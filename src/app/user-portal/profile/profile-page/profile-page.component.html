@@ -70,9 +70,9 @@
                                         </td>
                                         <td>
                                             <a routerLink="personal-info/change-email"><b><i class="fa fa-edit"></i></b></a>
-                                            <a class="btn btn-default">Підтвердити</a>
+                                            <a class="btn btn-default" (click)="confirmEmail()">Підтвердити</a>
                                         </td>
-                                        <td></td>
+                                        <td><i *ngIf="user.EmailConfirmed" class="fa fa-check text-success"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Телефон:</td>
