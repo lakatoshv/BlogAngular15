@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: './default-pages/default-pages.module#DefaultPagesModule'
       },
       {
+        path: 'comments',
+        loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
+      },
+      {
         path: 'posts',
         loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
       },

@@ -1,3 +1,4 @@
+import { Post } from './Post';
 import { User } from './User';
 
 /**
@@ -9,6 +10,8 @@ export class Comment {
    * @param Id number
    * Post Comment PostId
    * @param PostId number
+   * Post Comment Post
+   * @param Post Post
    * Post Comment AuthorId
    * @param AuthorId number
    * Post Comment User
@@ -25,6 +28,7 @@ export class Comment {
   constructor(
     public Id: number = 0,
     public PostId?: number,
+    public Post?: Post,
     public AuthorId?: number,
     public Author?: User,
     public Email?: string,

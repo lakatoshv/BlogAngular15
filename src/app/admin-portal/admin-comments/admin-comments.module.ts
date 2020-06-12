@@ -1,3 +1,4 @@
+import { CoreModule } from './../../core/core.module';
 import { CommentsModule } from './../../shared/posts/comments/comments.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,16 +11,21 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
-    CommentsActivityComponent
+    CommentsActivityComponent,
+    CommentsListComponent,
+    CommentsTableComponent
   ],
   imports: [
     CommonModule,
     AdminCommentsRoutingModule,
     NgxChartsModule,
-    CommentsModule
+    CommentsModule,
+    CoreModule
   ],
   exports: [
-    CommentsActivityComponent
+    CommentsActivityComponent,
+    CommentsListComponent,
+    CommentsTableComponent
   ]
 })
 export class AdminCommentsModule { }
