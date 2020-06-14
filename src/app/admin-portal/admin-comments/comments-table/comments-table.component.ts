@@ -58,6 +58,12 @@ export class CommentsTableComponent implements OnInit {
     }
 
     this._getComments(this.postId);
+
+    this._commentsService.commentChanged.subscribe(
+      () => {
+        this._getComments(this.postId);
+      }
+    );
   }
 
   /**
@@ -66,9 +72,7 @@ export class CommentsTableComponent implements OnInit {
    * @returns void
    */
   deleteAction(comment: Comment): void {
-    if (this.user.Id === comment.AuthorId) {
-      this._commentsService.deleteComment(comment);
-    }
+    this._commentsService.deleteComment(comment);
   }
 
   /**
