@@ -39,7 +39,7 @@
                 <td>{{post.Seen}}</td>
                 <td>{{post.Likes}}</td>
                 <td>{{post.Dislikes}}</td>
-                <td>{{post.CommentsCount}}</td>
+                <td><a routerLink="/admin/comments/{{post.Id}}">{{post.CommentsCount}}</a></td>
                 <td>2011/04/25</td>
                 <td class="actions" data-th="">
                     <a class="btn btn-primary" routerLink="post/edit/1"><i class="fa fa-edit"></i></a>

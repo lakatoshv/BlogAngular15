@@ -12,12 +12,16 @@ const routes: Routes = [
         loadChildren: './default-pages/default-pages.module#DefaultPagesModule'
       },
       {
+        path: 'posts',
+        loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
+      },
+      {
         path: 'comments',
         loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
       },
       {
-        path: 'posts',
-        loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
+        path: 'comments/:post-id',
+        loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
       },
     ]
   }

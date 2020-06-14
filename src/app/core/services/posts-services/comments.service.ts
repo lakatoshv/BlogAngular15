@@ -47,6 +47,7 @@ export class CommentsService {
     const comments: Comment[] = [];
     this._comments.filter(item => item.PostId === postId).forEach(comment => {
       comment.Author = this._usersService.getUserById(comment.AuthorId);
+      comment.Post = Posts[comment.PostId];
       comments.push(comment);
     });
     return comments;
