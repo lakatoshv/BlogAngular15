@@ -15,6 +15,14 @@ const routes: Routes = [
         path: 'posts',
         loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
       },
+      {
+        path: 'comments',
+        loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
+      },
+      {
+        path: 'comments/:post-id',
+        loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
+      },
     ]
   }
 ];

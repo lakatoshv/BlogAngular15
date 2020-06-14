@@ -1,3 +1,4 @@
+import { AdminCommentsModule } from './../admin-comments/admin-comments.module';
 import { UsersModule } from './../users/users.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import { IconsCardsComponent } from './icons-cards/icons-cards.component';
     CommonModule,
     DefaultPagesRoutingModule,
     AdminPostsModule,
+    AdminCommentsModule,
     UsersModule
   ],
   declarations: [

@@ -1,3 +1,5 @@
+import { Posts } from './../../data/PostsList';
+import { PostsService } from './posts.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { Comment } from '../../models/Comment';
 import { Comments } from '../../data/CommentsList';
@@ -23,7 +25,9 @@ export class CommentsService {
   /**
    * @param _usersService UsersService
    */
-  constructor(private _usersService: UsersService) { }
+  constructor(
+    private _usersService: UsersService
+  ) { }
 
   /**
    * Get comment position by id.
@@ -43,8 +47,24 @@ export class CommentsService {
     const comments: Comment[] = [];
     this._comments.filter(item => item.PostId === postId).forEach(comment => {
       comment.Author = this._usersService.getUserById(comment.AuthorId);
+      comment.Post = Posts[comment.PostId];
       comments.push(comment);
     });
+    return comments;
+  }
+
+  /**
+   * Get comments.
+   * @returns Comment[].
+   */
+  public getComments(): Comment[] {
+    const comments: Comment[] = [];
+    this._comments.forEach(comment => {
+      comment.Author = this._usersService.getUserById(comment.AuthorId);
+      comment.Post = Posts[comment.PostId];
+      comments.push(comment);
+    });
+
     return comments;
   }
 
