@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from './User';
 
 /**
  * Post model.
@@ -8,7 +8,7 @@ export class Post {
   //access -> string
   */
   /**
-   * Post Id 
+   * Post Id
    * @param Id number
    * Post Title
    * @param Title string
