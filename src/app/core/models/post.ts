@@ -1,3 +1,4 @@
+import { Tag } from './Tag';
 import { User } from './User';
 
 /**
@@ -48,6 +49,6 @@ export class Post {
     public ImageUrl: string,
     public Tags: string,
     public CommentsCount: number,
-    public TagsList?: string[],
+    public TagsList?: Tag[],
   ) {}
 }

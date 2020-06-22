@@ -4,7 +4,7 @@ import { Post } from '../models/Post';
  * Posts list with default data.
  */
 export const Posts: Post[] = [
-    { 
+    {
         Id: 0,
         Title: 'Building the orbits of celestial bodies using Python1',
         Description: 'To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).',
@@ -16,9 +16,31 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
+        TagsList: [
+            {
+                Id: 0,
+                Title: 'Development under Windows'
+            },
+            {
+                Id: 1,
+                Title: 'Mathematics'
+            },
+            {
+                Id: 2,
+                Title: 'Astronomy'
+            },
+            {
+                Id: 3,
+                Title: 'Algorithms'
+            },
+            {
+                Id: 4,
+                Title: 'Python'
+            }
+        ],
         CommentsCount: 0
     },
-    { 
+    {
         Id: 1,
         Title: 'Building the orbits of celestial bodies using Python2',
         Description: 'To find the trajectories of relative motions in classical mechanics, we use the assumption of absolute time in all reference frames (both inertial and non-inertial).',
@@ -30,6 +52,28 @@ export const Posts: Post[] = [
         Dislikes: 0,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
+        TagsList: [
+            {
+                Id: 0,
+                Title: 'Development under Windows'
+            },
+            {
+                Id: 1,
+                Title: 'Mathematics'
+            },
+            {
+                Id: 2,
+                Title: 'Astronomy'
+            },
+            {
+                Id: 3,
+                Title: 'Algorithms'
+            },
+            {
+                Id: 4,
+                Title: 'Python'
+            }
+        ],
         CommentsCount: 0
     },
     { 
@@ -44,6 +88,28 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
+        TagsList: [
+            {
+                Id: 0,
+                Title: 'Development under Windows'
+            },
+            {
+                Id: 1,
+                Title: 'Mathematics'
+            },
+            {
+                Id: 2,
+                Title: 'Astronomy'
+            },
+            {
+                Id: 3,
+                Title: 'Algorithms'
+            },
+            {
+                Id: 4,
+                Title: 'Python'
+            }
+        ],
         CommentsCount: 0
     },
     { 
