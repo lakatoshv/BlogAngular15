@@ -14,7 +14,7 @@ const routes: Routes = [
     component: PostsListComponent
   },
   {
-    path: ':search-filter',
+    path: 'posts/:search-filter',
     component: PostsListComponent
   },
   {

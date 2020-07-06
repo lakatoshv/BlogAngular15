@@ -15,8 +15,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
-        Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        TagsListIds: [0, 1, 2, 3, 4],
+        Tags: 'Mathematics, Astronomy, Algorithms, Python',
+        TagsListIds: [1, 2, 3, 4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },

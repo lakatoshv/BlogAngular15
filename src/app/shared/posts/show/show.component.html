@@ -25,7 +25,7 @@
                 <span><i class="fa fa-fw fa-thumbs-down"></i> {{post.Dislikes}}</span>
             </p>
             <p class="post-meta">Теги:
-                <a routerLink="/blog/{{tag.Title}}" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a>
+                <a routerLink="/blog/posts/{{tag.Title}}" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a>
             </p>
             <p class="text-justify">{{post.Content}}</p>
             <p class="post-meta">

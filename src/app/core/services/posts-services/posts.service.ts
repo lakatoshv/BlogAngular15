@@ -34,10 +34,12 @@ export class PostsService {
   /**
    * Get posts.
    * @param search string
+   * @param searchFilter string[]
    * @returns Post[]
    */
-  public getPosts(search: string = null): Post[] {
+  public getPosts(search: string = null, searchFilter: string[] = null): Post[] {
     let posts = [];
+    searchFilter = searchFilter.filter(x => x !== null);
     this._posts.forEach(post => {
       post.TagsList = [];
       if (post.TagsListIds !== undefined) {
@@ -62,6 +64,18 @@ export class PostsService {
       posts = posts.filter(post => post.Title.includes(search));
     }
 
+    if (searchFilter.length > 0) {
+      // posts = posts.filter(post => post.TagsList.every(x => x.Title.includes(searchFilter)));
+      const filteredPosts = [];
+      posts = posts.map(post => {
+        const found = post.TagsList.filter(tag => (searchFilter.includes(tag.Title)));
+        if (found.length > 0) {
+          filteredPosts.push(post);
+        }
+      });
+      posts = filteredPosts;
+    }
+
     return posts;
   }
 
@@ -69,10 +83,12 @@ export class PostsService {
    * get user posts.
    * @param userId number
    * @param search string
+   * @param searchFilter string[]
    * @returns Post[]
    */
-  public getUserPosts(userId: number, search: string = null): Post[] {
+  public getUserPosts(userId: number, search: string = null, searchFilter: string[] = null): Post[] {
     let posts = [];
+    searchFilter = searchFilter.filter(x => x !== null);
 
     this._posts.filter(user => user.Id === userId).forEach(post => {
       post.TagsList = [];
@@ -96,6 +112,18 @@ export class PostsService {
 
     if (search !== null) {
       posts = posts.filter(post => post.Title.includes(search));
+    }
+    
+    if (searchFilter.length > 0) {
+      // posts = posts.filter(post => post.TagsList.every(x => x.Title.includes(searchFilter)));
+      const filteredPosts = [];
+      posts = posts.map(post => {
+        const found = post.TagsList.filter(tag => (searchFilter.includes(tag.Title)));
+        if (found.length > 0) {
+          filteredPosts.push(post);
+        }
+      });
+      posts = filteredPosts;
     }
 
     return posts;

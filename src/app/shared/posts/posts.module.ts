@@ -1,3 +1,5 @@
+import { TagsModule } from './../tags/tags.module';
+import { SharedModule } from './../shared.module';
 import { CoreModule } from './../../core/core.module';
 import { CommentsModule } from './comments/comments.module';
 import { NgModule } from '@angular/core';
@@ -11,6 +13,8 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { MyPostsComponent } from './my-posts/my-posts.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { PopularPostsComponent } from './popular-posts/popular-posts.component';
 
 @NgModule({
   imports: [
@@ -21,14 +25,18 @@ import { MyPostsComponent } from './my-posts/my-posts.component';
     EditorModule,
     NgxPaginationModule,
     CommentsModule,
-    CoreModule
+    CoreModule,
+    SharedModule,
+    TagsModule
   ],
   declarations: [
     PostsListComponent,
     ShowComponent,
     AddPostComponent,
     EditPostComponent,
-    MyPostsComponent
+    MyPostsComponent,
+    RightSidebarComponent,
+    PopularPostsComponent
   ],
   exports: [
     AddPostComponent,

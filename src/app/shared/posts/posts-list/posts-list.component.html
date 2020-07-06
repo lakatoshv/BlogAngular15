@@ -66,7 +66,7 @@
                         <span><i class="fa fa-fw fa-comment"></i>{{post.CommentsCount}}</span>
                     </p>
                     <p class="post-meta">Теги:
-                        <a routerLink="/blog/{{tag.Title}}" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a>
+                        <a routerLink="/blog/posts/{{tag.Title}}" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a>
                     </p>
                     <p class="post-meta">
                         Написав: <b><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a><i > {{post.CreatedAt | date:'medium' }}</i></b>

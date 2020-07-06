@@ -1,4 +1,4 @@
-import { CommentsService } from './../../../core/services/posts-services/comments.service';
+import { GeneralServiceService } from './../../../core/services/general-service.service';
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { PageInfo } from './../../../core/models/PageInfo';
 import { Component, OnInit } from '@angular/core';
@@ -8,10 +8,6 @@ import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/core/models/User';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
-import { Posts } from 'src/app/core/data/PostsList';
-import { Users } from 'src/app/core/data/UsersList';
-import { sortBy } from 'lodash';
-import { Comments } from 'src/app/core/data/CommentsList';
 import { Post } from 'src/app/core/models/Post';
 
 @Component({
@@ -78,6 +74,7 @@ export class MyPostsComponent implements OnInit {
    * @param _userId number
    */
   private _userId: number;
+  private _searchFilter: any;
 
   /**
    * @param _globalService GlobalService
@@ -89,6 +86,7 @@ export class MyPostsComponent implements OnInit {
    */
   constructor(
     private _globalService: GlobalService,
+    private _generalService: GeneralServiceService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
@@ -100,6 +98,8 @@ export class MyPostsComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
+    this._searchFilter = this._generalService.getRoutePeram('search-filter', this._activatedRoute);
+
     this.isLoggedIn = this._usersService.isLoggedIn();
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
@@ -119,7 +119,7 @@ export class MyPostsComponent implements OnInit {
 
     this._postsService.postChanged.subscribe(
       () => {
-        this.posts = this._postsService.getUserPosts(this._userId);
+        this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
         this.pageInfo.TotalItems = this.paginate.length;
       }
     );
@@ -171,7 +171,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   public search(search: string): void {
-    this.posts = this._postsService.getUserPosts(this._userId, search);
+    this.posts = this._postsService.getUserPosts(this._userId, search, [this._searchFilter]);
   }
 
   /**
@@ -187,7 +187,7 @@ export class MyPostsComponent implements OnInit {
    * @returns void
    */
   private _getPosts(): void {
-    this.posts = this._postsService.getUserPosts(this._userId);
+    this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
     this.pageInfo.TotalItems = this.posts.length;
   }
 }
