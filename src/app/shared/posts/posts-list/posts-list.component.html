@@ -1,7 +1,7 @@
 <!-- Main Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="col-lg-8 col-md-8 mx-auto">
             <a routerLink="/blog/posts/add" class="btn btn-light">Написати пост</a>
             <div class="text-center" *ngIf="!posts">
                 <b>Дана категорія ще не створена або не має записів</b>
@@ -68,8 +68,7 @@
                     <p class="post-meta">Теги: {{post.Tags}}
                     </p>
                     <p class="post-meta">
-                        Написав: <b><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a><i> 
-                10.11.2018</i></b>
+                        Написав: <b><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a><i > {{post.CreatedAt | date:'medium' }}</i></b>
                     </p>
                     <button class="btn btn-xs btn-info" (click)="like(post.Id)"><span class="fa fa-thumbs-up"></span> Подобається</button>
                     <button class="btn btn-sm btn-danger" (click)="dislike(post.Id)"><span class="fa fa-thumbs-down"></span> Неподобається</button>
@@ -83,5 +82,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-4 mx-auto sidebar pt-5">
+            <app-right-sidebar></app-right-sidebar>
+        </div>
     </div>
-</div>
