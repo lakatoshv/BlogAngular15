@@ -24,7 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   declarations: [
     CommentsListComponent,
-    AddCommentComponent, 
+    AddCommentComponent,
     EditCommentComponent
   ]
 })

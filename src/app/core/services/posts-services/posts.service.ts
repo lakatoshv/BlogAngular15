@@ -1,3 +1,4 @@
+import { TagsService } from './tags.service';
 import { sortBy } from 'lodash';
 import { CommentsService } from './comments.service';
 import { UsersService } from './../users/users-service.service';
@@ -22,10 +23,12 @@ export class PostsService {
   /**
    * @param _usersService UsersService
    * @param _commentsService CommentsService
+   * @param _tagsService TagsService
    */
   constructor(
     private _usersService: UsersService,
-    private _commentsService: CommentsService
+    private _commentsService: CommentsService,
+    private _tagsService: TagsService
   ) { }
 
   /**
@@ -36,6 +39,20 @@ export class PostsService {
   public getPosts(search: string = null): Post[] {
     let posts = [];
     this._posts.forEach(post => {
+      post.TagsList = [];
+      if (post.TagsListIds !== undefined) {
+        post.TagsListIds.forEach(x => {
+          if (!post.TagsList.includes(this._tagsService.getTag(x))) {
+            post.TagsList.push(this._tagsService.getTag(x));
+          }
+        });
+      }
+      post.Tags.split(', ').forEach(x => {
+        const tag = this._tagsService.getTagByTitle(x);
+        if (!post.TagsList.includes(tag)) {
+          post.TagsList.push(tag);
+        }
+      });
       post.Author = this._usersService.getUserById(post.AuthorId);
       post.CommentsCount = this._posts.findIndex(item => item.Id === post.Id);
       posts.push(post);
@@ -58,6 +75,20 @@ export class PostsService {
     let posts = [];
 
     this._posts.filter(user => user.Id === userId).forEach(post => {
+      post.TagsList = [];
+      if (post.TagsListIds !== undefined) {
+        post.TagsListIds.forEach(x => {
+          if (!post.TagsList.includes(this._tagsService.getTag(x))) {
+            post.TagsList.push(this._tagsService.getTag(x));
+          }
+        });
+      }
+      post.Tags.split(', ').forEach(x => {
+        const tag = this._tagsService.getTagByTitle(x);
+        if (!post.TagsList.includes(tag)) {
+          post.TagsList.push(tag);
+        }
+      });
       post.Author = this._usersService.getUserById(userId);
       post.CommentsCount = this._posts.findIndex(item => item.Id === post.Id);
       posts.push(post);
@@ -86,7 +117,20 @@ export class PostsService {
    */
   public getPost(id: number): Post {
     const post = this._posts[id];
-    post.TagsList = post.Tags.split(', ');
+    post.TagsList = [];
+    if (post.TagsListIds !== undefined) {
+      post.TagsListIds.forEach(x => {
+        if (!post.TagsList.includes(this._tagsService.getTag(x))) {
+          post.TagsList.push(this._tagsService.getTag(x));
+        }
+      });
+    }
+    post.Tags.split(', ').forEach(x => {
+      const tag = this._tagsService.getTagByTitle(x);
+      if (!post.TagsList.includes(tag)) {
+        post.TagsList.push(tag);
+      }
+    });
     post.Author = this._usersService.getUserById(post.AuthorId);
     return post;
   }

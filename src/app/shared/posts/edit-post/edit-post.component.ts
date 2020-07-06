@@ -10,6 +10,8 @@ import { Posts } from 'src/app/core/data/PostsList';
 import { Post } from 'src/app/core/models/Post';
 import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
 import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
+import { Tag } from 'src/app/core/models/Tag';
+import { Tags } from 'src/app/core/data/TagsList';
 
 @Component({
   selector: 'app-edit-post',
@@ -130,9 +132,9 @@ export class EditPostComponent implements OnInit {
    * @param tag string
    * @returns void
    */
-  editTag(tag: string): void {
-    this.selectedTag['value'] = tag;
-    this.selectedTag['id'] = this.post.TagsList.indexOf(tag);
+  editTag(tag: Tag): void {
+    this.selectedTag['value'] = tag.Title;
+    this.selectedTag['id'] = this.post.TagsList.findIndex(x => x.Title === tag.Title);
     this.action = 'edit';
     this.tagLabel = 'Редагувати тег';
   }
@@ -143,7 +145,7 @@ export class EditPostComponent implements OnInit {
    * @returns void
    */
   onAddTagAction(tag: string): void {
-    this.post.TagsList.unshift(tag);
+    this.post.TagsList.unshift({ Id: Tags.length + 1, Title: tag});
     this.clearFormData();
   }
 
@@ -152,10 +154,10 @@ export class EditPostComponent implements OnInit {
    * @param tag any
    * @returns void
    */
-  onEditTagAction(tag: any): void {
+  onEditTagAction(tag: string): void {
     const index = this.selectedTag['id'];
     if (index > -1) {
-      this.post.TagsList[index] = tag;
+      this.post.TagsList[index].Title = tag;
       this.clearFormData();
     }
   }

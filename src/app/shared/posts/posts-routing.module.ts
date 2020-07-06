@@ -14,6 +14,10 @@ const routes: Routes = [
     component: PostsListComponent
   },
   {
+    path: ':search-filter',
+    component: PostsListComponent
+  },
+  {
     path: 'post/:post-id',
     component: ShowComponent
   },
@@ -27,6 +31,10 @@ const routes: Routes = [
   },
   {
     path: 'my-posts',
+    component: MyPostsComponent
+  },
+  {
+    path: 'my-posts/:search-filter',
     component: MyPostsComponent
   },
 ];

@@ -221,23 +221,3 @@
 .block-21 .text .meta>div a {
     color: gray;
 }
-
-.tagcloud {
-    padding: 0;
-}
-
-.tagcloud a {
-    text-transform: uppercase;
-    display: inline-block;
-    padding: 4px 10px;
-    margin-bottom: 7px;
-    margin-right: 4px;
-    border-radius: 4px;
-    color: #000000;
-    border: 1px solid #ccc;
-    font-size: 11px;
-}
-
-.tagcloud a:hover {
-    border: 1px solid #000;
-}

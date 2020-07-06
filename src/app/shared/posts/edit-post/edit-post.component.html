@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row" data-ref="container">
-        <div class="col-lg-12">
+        <div class="col-lg-8 col-md-8 mx-auto">
             <h2 class="text-center" id="form-header">Редагувати пост</h2>
             <form #f="ngForm" [formGroup]="postForm" (ngSubmit)="edit(f.value)">
                 <div class="form-group">
@@ -95,7 +95,7 @@
                                 <li class="list-group-item" *ngFor="let tag of post.TagsList">
                                     <div class="checkbox">
                                         <label>
-                                          {{tag}}
+                                          {{tag.Title}}
                                         </label>
                                     </div>
                                     <div class="pull-right action-buttons">
@@ -120,6 +120,10 @@
                 <input type="submit" name="submit" id="submit" value="Додати" class="btn btn-default">
 
             </form>
+        </div>
+
+        <div class="col-lg-4 col-md-4 mx-auto sidebar pt-5">
+            <app-right-sidebar></app-right-sidebar>
         </div>
     </div>
 </div>

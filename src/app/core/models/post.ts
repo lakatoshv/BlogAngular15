@@ -29,12 +29,16 @@ export class Post {
    * @param Dislikes number
    * Post Image Url
    * @param ImageUrl string
+   * Post Created at
+   * @param CreatedAt string
    * Post Tags
    * @param Tags string
    * Post Tags List
-   * @param TagsList string
+   * @param TagsList Tag[]
    * Post Comments Count
    * @param CommentsCount number
+   * Post Tags List Ids
+   * @param TagsListIds number[]
    */
   constructor (
     public Id: number,
@@ -47,8 +51,10 @@ export class Post {
     public Likes: number,
     public Dislikes: number,
     public ImageUrl: string,
+    public CreatedAt: Date,
     public Tags: string,
     public CommentsCount: number,
     public TagsList?: Tag[],
+    public TagsListIds?: number[],
   ) {}
 }

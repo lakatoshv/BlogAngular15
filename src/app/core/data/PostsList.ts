@@ -16,29 +16,9 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        TagsList: [
-            {
-                Id: 0,
-                Title: 'Development under Windows'
-            },
-            {
-                Id: 1,
-                Title: 'Mathematics'
-            },
-            {
-                Id: 2,
-                Title: 'Astronomy'
-            },
-            {
-                Id: 3,
-                Title: 'Algorithms'
-            },
-            {
-                Id: 4,
-                Title: 'Python'
-            }
-        ],
-        CommentsCount: 0
+        TagsListIds: [0, 1, 2, 3, 4],
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     {
         Id: 1,
@@ -52,29 +32,9 @@ export const Posts: Post[] = [
         Dislikes: 0,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        TagsList: [
-            {
-                Id: 0,
-                Title: 'Development under Windows'
-            },
-            {
-                Id: 1,
-                Title: 'Mathematics'
-            },
-            {
-                Id: 2,
-                Title: 'Astronomy'
-            },
-            {
-                Id: 3,
-                Title: 'Algorithms'
-            },
-            {
-                Id: 4,
-                Title: 'Python'
-            }
-        ],
-        CommentsCount: 0
+        TagsListIds: [0, 1, 2, 3, 4],
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 2,
@@ -88,29 +48,9 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        TagsList: [
-            {
-                Id: 0,
-                Title: 'Development under Windows'
-            },
-            {
-                Id: 1,
-                Title: 'Mathematics'
-            },
-            {
-                Id: 2,
-                Title: 'Astronomy'
-            },
-            {
-                Id: 3,
-                Title: 'Algorithms'
-            },
-            {
-                Id: 4,
-                Title: 'Python'
-            }
-        ],
-        CommentsCount: 0
+        TagsListIds: [0, 1, 2, 3, 4],
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 3,
@@ -124,7 +64,8 @@ export const Posts: Post[] = [
         Dislikes: 0,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 4,
@@ -138,7 +79,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 5,
@@ -152,7 +94,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 6,
@@ -166,7 +109,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 7,
@@ -180,7 +124,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 8,
@@ -194,7 +139,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 9,
@@ -208,7 +154,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 10,
@@ -222,7 +169,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 11,
@@ -236,7 +184,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 12,
@@ -250,7 +199,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 13,
@@ -264,7 +214,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 14,
@@ -278,7 +229,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 15,
@@ -292,7 +244,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 16,
@@ -306,7 +259,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 17,
@@ -320,7 +274,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 18,
@@ -334,7 +289,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 19,
@@ -348,7 +304,8 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
     { 
         Id: 20,
@@ -362,6 +319,7 @@ export const Posts: Post[] = [
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
         Tags: 'Development under Windows, Mathematics, Astronomy, Algorithms, Python',
-        CommentsCount: 0
+        CommentsCount: 0,
+        CreatedAt: new Date('10.11.2018')
     },
 ];
