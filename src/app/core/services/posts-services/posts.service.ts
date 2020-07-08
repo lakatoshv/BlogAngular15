@@ -37,7 +37,7 @@ export class PostsService {
    * @param searchFilter string[]
    * @returns Post[]
    */
-  public getPosts(search: string = null, searchFilter: string[] = null): Post[] {
+  public getPosts(search: string = null, searchFilter: string[] = []): Post[] {
     let posts = [];
     searchFilter = searchFilter.filter(x => x !== null);
     this._posts.forEach(post => {
@@ -49,12 +49,6 @@ export class PostsService {
           }
         });
       }
-      post.Tags.split(', ').forEach(x => {
-        const tag = this._tagsService.getTagByTitle(x);
-        if (!post.TagsList.includes(tag)) {
-          post.TagsList.push(tag);
-        }
-      });
       post.Author = this._usersService.getUserById(post.AuthorId);
       post.CommentsCount = this._posts.findIndex(item => item.Id === post.Id);
       posts.push(post);
@@ -86,7 +80,7 @@ export class PostsService {
    * @param searchFilter string[]
    * @returns Post[]
    */
-  public getUserPosts(userId: number, search: string = null, searchFilter: string[] = null): Post[] {
+  public getUserPosts(userId: number, search: string = null, searchFilter: string[] = []): Post[] {
     let posts = [];
     searchFilter = searchFilter.filter(x => x !== null);
 
@@ -99,12 +93,6 @@ export class PostsService {
           }
         });
       }
-      post.Tags.split(', ').forEach(x => {
-        const tag = this._tagsService.getTagByTitle(x);
-        if (!post.TagsList.includes(tag)) {
-          post.TagsList.push(tag);
-        }
-      });
       post.Author = this._usersService.getUserById(userId);
       post.CommentsCount = this._posts.findIndex(item => item.Id === post.Id);
       posts.push(post);
@@ -113,7 +101,7 @@ export class PostsService {
     if (search !== null) {
       posts = posts.filter(post => post.Title.includes(search));
     }
-    
+
     if (searchFilter.length > 0) {
       // posts = posts.filter(post => post.TagsList.every(x => x.Title.includes(searchFilter)));
       const filteredPosts = [];
@@ -135,7 +123,7 @@ export class PostsService {
    * @returns Post[]
    */
   public sort(sort: string): Post[] {
-    return sortBy(Object.values(this._posts), [sort]);
+    return sortBy(Object.values(this.getPosts()), [sort]);
   }
 
   /**
@@ -153,12 +141,6 @@ export class PostsService {
         }
       });
     }
-    post.Tags.split(', ').forEach(x => {
-      const tag = this._tagsService.getTagByTitle(x);
-      if (!post.TagsList.includes(tag)) {
-        post.TagsList.push(tag);
-      }
-    });
     post.Author = this._usersService.getUserById(post.AuthorId);
     return post;
   }
@@ -169,6 +151,17 @@ export class PostsService {
    * @returns void
    */
   public addPost(post: Post): void {
+    debugger
+    if (this._posts.findIndex(x => x.Title === post.Title) > -1) {
+      return;
+    }
+
+    post.TagsListIds = [];
+    debugger
+    post.TagsList.forEach(tag => {
+      post.TagsListIds.unshift(tag.Id);
+    });
+
     if (post.AuthorId !== null) {
       post.Author = this._usersService.getUserById(post.AuthorId);
     }

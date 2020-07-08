@@ -53,7 +53,6 @@ export class PopularPostsComponent implements OnInit {
    */
   public sort(): void {
     this.posts = this._postsService.sort(this.sortBy).slice(0, 5);
-    debugger
   }
 
 }

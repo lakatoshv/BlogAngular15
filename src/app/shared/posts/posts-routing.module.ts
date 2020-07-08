@@ -18,16 +18,16 @@ const routes: Routes = [
     component: PostsListComponent
   },
   {
-    path: 'post/:post-id',
-    component: ShowComponent
-  },
-  {
-    path: 'posts/add',
+    path: 'post/add',
     component: AddPostComponent
   },
   {
     path: 'post/edit/:post-id',
     component: EditPostComponent
+  },
+  {
+    path: 'post/:post-id',
+    component: ShowComponent
   },
   {
     path: 'my-posts',

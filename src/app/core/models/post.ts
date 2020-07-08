@@ -31,8 +31,6 @@ export class Post {
    * @param ImageUrl string
    * Post Created at
    * @param CreatedAt string
-   * Post Tags
-   * @param Tags string
    * Post Tags List
    * @param TagsList Tag[]
    * Post Comments Count
@@ -52,7 +50,6 @@ export class Post {
     public Dislikes: number,
     public ImageUrl: string,
     public CreatedAt: Date,
-    public Tags: string,
     public CommentsCount: number,
     public TagsList?: Tag[],
     public TagsListIds?: number[],

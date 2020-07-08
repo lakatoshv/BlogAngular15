@@ -1,5 +1,6 @@
+import { TagsService } from './../../../core/services/posts-services/tags.service';
 import { PostsService } from './../../../core/services/posts-services/posts.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import { PostForm } from '../../../core/forms/posts/PostForm';
@@ -10,6 +11,7 @@ import { GlobalService } from 'src/app/core/services/global-service/global-servi
 import { User } from 'src/app/core/models/User';
 import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
 import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
+import { Tag } from 'src/app/core/models/Tag';
 
 @Component({
   selector: 'app-add-post',
@@ -17,32 +19,41 @@ import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+  @ViewChild('tag') tagInput: ElementRef;
   /**
    * @param postForm FormGroup
    */
-  postForm: FormGroup = new PostForm().postForm;
+  public postForm: FormGroup = new PostForm().postForm;
 
-  tagsList: string[] = [];
+  /**
+   * @param tagsList string[]
+   */
+  public tagsList: Tag[] = [];
+
+  /**
+   * @param availableTags Tag[]
+   */
+  public availableTags: Tag[] = [];
 
   /**
    * @param isLoggedIn boolean
    */
-  isLoggedIn = false;
+  public isLoggedIn = false;
 
   /**
    * @param tagLabel string
    */
-  tagLabel = 'Додати новий тег';
+  public tagLabel = 'Додати новий тег';
 
   /**
    * @param action string
    */
-  action = 'add';
+  public action = 'add';
 
   /**
    * @param selectedTag object
    */
-  selectedTag: object = {
+  public selectedTag: object = {
     value: '',
     id: null
   };
@@ -50,7 +61,7 @@ export class AddPostComponent implements OnInit {
   /**
    * @param user User
    */
-  user: User;
+  public user: User;
 
   /**
    * @param tinyMCEOptions TinyMCEOptionsObject
@@ -61,18 +72,20 @@ export class AddPostComponent implements OnInit {
    * @param _router Router
    * @param _usersService UsersService
    * @param _globalService GlobalService
+   * @param _tagsService TagsService
    */
-  constructor(
+  public constructor(
     private _router: Router,
     private _usersService: UsersService,
     private _globalService: GlobalService,
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _tagsService: TagsService
   ) { }
 
   /**
    * @inheritdoc
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.isLoggedIn = this._usersService.isLoggedIn();
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
@@ -80,6 +93,7 @@ export class AddPostComponent implements OnInit {
     } else {
       this._router.navigateByUrl('/authorization');
     }
+    this._getTags();
   }
 
   /**
@@ -89,7 +103,7 @@ export class AddPostComponent implements OnInit {
    * @param action string
    * @returns void
    */
-  tagAction(tag: string, action: string): void {
+  public tagAction(tag: string, action: string): void {
     if (action === 'add') { this.onAddTagAction(tag); }
     if (action === 'edit') { this.onEditTagAction(tag); }
   }
@@ -98,7 +112,7 @@ export class AddPostComponent implements OnInit {
    * Add tag event
    * @returns void
    */
-  addTagLabel(): void {
+  public addTagLabel(): void {
     this.clearFormData();
   }
   /**
@@ -106,8 +120,8 @@ export class AddPostComponent implements OnInit {
    * @param tag string
    * @returns void
    */
-  editTag(tag: string): void {
-    this.selectedTag['value'] = tag;
+  public editTag(tag: Tag): void {
+    this.selectedTag['value'] = tag.Title;
     this.selectedTag['id'] = this.tagsList.indexOf(tag);
     this.action = 'edit';
     this.tagLabel = 'Редагувати тег';
@@ -118,20 +132,29 @@ export class AddPostComponent implements OnInit {
    * @param tag string
    * @returns void
    */
-  onAddTagAction(tag: string): void {
-    this.tagsList.unshift(tag);
-    this.clearFormData();
+  public onAddTagAction(tag: string): void {
+    if (tag !== '' && this.tagsList.findIndex(x => x.Title === tag) === -1) {
+      const index = this.availableTags.findIndex(x => x.Title === tag);
+      if (index > -1) {
+        this.tagsList.unshift(this.availableTags[index]);
+        this._removeFromAvailableTags(this.availableTags[index]);
+      } else {
+        this._tagsService.addTag({Id: 0, Title: tag});
+        this.tagsList.unshift(this._tagsService.getTagByTitle(tag));
+      }
+      this.clearFormData();
+    }
   }
 
   /**
    * Edit tag event
-   * @param tag any
+   * @param tag string
    * @returns void
    */
-  onEditTagAction(tag: any): void {
+  public onEditTagAction(tag: string): void {
     const index = this.selectedTag['id'];
     if (index > -1) {
-      this.tagsList[index] = tag;
+      this.tagsList[index].Title = tag;
       this.clearFormData();
     }
   }
@@ -140,7 +163,7 @@ export class AddPostComponent implements OnInit {
    * Delete tag event
    * @param tag any
    */
-  onDeleteTagAction(tag: any): void {
+  public onDeleteTagAction(tag: any): void {
     const index = this.tagsList.indexOf(tag);
     if (index > -1) {
       this.tagsList.splice(index, 1);
@@ -152,11 +175,25 @@ export class AddPostComponent implements OnInit {
    * @param post Post
    * @returns void
    */
-  add(post: Post): void {
+  public add(post: Post): void {
+    post.TagsList = this.tagsList;
     post.AuthorId = this.user.Id;
     this._postsService.addPost(post);
     this._router.navigate(['/blog']);
   }
+
+  private _getTags(): void {
+    this.availableTags = this._tagsService.getTags();
+  }
+
+  private _removeFromAvailableTags(tag: Tag): void {
+    const index = this.availableTags.indexOf(tag);
+    if (index > -1) {
+      this.availableTags.splice(index, 1);
+    }
+  }
+
+
 
   /**
    * Clear form data.
@@ -167,6 +204,6 @@ export class AddPostComponent implements OnInit {
     this.action = 'add';
     this.selectedTag['value'] = '';
     this.selectedTag['id'] = null;
+    this.tagInput.nativeElement.value = '';
   }
-
 }
