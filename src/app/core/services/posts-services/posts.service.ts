@@ -157,7 +157,6 @@ export class PostsService {
     }
 
     post.TagsListIds = [];
-    debugger
     post.TagsList.forEach(tag => {
       post.TagsListIds.unshift(tag.Id);
     });
@@ -178,6 +177,12 @@ export class PostsService {
     if (id > -1) {
       this._posts[id] = post;
     }
+    post.TagsList.forEach(tag => {
+      post.TagsListIds.unshift(tag.Id);
+    });
+    post.TagsListIds = post.TagsListIds.filter(function(item, pos, self) {
+      return self.indexOf(item) === pos;
+    });
     this.postChanged.emit(true);
   }
 

@@ -19,7 +19,11 @@ import { Tag } from 'src/app/core/models/Tag';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+  /**
+   * @param tagInput ElementRef
+   */
   @ViewChild('tag') tagInput: ElementRef;
+
   /**
    * @param postForm FormGroup
    */
@@ -72,6 +76,7 @@ export class AddPostComponent implements OnInit {
    * @param _router Router
    * @param _usersService UsersService
    * @param _globalService GlobalService
+   * @param _postsService PostsService,
    * @param _tagsService TagsService
    */
   public constructor(
@@ -182,18 +187,25 @@ export class AddPostComponent implements OnInit {
     this._router.navigate(['/blog']);
   }
 
+  /**
+   * Get available tags.
+   * @returns void
+   */
   private _getTags(): void {
     this.availableTags = this._tagsService.getTags();
   }
 
+  /**
+   * Remove selected tag from available tags.
+   * @param tag Tag
+   * @returns void
+   */
   private _removeFromAvailableTags(tag: Tag): void {
     const index = this.availableTags.indexOf(tag);
     if (index > -1) {
       this.availableTags.splice(index, 1);
     }
   }
-
-
 
   /**
    * Clear form data.
