@@ -15,7 +15,7 @@ const routes: Routes = [
     component: ShowComponent
   },
   {
-    path: 'posts/add',
+    path: 'post/add',
     component: AddPostComponent
   },
   {

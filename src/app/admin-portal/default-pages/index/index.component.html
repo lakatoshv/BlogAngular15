@@ -8,9 +8,8 @@
     </ol>
 
     <app-icons-cards></app-icons-cards>
+
     <app-posts-activity-chart></app-posts-activity-chart>
-    <app-comments-activity></app-comments-activity>
-    <app-users-activity-chart></app-users-activity-chart>
 
     <!-- DataTables Example -->
     <div class="card mb-3">
@@ -26,6 +25,53 @@
         </div>
         <div class="card-body">
             <app-posts-table></app-posts-table>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+
+    <app-comments-activity></app-comments-activity>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a routerLink="posts/" class="navbar-brand">Коментарі</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <app-comments-table></app-comments-table>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+
+    <app-users-activity-chart></app-users-activity-chart>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a routerLink="posts/" class="navbar-brand">Користувачі</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+
+    <app-tags-activity-chart></app-tags-activity-chart>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a routerLink="tags/" class="navbar-brand">Теги</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <app-tags-table></app-tags-table>
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>

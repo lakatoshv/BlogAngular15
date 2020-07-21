@@ -14,11 +14,11 @@ const routes: Routes = [
     component: PostsListComponent
   },
   {
-    path: 'post/:post-id',
-    component: ShowComponent
+    path: 'posts/:search-filter',
+    component: PostsListComponent
   },
   {
-    path: 'posts/add',
+    path: 'post/add',
     component: AddPostComponent
   },
   {
@@ -26,7 +26,15 @@ const routes: Routes = [
     component: EditPostComponent
   },
   {
+    path: 'post/:post-id',
+    component: ShowComponent
+  },
+  {
     path: 'my-posts',
+    component: MyPostsComponent
+  },
+  {
+    path: 'my-posts/:search-filter',
     component: MyPostsComponent
   },
 ];

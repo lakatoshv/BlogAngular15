@@ -1,4 +1,5 @@
-import { User } from "./User";
+import { Tag } from './Tag';
+import { User } from './User';
 
 /**
  * Post model.
@@ -8,7 +9,7 @@ export class Post {
   //access -> string
   */
   /**
-   * Post Id 
+   * Post Id
    * @param Id number
    * Post Title
    * @param Title string
@@ -28,12 +29,14 @@ export class Post {
    * @param Dislikes number
    * Post Image Url
    * @param ImageUrl string
-   * Post Tags
-   * @param Tags string
+   * Post Created at
+   * @param CreatedAt string
    * Post Tags List
-   * @param TagsList string
+   * @param TagsList Tag[]
    * Post Comments Count
    * @param CommentsCount number
+   * Post Tags List Ids
+   * @param TagsListIds number[]
    */
   constructor (
     public Id: number,
@@ -46,8 +49,9 @@ export class Post {
     public Likes: number,
     public Dislikes: number,
     public ImageUrl: string,
-    public Tags: string,
+    public CreatedAt: Date,
     public CommentsCount: number,
-    public TagsList?: string[],
+    public TagsList?: Tag[],
+    public TagsListIds?: number[],
   ) {}
 }

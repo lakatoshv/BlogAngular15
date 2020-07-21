@@ -53,6 +53,11 @@ export class PostsListComponent implements OnInit {
   };
 
   /**
+   * @param loggedIn boolean
+   */
+  public loggedIn = false;
+
+  /**
    * @param _postId number
    */
   private _postId: number;
@@ -63,9 +68,9 @@ export class PostsListComponent implements OnInit {
   private users: User[] = [];
 
   /**
-   * @param loggedIn boolean
+   * @param _searchFilter string
    */
-  public loggedIn = false;
+  private _searchFilter: string = null;
 
   /**
    * @param _globalService GlobalService
@@ -88,6 +93,7 @@ export class PostsListComponent implements OnInit {
    */
   ngOnInit() {
     this._postId = parseInt(this._generalService.getRoutePeram('post', this._activatedRoute), null);
+    this._searchFilter = this._generalService.getRoutePeram('search-filter', this._activatedRoute);
     this._getPosts();
     this.loggedIn = this._usersService.isLoggedIn();
     if (this.loggedIn) {
@@ -97,7 +103,7 @@ export class PostsListComponent implements OnInit {
 
     this._postsService.postChanged.subscribe(
       () => {
-        this.posts = this._postsService.getPosts();
+        this.posts = this._postsService.getPosts(null, [this._searchFilter]);
         this.pageInfo.TotalItems = this.paginate.length;
       }
     );
@@ -150,7 +156,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   public search(search: string): void {
-    this.posts = this._postsService.getPosts(search);
+    this.posts = this._postsService.getPosts(search, [this._searchFilter]);
   }
 
   /**
@@ -166,7 +172,7 @@ export class PostsListComponent implements OnInit {
    * @returns void
    */
   private _getPosts(): void {
-    this.posts = this._postsService.getPosts();
+    this.posts = this._postsService.getPosts(null, [this._searchFilter]);
     this.pageInfo.TotalItems = this.posts.length;
   }
 }

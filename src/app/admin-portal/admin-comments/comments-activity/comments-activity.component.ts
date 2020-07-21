@@ -8,7 +8,6 @@ import { ChartOptionsData } from 'src/app/core/data/chart/ChartOptionsData';
   styleUrls: ['./comments-activity.component.css']
 })
 export class CommentsActivityComponent implements OnInit {
-
    /**
    * @param pbgChartContainer ElementRef
    */

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row" data-ref="container">
-        <div class="col-lg-12">
+        <div class="col-lg-8 col-md-8 mx-auto">
             <h2 class="text-center" id="form-header">Додати новий пост</h2>
             <form #f="ngForm" [formGroup]="postForm" (ngSubmit)="add(f.value)">
                 <div class="form-group">
@@ -92,7 +92,7 @@
                                 <li class="list-group-item" *ngFor="let tag of tagsList">
                                     <div class="checkbox">
                                         <label>
-                                        {{tag}}
+                                        {{tag.Title}}
                                       </label>
                                     </div>
                                     <div class="pull-right action-buttons">
@@ -109,7 +109,10 @@
                       {{tagLabel}}:
                   </label>
 
-                    <input type="text" name="tags" id="tags" #tag value="{{selectedTag['value']}}" class="form-control">
+                    <input type="text" name="tags" id="tags" #tag value="{{selectedTag['value']}}" class="form-control" list="tags-list">
+                    <datalist id="tags-list">
+                      <option *ngFor="let tag of availableTags">{{tag.Title}}</option>
+                    </datalist>
 
                     <input type="button" name="tagAction" id="tagAction" value="{{tagLabel}}" class="btn btn-default" (click)="tagAction(tag.value, action)">
                 </div>
@@ -124,6 +127,10 @@
                 <input type="submit" name="submit" id="submit" value="Додати" class="btn btn-default">
 
             </form>
+        </div>
+
+        <div class="col-lg-4 col-md-4 mx-auto sidebar pt-5">
+            <app-right-sidebar></app-right-sidebar>
         </div>
     </div>
 </div>
