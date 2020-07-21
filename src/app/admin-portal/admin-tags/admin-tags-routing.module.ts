@@ -10,11 +10,11 @@ const routes: Routes = [
     component: TagsListComponent
   },
   {
-    path: 'post/add',
+    path: 'tags/add',
     component: AddTagComponent
   },
   {
-    path: 'post/edit/:post-id',
+    path: 'tags/edit/:post-id',
     component: EditTagComponent
   },
 ];

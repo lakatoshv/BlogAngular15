@@ -17,7 +17,7 @@ export class TagsTableComponent implements OnInit {
   }
 
   private _getTags(search: string = null): void {
-    this._tagsService.getTags();
+    this.tags = this._tagsService.getTags();
   }
 
   /**
