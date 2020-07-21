@@ -23,6 +23,10 @@ const routes: Routes = [
         path: 'comments/:post-id',
         loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
       },
+      {
+        path: 'tags',
+        loadChildren: './admin-tags/admin-tags.module#AdminTagsModule'
+      },
     ]
   }
 ];
