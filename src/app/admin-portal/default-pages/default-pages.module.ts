@@ -1,3 +1,4 @@
+import { AdminTagsModule } from './../admin-tags/admin-tags.module';
 import { AdminCommentsModule } from './../admin-comments/admin-comments.module';
 import { UsersModule } from './../users/users.module';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { IconsCardsComponent } from './icons-cards/icons-cards.component';
     DefaultPagesRoutingModule,
     AdminPostsModule,
     AdminCommentsModule,
-    UsersModule
+    UsersModule,
+    AdminTagsModule
   ],
   declarations: [
     IndexComponent,

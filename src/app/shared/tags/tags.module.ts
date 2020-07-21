@@ -8,12 +8,12 @@ import { EditTagComponent } from './edit-tag/edit-tag.component';
 import { TagsListComponent } from './tags-list/tags-list.component';
 
 @NgModule({
-  declarations: [TagsListComponent],
+  declarations: [AddTagComponent, EditTagComponent, TagsListComponent],
   imports: [
     CommonModule,
     TagsRoutingModule
   ],
   providers: [TagsService],
-  exports: [TagsListComponent]
+  exports: [AddTagComponent, EditTagComponent, TagsListComponent]
 })
 export class TagsModule { }
