@@ -2,7 +2,7 @@ import { PostsService } from './../../../core/services/posts-services/posts.serv
 import { Component, OnInit } from '@angular/core';
 import { Posts } from '../../../core/data/PostsList';
 import { GeneralServiceService } from 'src/app/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Users } from 'src/app/core/data/UsersList';
 import { Post } from 'src/app/core/models/Post';
 import { User } from 'src/app/core/models/User';
@@ -92,14 +92,20 @@ export class PostsListComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._postId = parseInt(this._generalService.getRoutePeram('post', this._activatedRoute), null);
-    this._searchFilter = this._generalService.getRoutePeram('search-filter', this._activatedRoute);
+    this._postId = parseInt(this._generalService.getRouteParam('post', this._activatedRoute), null);
+    this._searchFilter = this._generalService.getRouteParam('search-filter', this._activatedRoute);
+
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this._postId = parseInt(params['post-id'], null);
+        this._searchFilter = params['search-filter'];
+        this._checkIfUserIsLoggedIn();
+
+        this._getPosts();
+      }
+    );
+
     this._getPosts();
-    this.loggedIn = this._usersService.isLoggedIn();
-    if (this.loggedIn) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    }
 
     this._postsService.postChanged.subscribe(
       () => {
@@ -174,5 +180,17 @@ export class PostsListComponent implements OnInit {
   private _getPosts(): void {
     this.posts = this._postsService.getPosts(null, [this._searchFilter]);
     this.pageInfo.TotalItems = this.posts.length;
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.loggedIn = this._usersService.isLoggedIn();
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    }
   }
 }

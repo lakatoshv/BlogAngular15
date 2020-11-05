@@ -1,6 +1,6 @@
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostForm } from '../../../core/forms/posts/PostForm';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
@@ -99,15 +99,18 @@ export class EditPostComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
+    this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute), null);
 
-    this.isLoggedIn = this._usersService.isLoggedIn();
-    if (this._usersService.isLoggedIn()) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    } else {
-      this._router.navigateByUrl('/authorization');
-    }
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this._postId = parseInt(params['post-id'], null);
+        this._checkIfUserIsLoggedIn();
+        this._getPost();
+        this._getTags();
+      }
+    );
+
+    this._checkIfUserIsLoggedIn();
     this._getPost();
     this._getTags();
   }
@@ -257,5 +260,19 @@ export class EditPostComponent implements OnInit {
     this.selectedTag['value'] = '';
     this.selectedTag['id'] = null;
     this.tagInput.nativeElement.value = '';
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    } else {
+      this._router.navigateByUrl('/authorization');
+    }
   }
 }

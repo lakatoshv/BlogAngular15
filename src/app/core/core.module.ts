@@ -12,7 +12,7 @@ import { CommentsService } from './services/posts-services/comments.service';
   providers: [
     GeneralServiceService,
     CommentsService,
-    PostsService
+    PostsService,
   ]
 })
 export class CoreModule { }

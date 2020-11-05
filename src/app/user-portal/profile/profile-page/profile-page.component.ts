@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralServiceService } from 'src/app/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from 'src/app/core/models/User';
 import { Users } from 'src/app/core/data/UsersList';
 import { Posts } from 'src/app/core/data/PostsList';
@@ -69,19 +69,37 @@ export class ProfilePageComponent implements OnInit {
    * @inheritdoc
    */
   public ngOnInit() {
-    this._userId = parseInt(this._generalService.getRoutePeram('profile-id', this._activatedRoute), null);
-    this.isLoggedIn = this._usersService.isLoggedIn();
-    if (this._usersService.isLoggedIn()) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    }
+    this._userId = parseInt(this._generalService.getRouteParam('profile-id', this._activatedRoute), null);
+
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this._userId = parseInt(params['profile-id'], null);
+        this._checkIfUserIsLoggedIn();
+
+        this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user.Id === this._userId);
+
+        if (!this.isForCurrentUser) {
+          if (this._userId !== null) {
+            this.user = Users.find(user => user.Id === this._userId);
+            this._getPosts();
+          } else {
+            this._router.navigateByUrl('/');
+          }
+        } else if (!this.isLoggedIn) {
+          this._router.navigateByUrl('/authorization');
+        }
+      }
+    );
+
+    this._checkIfUserIsLoggedIn();
+
     this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user.Id === this._userId);
 
     if (!this.isForCurrentUser) {
       if (this._userId !== null) {
         this.user = Users.find(user => user.Id === this._userId);
         this._getPosts();
-      } else{
+      } else {
         this._router.navigateByUrl('/');
       }
     } else if (!this.isLoggedIn) {
@@ -132,5 +150,17 @@ export class ProfilePageComponent implements OnInit {
       post.CommentsCount = Comments.filter(comment => comment.AuthorId = this.user.Id).length;
       this.posts.push(post);
     });
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    }
   }
 }

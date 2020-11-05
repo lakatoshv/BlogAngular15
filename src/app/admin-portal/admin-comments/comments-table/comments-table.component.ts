@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Comment } from 'src/app/core/models/Comment';
 import { User } from 'src/app/core/models/User';
 import { GeneralServiceService } from 'src/app/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-comments-table',
@@ -50,12 +50,18 @@ export class CommentsTableComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this.postId = parseInt(this._generalService.getRoutePeram('post-id', this._activatedRoute), null);
-    this.loggedIn = this._usersService.isLoggedIn();
-    if (this.loggedIn) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    }
+    this.postId = parseInt(this._generalService.getRouteParam('post-id', this._activatedRoute), null);
+
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.postId = parseInt(params['post-id'], null);
+        this._checkIfUserIsLoggedIn();
+
+        this._getComments(this.postId);
+      }
+    );
+
+    this._checkIfUserIsLoggedIn();
 
     this._getComments(this.postId);
 
@@ -84,5 +90,17 @@ export class CommentsTableComponent implements OnInit {
     this.comments = postId !== NaN
       ? this._commentsService.getCommentsByPostId(postId)
       : this._commentsService.getComments();
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.loggedIn = this._usersService.isLoggedIn();
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    }
   }
 }

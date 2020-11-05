@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TagForm } from 'src/app/core/forms/posts/TagForm';
 import { User } from 'src/app/core/models/User';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { TagsService } from 'src/app/core/services/posts-services/tags.service';
@@ -58,15 +58,18 @@ export class EditTagComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._tagId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
+    this._tagId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute), null);
 
-    this.isLoggedIn = this._usersService.isLoggedIn();
-    if (this._usersService.isLoggedIn()) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    } else {
-      this._router.navigateByUrl('/authorization');
-    }
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this._tagId = parseInt(params['post-id'], null);
+        this._checkIfUserIsLoggedIn();
+
+        this._getTag();
+      }
+    );
+
+    this._checkIfUserIsLoggedIn();
 
     this._getTag();
   }
@@ -97,5 +100,19 @@ export class EditTagComponent implements OnInit {
   private _getTag(): void {
     this.tag = this._tagsService.getTag(this._tagId);
     this._setFormData();
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    } else {
+      this._router.navigateByUrl('/authorization');
+    }
   }
 }

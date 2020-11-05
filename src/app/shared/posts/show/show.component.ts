@@ -1,6 +1,6 @@
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
@@ -54,13 +54,18 @@ export class ShowComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this.postId = parseInt(this._generalService.getRoutePeram('post-id', this._activatedRoute), null);
+    this.postId = parseInt(this._generalService.getRouteParam('post-id', this._activatedRoute), null);
+
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.postId = parseInt(params['post-id'], null);
+        this._checkIfUserIsLoggedIn();
+
+        this._getPost();
+      }
+    );
+
     this._getPost();
-    this.loggedIn = this._usersService.isLoggedIn();
-    if (this.loggedIn) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    }
 
     this._postsService.postChanged.subscribe(
       () => {
@@ -106,4 +111,15 @@ export class ShowComponent implements OnInit {
     this.post = this._postsService.getPost(this.postId);
   }
 
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.loggedIn = this._usersService.isLoggedIn();
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    }
+  }
 }

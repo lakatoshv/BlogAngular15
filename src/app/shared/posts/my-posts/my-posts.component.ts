@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { SearchForm } from 'src/app/core/forms/SearchForm';
 import { FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/core/models/User';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { Post } from 'src/app/core/models/Post';
@@ -98,15 +98,25 @@ export class MyPostsComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._searchFilter = this._generalService.getRoutePeram('search-filter', this._activatedRoute);
+    this._searchFilter = this._generalService.getRouteParam('search-filter', this._activatedRoute);
 
-    this.isLoggedIn = this._usersService.isLoggedIn();
-    if (this._usersService.isLoggedIn()) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    } else {
-      this._router.navigateByUrl('/authorization');
-    }
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this._searchFilter = params['search-filter'];
+        this._checkIfUserIsLoggedIn();
+
+        if (this._router.url.includes('/my-posts')) {
+          this._userId = this.user.Id;
+          this.isCurrentUserPosts = true;
+        } else {
+          this._userId = parseInt(params['user-id'], null);
+          this.isCurrentUserPosts = false;
+        }
+        this._getPosts();
+      }
+    );
+
+    this._checkIfUserIsLoggedIn();
 
     if (this._router.url.includes('/my-posts')) {
       this._userId = this.user.Id;
@@ -189,5 +199,19 @@ export class MyPostsComponent implements OnInit {
   private _getPosts(): void {
     this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
     this.pageInfo.TotalItems = this.posts.length;
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    } else {
+      this._router.navigateByUrl('/authorization');
+    }
   }
 }
