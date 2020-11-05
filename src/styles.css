@@ -714,3 +714,20 @@ ul.socialIcons {
 .table td {
     line-height: 43px;
 }
+
+a:not([href]):not([tabindex]) {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:not([href]):not([tabindex]):hover,
+a:not([href]):not([tabindex]):focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:not([href]):not([tabindex]):focus {
+    outline: 0;
+}

@@ -13,6 +13,7 @@ import { AboutComponent } from './default-pages/about/about.component';
 import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthorizationComponent } from './user/authorization/authorization.component';
+import { ErrorsModule } from '../shared/errors/errors.module';
 // import { SharedModule } from "@app/shared";
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AuthorizationComponent } from './user/authorization/authorization.compo
     ReactiveFormsModule,
     EditorModule,
     ProfileModule,
-    PersonalInfoModule
+    PersonalInfoModule,
+    ErrorsModule,
   ],
   declarations: [
     LayoutComponentComponent,
