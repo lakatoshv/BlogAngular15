@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th><b>Назва:</b></th>
+                <th><b>Категорія:</b></th>
                 <th><b>Теги:</b></th>
                 <th><b>Автор:</b></th>
                 <th><b>Статус</b></th>
@@ -17,6 +18,7 @@
         <tfoot>
             <tr>
                 <th><b>Назва:</b></th>
+                <th><b>Категорія:</b></th>
                 <th><b>Теги:</b></th>
                 <th><b>Автор:</b></th>
                 <th><b>Статус</b></th>
@@ -31,6 +33,7 @@
         <tbody>
             <tr *ngFor="let post of posts">
                 <td><a routerLink="show/{{post.Id}}">{{post.Title}}</a></td>
+                <td><a routerLink="/blog/posts-category/{{post.Category.Name}}">{{post.Category.Name}}</a></td>
                 <td>{{post.Tags}}</td>
                 <td><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
                 <td>

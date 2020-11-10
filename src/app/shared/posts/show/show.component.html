@@ -24,6 +24,9 @@
                 <span><i class="fa fa-fw fa-thumbs-up"></i> {{post.Likes}}</span>
                 <span><i class="fa fa-fw fa-thumbs-down"></i> {{post.Dislikes}}</span>
             </p>
+            <p class="post-meta">Категорія:
+                <a routerLink="/blog/posts-category/{{post.Category.Name}}">{{post.Category.Name}}</a>
+            </p>
             <p class="post-meta">Теги:
                 <a routerLink="/blog/posts/{{tag.Title}}" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a>
             </p>
