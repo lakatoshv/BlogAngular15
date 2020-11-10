@@ -1,3 +1,4 @@
+import { Categories } from './CategoriesList';
 import { Post } from '../models/Post';
 
 /**
@@ -15,6 +16,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 0,
+        Category: Categories[0],
         TagsListIds: [1, 2, 3, 4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
@@ -30,6 +33,8 @@ export const Posts: Post[] = [
         Likes: 0,
         Dislikes: 0,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 0,
+        Category: Categories[0],
         TagsListIds: [0, 1, 2, 3, 4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
@@ -45,6 +50,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 0,
+        Category: Categories[0],
         TagsListIds: [0, 1, 2, 3, 4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
@@ -60,6 +67,8 @@ export const Posts: Post[] = [
         Likes: 0,
         Dislikes: 0,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 1,
+        Category: Categories[1],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -74,6 +83,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 1,
+        Category: Categories[1],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -88,6 +99,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 2,
+        Category: Categories[2],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -102,6 +115,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 2,
+        Category: Categories[2],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -116,6 +131,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 2,
+        Category: Categories[2],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -130,6 +147,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -144,6 +163,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -158,6 +179,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -172,6 +195,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -186,6 +211,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -200,6 +227,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -214,6 +243,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -228,6 +259,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -242,6 +275,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -256,6 +291,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -270,6 +307,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -284,6 +323,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
@@ -298,6 +339,8 @@ export const Posts: Post[] = [
         Likes: 10,
         Dislikes: 5,
         ImageUrl: 'https://habrastorage.org/webt/od/ie/1k/odie1kfvgxwkus8qxtmateofkek.png',
+        CategoryId: 4,
+        Category: Categories[4],
         CommentsCount: 0,
         CreatedAt: new Date('10.11.2018')
     },
