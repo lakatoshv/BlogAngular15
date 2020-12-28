@@ -7,9 +7,15 @@ import { AddTagComponent } from './add-tag/add-tag.component';
 import { EditTagComponent } from './edit-tag/edit-tag.component';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PopularTagsComponent } from './popular-tags/popular-tags.component';
 
 @NgModule({
-  declarations: [AddTagComponent, EditTagComponent, TagsListComponent],
+  declarations: [
+    AddTagComponent, 
+    EditTagComponent, 
+    TagsListComponent, 
+    PopularTagsComponent
+  ],
   imports: [
     CommonModule,
     TagsRoutingModule,
@@ -17,6 +23,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
   ],
   providers: [TagsService],
-  exports: [AddTagComponent, EditTagComponent, TagsListComponent]
+  exports: [
+    AddTagComponent, 
+    EditTagComponent, 
+    TagsListComponent,
+    PopularTagsComponent
+  ]
 })
 export class TagsModule { }
