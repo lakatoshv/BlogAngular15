@@ -29,7 +29,8 @@ import { PopularPostsComponent } from './popular-posts/popular-posts.component';
     CoreModule,
     SharedModule,
     TagsModule,
-    CategoriesModule
+    CategoriesModule,
+    SharedModule,
   ],
   declarations: [
     PostsListComponent,
