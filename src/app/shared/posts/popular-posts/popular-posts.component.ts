@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/core/models/Post';
-import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
-import { GeneralServiceService } from 'src/app/core';
-import { ActivatedRoute } from '@angular/router';
-import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { PostsService } from 'src/app/core/services/posts-services/posts.service';
 
 @Component({
@@ -27,10 +23,6 @@ export class PopularPostsComponent implements OnInit {
    */
   public orderBy = 'asc';
   constructor(
-    private _globalService: GlobalService,
-    private _generalService: GeneralServiceService,
-    private _activatedRoute: ActivatedRoute,
-    private _usersService: UsersService,
     private _postsService: PostsService
   ) { }
 
@@ -54,5 +46,4 @@ export class PopularPostsComponent implements OnInit {
   public sort(): void {
     this.posts = this._postsService.sort(this.sortBy).slice(0, 5);
   }
-
 }

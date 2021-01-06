@@ -32,20 +32,20 @@
         </tfoot>
         <tbody>
             <tr *ngFor="let post of posts">
-                <td><a routerLink="show/{{post.Id}}">{{post.Title}}</a></td>
-                <td><a routerLink="/blog/posts-category/{{post.Category.Name}}">{{post.Category.Name}}</a></td>
-                <td>{{post.Tags}}</td>
-                <td><a routerLink="/blog/profile/{{post.AuthorId}}">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
+                <td><a [routerLink]="[postsUrl, 'show', post.Id]">{{post.Title}}</a></td>
+                <td><a [routerLink]="['/blog/posts-category', post.Category.Name]">{{post.Category.Name}}</a></td>
+                <td><a [routerLink]="['/blog/posts', tag.Title]" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a></td>
+                <td><a [routerLink]="['/blog/profile', post.AuthorId]">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
                 <td>
                     <app-change-status [status]="null" (onChanged)="onChangeStatusAction(post.Id, $event)"></app-change-status>
                 </td>
                 <td>{{post.Seen}}</td>
                 <td>{{post.Likes}}</td>
                 <td>{{post.Dislikes}}</td>
-                <td><a routerLink="/admin/comments/{{post.Id}}">{{post.CommentsCount}}</a></td>
+                <td><a [routerLink]="['/admin/comments', post.Id]">{{post.CommentsCount}}</a></td>
                 <td>2011/04/25</td>
                 <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="post/edit/1"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary" [routerLink]="['post/edit', post.Id]"><i class="fa fa-edit"></i></a>
                     <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" (click)="deleteAction(post.Id)" data-toggle="modal" data-target="#delete-post">
                         <i class="fa fa-trash"></i>
                     </button>

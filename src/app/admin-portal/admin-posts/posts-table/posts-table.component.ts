@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Posts } from 'src/app/core/data/PostsList';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/core/models/Post';
@@ -15,15 +16,18 @@ export class PostsTableComponent implements OnInit {
    */
   posts: Post[] = [];
 
+  postsUrl = "";
+
   /**
    * @inheritdoc
    */
-  constructor() { }
+  constructor(private _router: Router) { }
 
   /**
    * @inheritdoc
    */
   ngOnInit() {
+    this.postsUrl = this._router.url.includes('posts') ? "" : "posts";
     this._getPosts();
   }
 

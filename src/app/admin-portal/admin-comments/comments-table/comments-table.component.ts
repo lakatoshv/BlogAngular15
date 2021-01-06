@@ -87,7 +87,7 @@ export class CommentsTableComponent implements OnInit {
    * @returns void
    */
   private _getComments(postId: number): void {
-    this.comments = postId !== NaN
+    this.comments = !isNaN(postId)
       ? this._commentsService.getCommentsByPostId(postId)
       : this._commentsService.getComments();
   }

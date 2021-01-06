@@ -25,7 +25,7 @@
                                     <tr>
                                         <td></td>
                                         <td *ngIf="isForCurrentUser" class="pull-right">
-                                            <a class="" routerLink="/blog/my-profile/edit"><i class="fa fa-edit"> Редагувати</i></a>
+                                            <a class="" [routerLink]="['/blog/my-profile/edit']"><i class="fa fa-edit"> Редагувати</i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -38,7 +38,7 @@
                                     </tr>
                                     <tr>
                                         <td>Електронна пошта:</td>
-                                        <td><b><a routerLink="/blogmailto:test@test.test">{{user.Email}}</a></b></td>
+                                        <td><b><a [routerLink]="['/blogmailto:test@test.test']">{{user.Email}}</a></b></td>
                                     </tr>
                                     <tr>
                                         <td>Адреса:</td>
@@ -69,7 +69,7 @@
                                             <b>{{user.Email}}</b>
                                         </td>
                                         <td>
-                                            <a routerLink="personal-info/change-email"><b><i class="fa fa-edit"></i></b></a>
+                                            <a [routerLink]="['personal-info/change-email']"><b><i class="fa fa-edit"></i></b></a>
                                             <a class="btn btn-default" (click)="confirmEmail()">Підтвердити</a>
                                         </td>
                                         <td><i *ngIf="user.EmailConfirmed" class="fa fa-check text-success"></i></td>
@@ -80,14 +80,14 @@
                                             <b>{{user.PhoneNumber}}</b>
                                         </td>
                                         <td>
-                                            <a routerLink="personal-info/change-phone-number"><b><i class="fa fa-edit"></i></b></a>
+                                            <a [routerLink]="['personal-info/change-phone-number']"><b><i class="fa fa-edit"></i></b></a>
                                             <a class="btn btn-default" (click)="confirmPhoneNumber()">Підтвердити</a>
                                         </td>
                                         <td><i *ngIf="user.PhoneNumberConfirmed" class="fa fa-check text-success"></i></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <a routerLink="personal-info/change-password"><b><i class="fa fa-edit"></i> Змінити пароль</b></a>
+                                            <a [routerLink]="['personal-info/change-password']"><b><i class="fa fa-edit"></i> Змінити пароль</b></a>
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -131,14 +131,14 @@
                                         <tbody>
                                             <tr *ngFor="let post of posts">
                                                 <td>
-                                                    <a routerLink="/blog/posts/show/{{post.Id}}">{{post.Title}}</a>
+                                                    <a [routerLink]="['/blog/posts/show', post.Id]">{{post.Title}}</a>
                                                 </td>
                                                 <td>{{post.Seen}}</td>
                                                 <td>{{post.Likes}}</td>
                                                 <td>{{post.Dislikes}}</td>
                                                 <td>12.12.2019</td>
                                                 <td class="actions" data-th="">
-                                                    <a class="btn btn-primary" routerLink="/blog/edit"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-primary" [routerLink]="['/blog/edit']"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-sm text-white btn-danger" id="1">
                               <i class="fa fa-trash"></i>
                           </button>
@@ -159,7 +159,7 @@
         <div class="panel-footer">
             <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i></a>
             <span class="pull-right">
-        <a routerLink="/blogedit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+        <a [routerLink]="['/blog/edit.html']" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
         <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>
       </span>
         </div>
