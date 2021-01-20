@@ -58,14 +58,5 @@ export class AuthorizationComponent implements OnInit {
     this._usersService.saveUser(user);
     this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
     this._router.navigate(['/']);
-    /*
-    const initializeSubscription = this._accountService.initialize(this._globalService._currentUser.Id).subscribe(
-        (initializationData) => {
-            this._globalService.initializeData(initializationData);
-            this._router.navigate(['/']);
-        },
-        (errorMessage) => {}
-    );
-    */
   }
 }
