@@ -7,6 +7,8 @@ import { UsersService } from 'src/app/core/services/users/users-service.service'
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { TagsService } from 'src/app/core/services/posts-services/tags.service';
 import { Tag } from 'src/app/core/models/Tag';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-edit-tag',
@@ -45,13 +47,15 @@ export class EditTagComponent implements OnInit {
    * @param _usersService UsersService
    * @param _globalService GlobalService
    * @param _tagsService TagsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _usersService: UsersService,
     private _globalService: GlobalService,
-    private _tagsService: TagsService
+    private _tagsService: TagsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -82,6 +86,7 @@ export class EditTagComponent implements OnInit {
   public edit(tag: Tag): void {
     this.tag.Title = tag['title'];
     this._tagsService.editTag(this._tagId, this.tag);
+    this._customToastrService.displaySuccessMessage(Messages.TAG_EDITED_SUCCESSFULLY);
     this._router.navigate(['/admin/tags']);
   }
 

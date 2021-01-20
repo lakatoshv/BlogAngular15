@@ -58,6 +58,11 @@ export class Messages {
      * @param PHONE_NUMBER_CHANGED_SUCCESSFULLY string
      */
     public static readonly PHONE_NUMBER_CHANGED_SUCCESSFULLY: string = 'Номер телефону успішно змінений!';
+
+    /**
+     * @param PHONE_NUMBER_VERIFIED_SUCCESSFULLY string
+     */
+    public static readonly PHONE_NUMBER_VERIFIED_SUCCESSFULLY: string = 'Номер телефону підтверджений!';
   
     /**
      * @param PHONE_NUMBER_CHANGED_SUCCESSFULLY string
@@ -74,5 +79,21 @@ export class Messages {
      * @param REGISTERED_SUCCESSFULLY string
      */
     public static readonly REGISTERED_SUCCESSFULLY: string = 'Ви успішно зареєструвалиь!';
+
+    // Tags
+    /**
+     * @param TAG_CREATED_SUCCESSFULLY string
+     */
+    public static readonly TAG_CREATED_SUCCESSFULLY: string = 'Коментар успішно створений!';
+  
+    /**
+     * @param PTAG_EDITED_SUCCESSFULLY string
+     */
+    public static readonly TAG_EDITED_SUCCESSFULLY: string = 'Коментар успішно змінений!';
+  
+    /**
+     * @param TAG_DELETED_SUCCESSFULLY string
+     */
+    public static readonly TAG_DELETED_SUCCESSFULLY: string = 'Коментар успішно видалений!';
   }
   
