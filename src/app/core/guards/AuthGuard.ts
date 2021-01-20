@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { UsersService } from "../services/users/users-service.service";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
     
     constructor(
         private _usersService: UsersService,
@@ -22,4 +22,12 @@ export class AuthGuard implements CanActivate {
 
         this._router.navigate(['/']);
     }
+
+    canActivateChild(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean> | Promise<boolean> | boolean {
+        return this.canActivate(route, state);
+    }
+    
 }

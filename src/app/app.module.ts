@@ -26,6 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   providers:    [
     AngularTokenService,
+    UsersService,
+    AuthGuard,
     CustomToastrService
   ],
   bootstrap: [AppComponent]
