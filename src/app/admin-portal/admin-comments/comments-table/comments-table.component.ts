@@ -6,6 +6,8 @@ import { Comment } from 'src/app/core/models/Comment';
 import { User } from 'src/app/core/models/User';
 import { GeneralServiceService } from 'src/app/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-comments-table',
@@ -37,13 +39,15 @@ export class CommentsTableComponent implements OnInit {
    * @param _commentsService CommentsService
    * @param _usersService UsersService
    * @param _globalService GlobalService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _commentsService: CommentsService,
     private _usersService: UsersService,
     private _globalService: GlobalService,
     private _generalService: GeneralServiceService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -79,6 +83,7 @@ export class CommentsTableComponent implements OnInit {
    */
   deleteAction(comment: Comment): void {
     this._commentsService.deleteComment(comment);
+    this._customToastrService.displaySuccessMessage(Messages.COMMENT_DELETED_SUCCESSFULLY);
   }
 
   /**

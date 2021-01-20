@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-change-status',
@@ -32,6 +34,12 @@ export class ChangeStatusComponent implements OnInit {
   newStatus = '';
 
   /**
+   * @param _customToastrService CustomToastrService
+   */
+  constructor(private _customToastrService: CustomToastrService) {
+  }
+
+  /**
    * @inheritdoc
    */
   ngOnInit() {
@@ -45,6 +53,7 @@ export class ChangeStatusComponent implements OnInit {
     if (this.status !== newStatus) {
       this.changed = true;
       this.newStatus = newStatus;
+      this._customToastrService.displaySuccessMessage(Messages.POST_EDITED_SUCCESSFULLY);
     }
   }
 

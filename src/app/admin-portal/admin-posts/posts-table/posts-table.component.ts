@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/core/models/Post';
 import { Users } from 'src/app/core/data/UsersList';
 import { Comments } from 'src/app/core/data/CommentsList';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-posts-table',
@@ -19,9 +21,13 @@ export class PostsTableComponent implements OnInit {
   postsUrl = "";
 
   /**
-   * @inheritdoc
+   * @param _router Router
+   * @param _customToastrService CustomToastrService
    */
-  constructor(private _router: Router) { }
+  constructor(
+    private _router: Router,
+    private _customToastrService: CustomToastrService
+  ) { }
 
   /**
    * @inheritdoc
@@ -50,6 +56,7 @@ export class PostsTableComponent implements OnInit {
       const comments = Comments.filter(comment => comment.PostId === postId).forEach(comment => {
         Comments.splice(comment.Id, 1);
       });
+      this._customToastrService.displaySuccessMessage(Messages.POST_DELETED_SUCCESSFULLY);
       this.posts = this.posts;
     }
   }
