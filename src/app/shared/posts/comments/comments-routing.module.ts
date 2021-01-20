@@ -5,6 +5,7 @@ import {CommentsListComponent} from './comments-list/comments-list.component';
 import {AddCommentComponent} from './add-comment/add-comment.component';
 import { from } from 'rxjs';
 import { EditCommentComponent } from './edit-comment/edit-comment.component';
+import { AuthGuard } from 'src/app/core/guards/AuthGuard';
 
 const routes: Routes = [
   {
@@ -13,10 +14,12 @@ const routes: Routes = [
   },
   {
     path: 'add',
+    canActivate: [AuthGuard],
     component: AddCommentComponent
   },
   {
     path: 'edit/:comment-id',
+    canActivate: [AuthGuard],
     component: EditCommentComponent
   }
 ];
