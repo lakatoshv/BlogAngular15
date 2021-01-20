@@ -7,6 +7,8 @@ import { FormGroup } from '@angular/forms';
 import { ProfileForm } from 'src/app/core/forms/user/ProfileForm';
 import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
 import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -38,11 +40,13 @@ export class EditProfileComponent implements OnInit {
    * @param _router Router
    * @param _globalService GlobalService
    * @param _usersService UsersService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _router: Router,
     private _globalService: GlobalService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -70,6 +74,7 @@ export class EditProfileComponent implements OnInit {
     this._globalService._currentUser.LastName = profileModel.lastName;
     this._globalService._currentUser.About = profileModel.about;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+    this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
   }
 
   /**

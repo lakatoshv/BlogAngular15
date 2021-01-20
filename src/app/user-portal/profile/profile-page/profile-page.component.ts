@@ -8,6 +8,8 @@ import { Comments } from 'src/app/core/data/CommentsList';
 import { Post } from 'src/app/core/models/Post';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-profile-page',
@@ -56,13 +58,15 @@ export class ProfilePageComponent implements OnInit {
    * @param _router Router
    * @param _globalService GlobalService
    * @param _usersService UsersService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _globalService: GlobalService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -130,6 +134,7 @@ export class ProfilePageComponent implements OnInit {
   public confirmPhoneNumber(): void {
     this._globalService._currentUser.PhoneNumberConfirmed = true;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+    this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_VERIFIED_SUCCESSFULLY);
   }
 
   /**
@@ -139,6 +144,7 @@ export class ProfilePageComponent implements OnInit {
   public confirmEmail(): void {
     this._globalService._currentUser.EmailConfirmed = true;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+    this._customToastrService.displaySuccessMessage(Messages.EMAIL_VERIFIED_SUCCESSFULLY);
   }
 
   /**
