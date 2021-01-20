@@ -1,6 +1,8 @@
 import { TagsService } from 'src/app/core/services/posts-services/tags.service';
 import { Component, OnInit } from '@angular/core';
 import { Tag } from 'src/app/core/models/Tag';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-tags-table',
@@ -10,7 +12,14 @@ import { Tag } from 'src/app/core/models/Tag';
 export class TagsTableComponent implements OnInit {
   public tags: Tag[] = [];
 
-  constructor(private _tagsService: TagsService) { }
+  /**
+   * @param _tagsService TagsService
+   * @param _customToastrService CustomToastrService
+   */
+  constructor(
+    private _tagsService: TagsService,
+    private _customToastrService: CustomToastrService
+  ) { }
 
   ngOnInit() {
     this._getTags();
@@ -27,5 +36,6 @@ export class TagsTableComponent implements OnInit {
    */
   deleteAction(tag: Tag): void {
     this._tagsService.deleteTag(tag.Id);
+    this._customToastrService.displaySuccessMessage(Messages.TAG_DELETED_SUCCESSFULLY);
   }
 }

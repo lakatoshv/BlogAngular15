@@ -1,12 +1,14 @@
 import { CommentsService } from './../../../../core/services/posts-services/comments.service';
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CommentForm } from 'src/app/core/forms/posts/CommentForm';
 
 import { Comment } from '../../../../core/models/Comment';
 import { User } from 'src/app/core/models/User';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-edit-comment',
@@ -37,11 +39,13 @@ export class EditCommentComponent implements OnInit {
   /**
    * @param _usersService UsersService
    * @param _globalService GlobalService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _usersService: UsersService,
     private _globalService: GlobalService,
-    private _commentsService: CommentsService
+    private _commentsService: CommentsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -78,6 +82,7 @@ export class EditCommentComponent implements OnInit {
     if (this.user.Id === this.comment.AuthorId) {
       this.comment.Content = this.commentForm.get('content').value;
       this._commentsService.editComment(this.comment);
+      this._customToastrService.displaySuccessMessage(Messages.COMMENT_EDITED_SUCCESSFULLY);
     }
   }
 }

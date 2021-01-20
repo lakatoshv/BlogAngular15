@@ -7,6 +7,8 @@ import { User } from 'src/app/core/models/User';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-add-tag',
@@ -34,12 +36,14 @@ export class AddTagComponent implements OnInit {
    * @param _usersService UsersService
    * @param _globalService GlobalService
    * @param _tagsService TagsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _router: Router,
     private _usersService: UsersService,
     private _globalService: GlobalService,
-    private _tagsService: TagsService
+    private _tagsService: TagsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -62,6 +66,7 @@ export class AddTagComponent implements OnInit {
    */
   public add(tag: Tag): void {
     this._tagsService.addTag(new Tag(0, tag['title']));
+    this._customToastrService.displaySuccessMessage(Messages.TAG_CREATED_SUCCESSFULLY);
     this._router.navigate(['/admin/tags']);
   }
 }

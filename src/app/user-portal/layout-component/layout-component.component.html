@@ -16,7 +16,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <img src="assets/blog.ico" width="50px" height="50px">
-        <a class="navbar-brand" routerLink="/blog/">AngularBlog</a>
+        <a class="navbar-brand" [routerLink]="['/blog']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">AngularBlog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" (click)="toggleNavbar()">
         Menu
         <i class="fa fa-bars"></i>
@@ -24,21 +24,21 @@
         <div class="collapse navbar-collapse" id="navbarResponsive" [ngClass]="{ 'show': navbarOpen }">
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" *ngIf="loggedIn"><a routerLink="/blog/my-posts" class="nav-link"> Мої пости</a></li>
+                <li class="nav-item" *ngIf="loggedIn"><a [routerLink]="['/blog/my-posts']" routerLinkActive="active" class="nav-link"> Мої пости</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/blog/about">Про нас</a>
+                    <a class="nav-link" [routerLink]="['/blog/about']" routerLinkActive="active">Про нас</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/blog/contacts">Контакти</a>
+                    <a class="nav-link" [routerLink]="['/blog/contacts']" routerLinkActive="active">Контакти</a>
                 </li>
-                <li class="nav-item" *ngIf="!loggedIn"><a routerLink="/blog/authorization" class="nav-link"><i class="fa fa-sign-in"></i> Ввійти</a></li>
-                <li class="nav-item" *ngIf="!loggedIn"><a routerLink="/blog/registration" class="nav-link"><i class="fa fa-user"></i> Зареєструватись</a></li>
+                <li class="nav-item" *ngIf="!loggedIn"><a [routerLink]="['/blog/authorization']" routerLinkActive="active" class="nav-link"><i class="fa fa-sign-in"></i> Ввійти</a></li>
+                <li class="nav-item" *ngIf="!loggedIn"><a [routerLink]="['/blog/registration']" routerLinkActive="active" class="nav-link"><i class="fa fa-user"></i> Зареєструватись</a></li>
                 <li class="nav-item dropdow" *ngIf="loggedIn">
-                    <a routerLink="/blog/my-profile" class="nav-link">
+                    <a [routerLink]="['/blog/my-profile']" class="nav-link">
             {{ user.Email }}
           </a>
                 </li>
-                <li class="nav-item" *ngIf="loggedIn"><a routerLink="/blog/logout" class="nav-link"><i class="fa fa-sign-in"></i> Вийти</a></li>
+                <li class="nav-item" *ngIf="loggedIn"><a [routerLink]="['/blog/logout']" routerLinkActive="active" class="nav-link"><i class="fa fa-sign-in"></i> Вийти</a></li>
                 <!--
             <li class="nav-item dropdow">
               <a routerLink="/blog#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

@@ -1,3 +1,5 @@
+import { Category } from './Category';
+import { Categories } from './../data/CategoriesList';
 import { Tag } from './Tag';
 import { User } from './User';
 
@@ -29,6 +31,8 @@ export class Post {
    * @param Dislikes number
    * Post Image Url
    * @param ImageUrl string
+   * Post Category Id
+   * @param CategoryId number
    * Post Created at
    * @param CreatedAt string
    * Post Tags List
@@ -37,6 +41,8 @@ export class Post {
    * @param CommentsCount number
    * Post Tags List Ids
    * @param TagsListIds number[]
+   * Post Category
+   * @param Category Category
    */
   constructor (
     public Id: number,
@@ -49,9 +55,11 @@ export class Post {
     public Likes: number,
     public Dislikes: number,
     public ImageUrl: string,
+    public CategoryId: number,
     public CreatedAt: Date,
     public CommentsCount: number,
     public TagsList?: Tag[],
     public TagsListIds?: number[],
+    public Category?: Category,
   ) {}
 }

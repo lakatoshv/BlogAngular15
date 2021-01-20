@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from '../shared/errors/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
         path: 'tags',
         loadChildren: './admin-tags/admin-tags.module#AdminTagsModule'
       },
+      {
+        path: 'not-found',
+        component: NotFoundComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
+      }
     ]
   }
 ];

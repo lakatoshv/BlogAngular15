@@ -1,11 +1,13 @@
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GeneralServiceService } from 'src/app/core';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/User';
 import { Post } from 'src/app/core/models/Post';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-show',
@@ -40,6 +42,7 @@ export class ShowComponent implements OnInit {
    * @param _globalService GlobalService
    * @param _router Router
    * @param _postsService PostsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _generalService: GeneralServiceService,
@@ -47,20 +50,26 @@ export class ShowComponent implements OnInit {
     private _usersService: UsersService,
     private _globalService: GlobalService,
     private _router: Router,
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
    * @inheritdoc
    */
   ngOnInit() {
-    this.postId = parseInt(this._generalService.getRoutePeram('post-id', this._activatedRoute), null);
+    this.postId = parseInt(this._generalService.getRouteParam('post-id', this._activatedRoute), null);
+
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.postId = parseInt(params['post-id'], null);
+        this._checkIfUserIsLoggedIn();
+
+        this._getPost();
+      }
+    );
+
     this._getPost();
-    this.loggedIn = this._usersService.isLoggedIn();
-    if (this.loggedIn) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    }
 
     this._postsService.postChanged.subscribe(
       () => {
@@ -94,6 +103,7 @@ export class ShowComponent implements OnInit {
   public deleteAction(): void {
     if (this.loggedIn && this.post.Author.Id === this.user.Id) {
       this._postsService.deletePost(this.postId);
+      this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
       this._router.navigateByUrl('/blog');
     }
   }
@@ -106,4 +116,15 @@ export class ShowComponent implements OnInit {
     this.post = this._postsService.getPost(this.postId);
   }
 
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.loggedIn = this._usersService.isLoggedIn();
+    if (this.loggedIn) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    }
+  }
 }

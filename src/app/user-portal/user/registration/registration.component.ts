@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 import { RegistrationForm } from '../../../core/forms/user/RegistrationForm';
 
 @Component({
@@ -14,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup = new RegistrationForm().registrationForm;
 
   constructor(
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -27,6 +30,7 @@ export class RegistrationComponent implements OnInit {
    */
   register() {
     if (this.registrationForm.value.password === this.registrationForm.value.confirmPassword) {
+      this._customToastrService.displaySuccessMessage(Messages.REGISTERED_SUCCESSFULLY);
     }
   }
 

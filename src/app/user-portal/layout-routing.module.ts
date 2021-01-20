@@ -11,6 +11,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 import { ChangeEmailComponent } from './personal-info/change-email/change-email.component';
 import { ChangePasswordComponent } from './personal-info/change-password/change-password.component';
 import { ChangePhoneNumberComponent } from './personal-info/change-phone-number/change-phone-number.component';
+import { NotFoundComponent } from '../shared/errors/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,14 @@ const routes: Routes = [
       {
         path: 'my-profile/personal-info/change-phone-number',
         component: ChangePhoneNumberComponent
+      },
+      {
+        path: 'not-found',
+        component: NotFoundComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
       }
     ]
   }

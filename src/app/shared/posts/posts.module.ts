@@ -1,3 +1,4 @@
+import { CategoriesModule } from './../categories/categories.module';
 import { TagsModule } from './../tags/tags.module';
 import { SharedModule } from './../shared.module';
 import { CoreModule } from './../../core/core.module';
@@ -27,7 +28,9 @@ import { PopularPostsComponent } from './popular-posts/popular-posts.component';
     CommentsModule,
     CoreModule,
     SharedModule,
-    TagsModule
+    TagsModule,
+    CategoriesModule,
+    SharedModule,
   ],
   declarations: [
     PostsListComponent,

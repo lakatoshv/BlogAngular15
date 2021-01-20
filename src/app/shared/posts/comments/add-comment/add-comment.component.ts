@@ -1,12 +1,12 @@
 import { CommentsService } from './../../../../core/services/posts-services/comments.service';
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CommentForm } from 'src/app/core/forms/posts/CommentForm';
 
 import { Comment } from '../../../../core/models/Comment';
-import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
-import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { User } from 'src/app/core/models/User';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-add-comment',
@@ -30,13 +30,12 @@ export class AddCommentComponent implements OnInit {
   commentForm: FormGroup = new CommentForm().commentForm;
 
   /**
-   * @param _globalService GlobalService
-   * @param _usersService UsersService
+   * @param _commentsService CommentsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
-    private _globalService: GlobalService,
-    private _usersService: UsersService,
-    private _commentsService: CommentsService
+    private _commentsService: CommentsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -65,5 +64,6 @@ export class AddCommentComponent implements OnInit {
       comment.Name = this.commentForm.get('name').value;
     }
     this._commentsService.addComment(comment);
+    this._customToastrService.displaySuccessMessage(Messages.COMMENT_CREATED_SUCCESSFULLY);
   }
 }

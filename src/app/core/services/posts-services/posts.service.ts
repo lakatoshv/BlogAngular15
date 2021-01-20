@@ -39,7 +39,7 @@ export class PostsService {
    */
   public getPosts(search: string = null, searchFilter: string[] = []): Post[] {
     let posts = [];
-    searchFilter = searchFilter.filter(x => x !== null);
+    searchFilter = searchFilter.filter(x => x !== null && x !== undefined);
     this._posts.forEach(post => {
       post.TagsList = [];
       if (post.TagsListIds !== undefined) {

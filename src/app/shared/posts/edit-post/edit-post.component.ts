@@ -1,6 +1,6 @@
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostForm } from '../../../core/forms/posts/PostForm';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
@@ -13,6 +13,8 @@ import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
 import { Tag } from 'src/app/core/models/Tag';
 import { Tags } from 'src/app/core/data/TagsList';
 import { TagsService } from 'src/app/core/services/posts-services/tags.service';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-edit-post',
@@ -78,8 +80,9 @@ export class EditPostComponent implements OnInit {
    * @param _router Router
    * @param _usersService UsersService
    * @param _globalService GlobalService
-   * @param _postsService PostsService,
+   * @param _postsService PostsService
    * @param _tagsService TagsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -87,7 +90,8 @@ export class EditPostComponent implements OnInit {
     private _usersService: UsersService,
     private _globalService: GlobalService,
     private _postsService: PostsService,
-    private _tagsService: TagsService
+    private _tagsService: TagsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -99,15 +103,18 @@ export class EditPostComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute));
+    this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute), null);
 
-    this.isLoggedIn = this._usersService.isLoggedIn();
-    if (this._usersService.isLoggedIn()) {
-      this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
-    } else {
-      this._router.navigateByUrl('/authorization');
-    }
+    this._activatedRoute.params.subscribe(
+      (params: Params) => {
+        this._postId = parseInt(params['post-id'], null);
+        this._checkIfUserIsLoggedIn();
+        this._getPost();
+        this._getTags();
+      }
+    );
+
+    this._checkIfUserIsLoggedIn();
     this._getPost();
     this._getTags();
   }
@@ -138,6 +145,7 @@ export class EditPostComponent implements OnInit {
     this.post.CreatedAt = new Date();
     this.post.AuthorId = this.user.Id;
     this._postsService.editPost(this._postId, this.post);
+    this._customToastrService.displaySuccessMessage(Messages.POST_EDITED_SUCCESSFULLY);
     this._router.navigateByUrl('/');
   }
 
@@ -257,5 +265,19 @@ export class EditPostComponent implements OnInit {
     this.selectedTag['value'] = '';
     this.selectedTag['id'] = null;
     this.tagInput.nativeElement.value = '';
+  }
+
+  /**
+   * Check if user is logged in.
+   * @returns void
+   */
+  private _checkIfUserIsLoggedIn(): void {
+    this.isLoggedIn = this._usersService.isLoggedIn();
+    if (this._usersService.isLoggedIn()) {
+      this._globalService.resetUserData();
+      this.user = this._globalService._currentUser;
+    } else {
+      this._router.navigateByUrl('/authorization');
+    }
   }
 }

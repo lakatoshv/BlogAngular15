@@ -4,11 +4,11 @@
         <a class="blog-img mr-4" [ngStyle]="{'background-image':'url(' + post.ImageUrl + ')'}"></a>
         <div class="text">
             <h3 class="heading">
-                <a routerLink="/blog/post/{{post.Id}}" [innerHTML]="post.Title"></a>
+                <a [routerLink]="['/blog/post', post.Id]" [innerHTML]="post.Title"></a>
             </h3>
             <div class="meta">
                 <div><a href="#"><span class="fa fa-calendar"></span> {{post.CreatedAt | date:'medium' }}</a></div>
-                <div><a routerLink="/blog/profile/{{post.AuthorId}}"><span class="fa fa-user"></span> {{post.Author.FirstName + " " + post.Author.LastName}}</a></div>
+                <div><a [routerLink]="['/blog/profile', post.AuthorId]"><span class="fa fa-user"></span> {{post.Author.FirstName + " " + post.Author.LastName}}</a></div>
                 <div><a href="#"><span class="fa fa-comment"></span> {{post.CommentsCount}}</a></div>
             </div>
         </div>

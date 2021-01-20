@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: './admin-portal/admin-portal.module#AdminPortalModule'
+  },
+  {
+    path: '**',
+    redirectTo: 'blog/not-found'
   }
 ];
 

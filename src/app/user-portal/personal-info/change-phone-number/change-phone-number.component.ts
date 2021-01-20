@@ -7,6 +7,8 @@ import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-change-phone-number',
@@ -38,11 +40,13 @@ export class ChangePhoneNumberComponent implements OnInit {
    * @param _router Router
    * @param _globalService GlobalService
    * @param _usersService UsersService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _router: Router,
     private _globalService: GlobalService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -68,6 +72,7 @@ export class ChangePhoneNumberComponent implements OnInit {
     this._globalService._currentUser.PhoneNumber = profileModel.phoneNumber;
     this._globalService._currentUser.PhoneNumberConfirmed = false;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+    this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_CHANGED_SUCCESSFULLY);
   }
 
   /**
@@ -77,6 +82,7 @@ export class ChangePhoneNumberComponent implements OnInit {
   public confirmPhoneNumber(): void {
     this._globalService._currentUser.PhoneNumberConfirmed = true;
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+    this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_VERIFIED_SUCCESSFULLY);
   }
 
   /**

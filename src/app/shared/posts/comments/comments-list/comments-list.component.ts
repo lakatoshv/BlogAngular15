@@ -1,13 +1,12 @@
 import { CommentsService } from './../../../../core/services/posts-services/comments.service';
 import { Component, OnInit, Input } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import { GeneralServiceService } from 'src/app/core';
-import { Comments } from 'src/app/core/data/CommentsList';
 import { Comment } from 'src/app/core/models/Comment';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/User';
 import { Users } from 'src/app/core/data/UsersList';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-comments-list',
@@ -65,17 +64,16 @@ export class CommentsListComponent implements OnInit {
   private users: User[] = [];
 
   /**
-   * @param _generalService GeneralServiceService
-   * @param _activatedRoute ActivatedRoute
    * @param _usersService UsersService
    * @param _globalService GlobalService
+   * @param _commentsService: CommentsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
-    private _generalService: GeneralServiceService,
-    private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
     private _globalService: GlobalService,
     private _commentsService: CommentsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -136,6 +134,7 @@ export class CommentsListComponent implements OnInit {
   deleteAction(comment: Comment): void {
     if (this.user.Id === comment.AuthorId) {
       this._commentsService.deleteComment(comment);
+      this._customToastrService.displaySuccessMessage(Messages.COMMENT_DELETED_SUCCESSFULLY);
     }
   }
 

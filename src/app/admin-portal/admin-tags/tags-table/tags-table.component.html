@@ -16,10 +16,10 @@
         </tfoot>
         <tbody>
             <tr *ngFor="let tag of tags">
-                <td><a routerLink="/admin/posts/show/{{tag.Id}}">{{tag.Title}}</a></td>
+                <td><a [routerLink]="['/admin/posts/show', tag.Id]">{{tag.Title}}</a></td>
                 <td>10</td>
                 <td class="actions" data-th="">
-                    <a class="btn btn-primary" routerLink="tags/edit/{{tag.Id}}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary" [routerLink]="['admin/tags/edit', tag.Id]"><i class="fa fa-edit"></i></a>
                     <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" (click)="deleteAction(tag)" data-toggle="modal" data-target="#delete-post">
                     <i class="fa fa-trash"></i>
                 </button>
