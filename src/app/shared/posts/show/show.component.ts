@@ -6,6 +6,8 @@ import { UsersService } from 'src/app/core/services/users/users-service.service'
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/User';
 import { Post } from 'src/app/core/models/Post';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-show',
@@ -40,6 +42,7 @@ export class ShowComponent implements OnInit {
    * @param _globalService GlobalService
    * @param _router Router
    * @param _postsService PostsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _generalService: GeneralServiceService,
@@ -47,7 +50,8 @@ export class ShowComponent implements OnInit {
     private _usersService: UsersService,
     private _globalService: GlobalService,
     private _router: Router,
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -99,6 +103,7 @@ export class ShowComponent implements OnInit {
   public deleteAction(): void {
     if (this.loggedIn && this.post.Author.Id === this.user.Id) {
       this._postsService.deletePost(this.postId);
+      this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
       this._router.navigateByUrl('/blog');
     }
   }

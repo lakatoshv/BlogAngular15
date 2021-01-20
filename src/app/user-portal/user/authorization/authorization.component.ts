@@ -54,7 +54,6 @@ export class AuthorizationComponent implements OnInit {
    * @param user string
    */
   public successLogin(user: string): void {
-    
     this._usersService.saveUser(user);
     this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
     this._router.navigate(['/']);

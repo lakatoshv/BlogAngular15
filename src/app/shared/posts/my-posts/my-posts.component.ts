@@ -9,6 +9,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/core/models/User';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { Post } from 'src/app/core/models/Post';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-my-posts',
@@ -83,6 +85,7 @@ export class MyPostsComponent implements OnInit {
    * @param _usersService UsersService
    * @param _postsService PostsService
    * @param _commentsService CommentsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _globalService: GlobalService,
@@ -90,7 +93,8 @@ export class MyPostsComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _customToastrService: CustomToastrService
   ) {
   }
 
@@ -143,6 +147,7 @@ export class MyPostsComponent implements OnInit {
   public deleteAction(postId: number): void {
     if (this.isLoggedIn && this.posts[postId].Author.Id === this.user.Id) {
       this._postsService.deletePost(postId);
+      this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
     }
 
     this.pageInfo.TotalItems -= 1;

@@ -14,6 +14,8 @@ import { SearchForm } from 'src/app/core/forms/SearchForm';
 import {debounceTime} from 'rxjs/operators';
 import { sortBy } from 'lodash';
 import { PageInfo } from 'src/app/core/models/PageInfo';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { Messages } from 'src/app/core/data/Mesages';
 
 @Component({
   selector: 'app-posts-list',
@@ -78,13 +80,15 @@ export class PostsListComponent implements OnInit {
    * @param _activatedRoute ActivatedRoute
    * @param _usersService UsersService
    * @param _postsService PostsService
+   * @param _customToastrService CustomToastrService
    */
   constructor(
     private _globalService: GlobalService,
     private _generalService: GeneralServiceService,
     private _activatedRoute: ActivatedRoute,
     private _usersService: UsersService,
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _customToastrService: CustomToastrService
   ) {
   }
 
@@ -125,6 +129,7 @@ export class PostsListComponent implements OnInit {
       const index = this.posts.findIndex(x => x.Id === postId);
       if (index > -1) {
         this._postsService.deletePost(postId);
+        this._customToastrService.displaySuccessMessage(Messages.POST_DELETED_SUCCESSFULLY);
       }
     }
   }

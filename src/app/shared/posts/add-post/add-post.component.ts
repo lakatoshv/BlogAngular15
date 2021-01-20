@@ -12,6 +12,8 @@ import { User } from 'src/app/core/models/User';
 import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
 import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
 import { Tag } from 'src/app/core/models/Tag';
+import { Messages } from 'src/app/core/data/Mesages';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-add-post',
@@ -78,13 +80,15 @@ export class AddPostComponent implements OnInit {
    * @param _globalService GlobalService
    * @param _postsService PostsService,
    * @param _tagsService TagsService
+   * @param _customToastrService CustomToastrService
    */
   public constructor(
     private _router: Router,
     private _usersService: UsersService,
     private _globalService: GlobalService,
     private _postsService: PostsService,
-    private _tagsService: TagsService
+    private _tagsService: TagsService,
+    private _customToastrService: CustomToastrService
   ) { }
 
   /**
@@ -184,6 +188,7 @@ export class AddPostComponent implements OnInit {
     post.TagsList = this.tagsList;
     post.AuthorId = this.user.Id;
     this._postsService.addPost(post);
+    this._customToastrService.displaySuccessMessage(Messages.POST_CREATED_SUCCESSFULLY);
     this._router.navigate(['/blog']);
   }
 
