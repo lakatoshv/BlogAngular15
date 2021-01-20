@@ -7,6 +7,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
+import { AuthGuard } from 'src/app/core/guards/AuthGuard';
 
 const routes: Routes = [
   {
@@ -19,10 +20,12 @@ const routes: Routes = [
   },
   {
     path: 'post/add',
+    canActivate: [AuthGuard],
     component: AddPostComponent
   },
   {
     path: 'post/edit/:post-id',
+    canActivate: [AuthGuard],
     component: EditPostComponent
   },
   {
@@ -31,6 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'my-posts',
+    canActivate: [AuthGuard],
     component: MyPostsComponent
   },
   {

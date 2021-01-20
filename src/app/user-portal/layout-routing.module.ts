@@ -12,6 +12,7 @@ import { ChangeEmailComponent } from './personal-info/change-email/change-email.
 import { ChangePasswordComponent } from './personal-info/change-password/change-password.component';
 import { ChangePhoneNumberComponent } from './personal-info/change-phone-number/change-phone-number.component';
 import { NotFoundComponent } from '../shared/errors/not-found/not-found.component';
+import { AuthGuard } from '../core/guards/AuthGuard';
 
 const routes: Routes = [
   {
@@ -40,26 +41,32 @@ const routes: Routes = [
       },
       {
         path: 'profile',
+        canActivate: [AuthGuard],
         loadChildren: '../user-portal/profile/profile.module#ProfileModule'
       },
       {
         path: 'my-profile',
+        canActivate: [AuthGuard],
         component: ProfilePageComponent
       },
       {
         path: 'my-profile/edit',
+        canActivate: [AuthGuard],
         component: EditProfileComponent
       },
       {
         path: 'my-profile/personal-info/change-email',
+        canActivate: [AuthGuard],
         component: ChangeEmailComponent
       },
       {
         path: 'my-profile/personal-info/change-password',
+        canActivate: [AuthGuard],
         component: ChangePasswordComponent
       },
       {
         path: 'my-profile/personal-info/change-phone-number',
+        canActivate: [AuthGuard],
         component: ChangePhoneNumberComponent
       },
       {
