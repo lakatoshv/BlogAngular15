@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 
@@ -49,12 +50,42 @@ export class CountDownComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.subscription = interval(1000)
-      .subscribe(x => { this.getTimeDifference(); });
+    this.countDownByInterval();
+    this.countDownByCustomObservable();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  /**
+   * Count down by interval.
+   * 
+   * @returns void.
+   */
+  private countDownByInterval(): void {
+    this.subscription = interval(1000)
+      .subscribe(x => { this.getTimeDifference(); });
+  }
+
+  /**
+   * Count down by custom observable.
+   * 
+   * @returns void.
+   */
+  private countDownByCustomObservable(): void {
+    const customCountDownObservable = Observable.create(observer => {
+      let timeDifference = this.dDay.getTime() - new  Date().getTime();
+      setInterval(() => {
+        observer.next(timeDifference);
+        timeDifference = this.dDay.getTime() - new  Date().getTime();
+      }, 1000);
+    });
+
+    customCountDownObservable.subscribe(data => {
+      this.timeDifference = this.dDay.getTime() - new  Date().getTime();
+      this.allocateTimeUnits(this.timeDifference);
+    });
   }
 
   /**
