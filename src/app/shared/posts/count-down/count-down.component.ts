@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
+import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 
 @Component({
   selector: 'app-count-down',
@@ -8,6 +9,7 @@ import { Subscription, interval } from 'rxjs';
   styleUrls: ['./count-down.component.css']
 })
 export class CountDownComponent implements OnInit, OnDestroy {
+  
   /** @param secondsToDay number */
   public secondsToDay: number;
 
@@ -48,6 +50,11 @@ export class CountDownComponent implements OnInit, OnDestroy {
   /** @param timeDifference number */
   private timeDifference: number;
 
+  /**
+    @param _customToastrService CustomToastrService
+   */
+  constructor(private _customToastrService: CustomToastrService) {    
+  }
 
   ngOnInit() {
     this.countDownByInterval();
@@ -78,14 +85,26 @@ export class CountDownComponent implements OnInit, OnDestroy {
       let timeDifference = this.dDay.getTime() - new  Date().getTime();
       setInterval(() => {
         observer.next(timeDifference);
+        if (timeDifference < 0) {
+          observer.error(new Error("Countdown finished badly"));
+        }
+        if(timeDifference === 0){
+          observer.complete();
+        }
         timeDifference = this.dDay.getTime() - new  Date().getTime();
       }, 1000);
     });
 
-    customCountDownObservable.subscribe(data => {
-      this.timeDifference = this.dDay.getTime() - new  Date().getTime();
-      this.allocateTimeUnits(this.timeDifference);
-    });
+    customCountDownObservable.subscribe(
+      (data: number) => {
+        this.allocateTimeUnits(this.timeDifference);
+      },
+      (errorMessage: string) => {
+        this._customToastrService.customErrorOrBadRequest(errorMessage, null);
+      },
+      () => {
+        this._customToastrService.displaySuccessMessage("Countdown finished");
+      });
   }
 
   /**
