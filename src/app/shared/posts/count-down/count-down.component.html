@@ -1,0 +1,9 @@
+<div class="sidebar-box ftco-animate">
+    <h3 class="sidebar-heading">Залишилось часу</h3>
+    <div class="timer mb-4 d-flex">
+        <span id="days" class="active" *ngIf="daysToDay > 0"> {{daysToDay}} дн.</span>
+        <span id="hours" class="active" *ngIf="hoursToDay > 0"> {{hoursToDay}} г.</span>
+        <span id="minutes" class="active" *ngIf="minutesToDay > 0"> {{minutesToDay}} хв.</span>
+        <span id="seconds" class="active" *ngIf="secondsToDay > 0"> {{secondsToDay}} с.</span>
+    </div>
+</div>

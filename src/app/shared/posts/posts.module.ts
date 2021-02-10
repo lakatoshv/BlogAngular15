@@ -16,6 +16,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { PopularPostsComponent } from './popular-posts/popular-posts.component';
+import { CountDownComponent } from './count-down/count-down.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { PopularPostsComponent } from './popular-posts/popular-posts.component';
     EditPostComponent,
     MyPostsComponent,
     RightSidebarComponent,
-    PopularPostsComponent
+    PopularPostsComponent,
+    CountDownComponent
   ],
   exports: [
     AddPostComponent,
