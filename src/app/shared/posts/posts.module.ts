@@ -1,3 +1,4 @@
+import { ArchiveModule } from './../archive/archive.module';
 import { CategoriesModule } from './../categories/categories.module';
 import { TagsModule } from './../tags/tags.module';
 import { SharedModule } from './../shared.module';
@@ -32,6 +33,7 @@ import { CountDownComponent } from './count-down/count-down.component';
     TagsModule,
     CategoriesModule,
     SharedModule,
+    ArchiveModule
   ],
   declarations: [
     PostsListComponent,

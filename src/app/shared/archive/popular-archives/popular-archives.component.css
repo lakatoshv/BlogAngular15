@@ -1,0 +1,59 @@
+.sidebar-box {
+    margin-bottom: 40px;
+    padding: 0 25px;
+    font-size: 15px;
+    width: 100%;
+}
+
+.sidebar-box h3.sidebar-heading {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar-box {
+        padding: 0;
+    }
+}
+
+.categories,
+.sidelink {
+    padding: 0;
+}
+
+.categories li,
+.sidelink li {
+    position: relative;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    list-style: none;
+}
+
+.categories li:last-child,
+.sidelink li:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.categories li a,
+.sidelink li a {
+    display: block;
+    color: #000000;
+}
+
+.categories li a span,
+.sidelink li a span {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ccc;
+}
+
+.categories li.active a,
+.sidelink li.active a {
+    color: #000000;
+    font-style: italic;
+}
