@@ -185,11 +185,13 @@ export class AddPostComponent implements OnInit {
    * @returns void
    */
   public add(post: Post): void {
-    post.TagsList = this.tagsList;
-    post.AuthorId = this.user.Id;
-    this._postsService.addPost(post);
-    this._customToastrService.displaySuccessMessage(Messages.POST_CREATED_SUCCESSFULLY);
-    this._router.navigate(['/blog']);
+    if (this.postForm.valid) {
+      post.TagsList = this.tagsList;
+      post.AuthorId = this.user.Id;
+      this._postsService.addPost(post);
+      this._customToastrService.displaySuccessMessage(Messages.POST_CREATED_SUCCESSFULLY);
+      this._router.navigate(['/blog']);
+    }
   }
 
   /**

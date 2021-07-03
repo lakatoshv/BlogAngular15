@@ -84,10 +84,12 @@ export class EditTagComponent implements OnInit {
    * @returns void
    */
   public edit(tag: Tag): void {
-    this.tag.Title = tag['title'];
-    this._tagsService.editTag(this._tagId, this.tag);
-    this._customToastrService.displaySuccessMessage(Messages.TAG_EDITED_SUCCESSFULLY);
-    this._router.navigate(['/admin/tags']);
+    if (this.tagForm.valid) {
+      this.tag.Title = tag['title'];
+      this._tagsService.editTag(this._tagId, this.tag);
+      this._customToastrService.displaySuccessMessage(Messages.TAG_EDITED_SUCCESSFULLY);
+      this._router.navigate(['/admin/tags']);
+    }
   }
 
   /**

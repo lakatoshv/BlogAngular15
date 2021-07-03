@@ -53,17 +53,19 @@ export class AddCommentComponent implements OnInit {
    * @returns void
    */
   addComment(): void {
-    const comment: Comment = new Comment();
-    comment.Content = this.commentForm.get('content').value;
-    comment.CreatedAt = new Date();
-    comment.PostId = this.postId;
-    if (this.user) {
-      comment.AuthorId = this.user.Id;
-    } else {
-      comment.Email = this.commentForm.get('email').value;
-      comment.Name = this.commentForm.get('name').value;
+    if (this.commentForm.valid) {
+      const comment: Comment = new Comment();
+      comment.Content = this.commentForm.get('content').value;
+      comment.CreatedAt = new Date();
+      comment.PostId = this.postId;
+      if (this.user) {
+        comment.AuthorId = this.user.Id;
+      } else {
+        comment.Email = this.commentForm.get('email').value;
+        comment.Name = this.commentForm.get('name').value;
+      }
+      this._commentsService.addComment(comment);
+      this._customToastrService.displaySuccessMessage(Messages.COMMENT_CREATED_SUCCESSFULLY);
     }
-    this._commentsService.addComment(comment);
-    this._customToastrService.displaySuccessMessage(Messages.COMMENT_CREATED_SUCCESSFULLY);
   }
 }
