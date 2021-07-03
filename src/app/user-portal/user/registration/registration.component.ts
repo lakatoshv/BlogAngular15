@@ -29,7 +29,9 @@ export class RegistrationComponent implements OnInit {
    * Register user event
    */
   register() {
-    if (this.registrationForm.value.password === this.registrationForm.value.confirmPassword) {
+    if (
+      this.registrationForm.valid &&
+      this.registrationForm.value.password === this.registrationForm.value.confirmPassword) {
       this._customToastrService.displaySuccessMessage(Messages.REGISTERED_SUCCESSFULLY);
     }
   }
