@@ -12,7 +12,7 @@
                     <input type="text" name="title" id="title" value="" class="form-control" formControlName="title">
                 </div>
 
-                <input type="submit" name="submit" id="submit" value="Редагувати" class="btn btn-default">
+                <input type="submit" name="submit" id="submit" value="Редагувати" class="btn btn-default" [disabled]="tagForm.invalid">
 
             </form>
         </div>

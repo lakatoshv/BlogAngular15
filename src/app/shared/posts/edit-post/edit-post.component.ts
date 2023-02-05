@@ -138,15 +138,17 @@ export class EditPostComponent implements OnInit {
    * @returns void
    */
   edit(post: Post): void {
-    this.post.Title = post['title'];
-    this.post.Description = post['description'];
-    this.post.Content = post['content'];
-    this.post.ImageUrl = post['imageUrl'];
-    this.post.CreatedAt = new Date();
-    this.post.AuthorId = this.user.Id;
-    this._postsService.editPost(this._postId, this.post);
-    this._customToastrService.displaySuccessMessage(Messages.POST_EDITED_SUCCESSFULLY);
-    this._router.navigateByUrl('/');
+    if (this.postForm.valid) {
+      this.post.Title = post['title'];
+      this.post.Description = post['description'];
+      this.post.Content = post['content'];
+      this.post.ImageUrl = post['imageUrl'];
+      this.post.CreatedAt = new Date();
+      this.post.AuthorId = this.user.Id;
+      this._postsService.editPost(this._postId, this.post);
+      this._customToastrService.displaySuccessMessage(Messages.POST_EDITED_SUCCESSFULLY);
+      this._router.navigateByUrl('/');
+    }
   }
 
 

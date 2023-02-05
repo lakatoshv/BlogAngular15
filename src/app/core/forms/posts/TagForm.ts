@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 /**
  * Tag add/edit form.
@@ -8,6 +8,10 @@ export class TagForm {
         /**
          * title input field.
          */
-        title: new FormControl(''),
+        title: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(255)
+        ]),
     });
 }

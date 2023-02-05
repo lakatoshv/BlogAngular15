@@ -79,7 +79,9 @@ export class EditCommentComponent implements OnInit {
    * @returns void
    */
   public edit(): void {
-    if (this.user.Id === this.comment.AuthorId) {
+    if (
+      this.commentForm.valid &&
+      this.user.Id === this.comment.AuthorId) {
       this.comment.Content = this.commentForm.get('content').value;
       this._commentsService.editComment(this.comment);
       this._customToastrService.displaySuccessMessage(Messages.COMMENT_EDITED_SUCCESSFULLY);

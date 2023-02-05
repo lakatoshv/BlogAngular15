@@ -65,8 +65,10 @@ export class AddTagComponent implements OnInit {
    * @returns void
    */
   public add(tag: Tag): void {
-    this._tagsService.addTag(new Tag(0, tag['title']));
-    this._customToastrService.displaySuccessMessage(Messages.TAG_CREATED_SUCCESSFULLY);
-    this._router.navigate(['/admin/tags']);
+    if (this.tagForm.valid) {
+      this._tagsService.addTag(new Tag(0, tag['title']));
+      this._customToastrService.displaySuccessMessage(Messages.TAG_CREATED_SUCCESSFULLY);
+      this._router.navigate(['/admin/tags']);
+    }
   }
 }
