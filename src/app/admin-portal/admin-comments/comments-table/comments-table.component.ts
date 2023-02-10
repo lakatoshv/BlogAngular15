@@ -23,7 +23,7 @@ export class CommentsTableComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param loggedIn boolean
@@ -33,7 +33,7 @@ export class CommentsTableComponent implements OnInit {
   /**
    * @param postId number
    */
-  public postId: number;
+  public postId: number | undefined;
 
   /**
    * @param _commentsService CommentsService
@@ -54,11 +54,14 @@ export class CommentsTableComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this.postId = parseInt(this._generalService.getRouteParam('post-id', this._activatedRoute), null);
+    const postIdStr = this._generalService.getRouteParam('post-id', this._activatedRoute);
+    if(postIdStr) {
+      this.postId = parseInt(postIdStr, undefined);
+    }
 
     this._activatedRoute.params.subscribe(
       (params: Params) => {
-        this.postId = parseInt(params['post-id'], null);
+        this.postId = parseInt(params['post-id'], undefined);
         this._checkIfUserIsLoggedIn();
 
         this._getComments(this.postId);
@@ -67,11 +70,15 @@ export class CommentsTableComponent implements OnInit {
 
     this._checkIfUserIsLoggedIn();
 
-    this._getComments(this.postId);
+    if(this.postId) {
+      this._getComments(this.postId);
+    }
 
     this._commentsService.commentChanged.subscribe(
       () => {
-        this._getComments(this.postId);
+        if(this.postId !== undefined){
+          this._getComments(this.postId);
+        }
       }
     );
   }

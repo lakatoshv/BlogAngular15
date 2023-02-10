@@ -35,9 +35,9 @@ export class AuthorizationComponent implements OnInit {
   }
 
   /**
-   * Authorization event
+   * Authorization event.
+   * 
    * @param dataForAuthorize any
-   * @returns void
    */
   authorization(dataForAuthorize: any): void {
     debugger
@@ -50,7 +50,8 @@ export class AuthorizationComponent implements OnInit {
   }
 
   /**
-   * Save user data if login success
+   * Save user data if login success.
+   * 
    * @param user string
    */
   public successLogin(user: string): void {

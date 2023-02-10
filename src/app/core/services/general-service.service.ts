@@ -12,20 +12,22 @@ export class GeneralServiceService {
 
   /**
    * Return property value by URL
+   * 
    * @param paramName string
    * @param activatedRoute ActivatedRoute
    */
-  public getRouteParam(paramName: string, activatedRoute: ActivatedRoute): string {
+  public getRouteParam(paramName: string, activatedRoute: ActivatedRoute): string | null {
     const snapshot = activatedRoute.snapshot;
     return this._getParamValue(paramName, snapshot);
   }
 
   /**
    * Return property value by URL
+   * 
    * @param paramName string
    * @param routeObject ActivatedRouteSnapshot
    */
-  private _getParamValue(paramName: string, routeObject: ActivatedRouteSnapshot): string {
+  private _getParamValue(paramName: string, routeObject: ActivatedRouteSnapshot | null): string | null {
     if (!routeObject) {
       return null;
     }

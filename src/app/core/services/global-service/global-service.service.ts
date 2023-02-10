@@ -21,17 +21,17 @@ export class GlobalService {
   /**
    * @param _currentUser User
    */
-  public _currentUser: User;
+  public _currentUser: User | undefined;
 
   /**
    * @param _avatarUrl string
    */
-  public _avatarUrl: string;
+  public _avatarUrl: string | undefined;
 
   /**
    * @param _roles string[]
    */
-  public _roles: string[];
+  public _roles: string[] = [];
 
   /**
    * @inheritdoc
@@ -60,7 +60,7 @@ export class GlobalService {
    */
   private _getId(
     idName: string,
-    routeObject: ActivatedRouteSnapshot
+    routeObject: ActivatedRouteSnapshot | null
   ): string|null {
     if (!routeObject) {
         return null;
@@ -78,7 +78,7 @@ export class GlobalService {
    * @param response any
    * @returns void
    */
-  public initializeData(response): void {
+  public initializeData(response: any): void {
     if (response.currentUser) {
         this._currentUser = response.currentUser;
     }

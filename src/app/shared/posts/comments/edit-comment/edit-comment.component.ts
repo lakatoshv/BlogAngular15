@@ -13,13 +13,13 @@ import { Messages } from 'src/app/core/data/Mesages';
 @Component({
   selector: 'app-edit-comment',
   templateUrl: './edit-comment.component.html',
-  styleUrls: ['./edit-comment.component.css']
+  styleUrls: ['./edit-comment.component.scss']
 })
 export class EditCommentComponent implements OnInit {
   /**
    * @param comment Comment
    */
-  @Input() comment: Comment;
+  @Input() comment: Comment | undefined;
 
   /**
    * @param loggedIn boolean
@@ -29,7 +29,7 @@ export class EditCommentComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User = null;
+  public user: User | undefined | null = null;
 
   /**
    * @param commentForm FormGroup
@@ -58,31 +58,31 @@ export class EditCommentComponent implements OnInit {
       this._globalService.resetUserData();
       this.user = this._globalService._currentUser;
     }
-    if (this.user.Id === this.comment.AuthorId) {
+    if (this.user?.Id === this.comment?.AuthorId) {
       this.setFormValue();
     }
   }
 
   /**
-   * Sets form value
-   * @returns void
+   * Sets form value.
    */
   public setFormValue(): void {
-    this.commentForm.get('name').setValue(this.comment.Author.FirstName + ' ' + this.comment.Author.LastName);
-    this.commentForm.get('email').setValue(this.comment.Author.Email);
-    this.commentForm.get('content').setValue(this.comment.Content);
+    this.commentForm.get('name')?.setValue(this.comment?.Author?.FirstName + ' ' + this.comment?.Author?.LastName);
+    this.commentForm.get('email')?.setValue(this.comment?.Author?.Email);
+    this.commentForm.get('content')?.setValue(this.comment?.Content);
   }
 
   /**
-   * Edit comment
+   * Edit comment.
+   * 
    * @param comment Comment
-   * @returns void
    */
   public edit(): void {
     if (
       this.commentForm.valid &&
-      this.user.Id === this.comment.AuthorId) {
-      this.comment.Content = this.commentForm.get('content').value;
+      this.user?.Id === this.comment?.AuthorId &&
+      this.comment !== undefined) {
+      this.comment.Content = this.commentForm.get('content')?.value;
       this._commentsService.editComment(this.comment);
       this._customToastrService.displaySuccessMessage(Messages.COMMENT_EDITED_SUCCESSFULLY);
     }

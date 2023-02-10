@@ -1,3 +1,4 @@
+import { CategoriesService } from './services/posts-services/categories.service';
 import { PostsService } from './services/posts-services/posts.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { CommentsService } from './services/posts-services/comments.service';
     GeneralServiceService,
     CommentsService,
     PostsService,
+    CategoriesService
   ]
 })
 export class CoreModule { }

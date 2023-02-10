@@ -11,7 +11,7 @@ export class TagsActivityChartComponent implements OnInit {
   /**
    * @param pbgChartContainer ElementRef
    */
-  @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef;
+  @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef | undefined;
 
   /**
    * @param chartOptions ChartOptions
@@ -32,6 +32,7 @@ export class TagsActivityChartComponent implements OnInit {
 
   /**
    * Select chart item event.
+   * 
    * @param data any
    */
   onSelect(data: any): void {
@@ -53,5 +54,4 @@ export class TagsActivityChartComponent implements OnInit {
   onDeactivate(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-
 }

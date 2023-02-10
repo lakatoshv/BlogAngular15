@@ -1,3 +1,4 @@
+import { Color } from '@swimlane/ngx-charts';
 import { ChartDataModel } from './ChartDataModel';
 
 /**
@@ -19,7 +20,7 @@ export class ChartOptions {
      */
     constructor(
         public Data: ChartDataModel[],
-        public View: any[],
+        public View: [number, number],
         public ShowXAxis: boolean,
         public ShowYAxis: boolean,
         public Gradient: boolean,
@@ -28,6 +29,6 @@ export class ChartOptions {
         public ShowYAxisLabel: boolean,
         public Timeline: boolean,
         public AutoScale: boolean,
-        public ColorScheme: object,
+        public ColorScheme: Color,
     ) {}
 }

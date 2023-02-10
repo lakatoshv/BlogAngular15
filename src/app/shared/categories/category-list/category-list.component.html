@@ -1,6 +1,6 @@
 <div class="sidebar-box ftco-animate">
     <h3 class="sidebar-heading">Категорії</h3>
     <ul class="categories" *ngFor="let category of categories">
-        <li><a [routerLink]="['/blog/posts-category', category.Name]">{{category.Name}} <span>({{category.Posts.length}})</span></a></li>
+        <li><a [routerLink]="['/blog/posts-category', category.Name]">{{category.Name}} <span>({{category.Posts?.length}})</span></a></li>
     </ul>
 </div>

@@ -1,10 +1,10 @@
 import { TagsService } from './tags.service';
-import { sortBy } from 'lodash';
 import { CommentsService } from './comments.service';
 import { UsersService } from './../users/users-service.service';
 import { Post } from './../../models/Post';
 import { Posts } from './../../data/PostsList';
 import { Injectable, EventEmitter } from '@angular/core';
+import { sortBy } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -33,23 +33,29 @@ export class PostsService {
 
   /**
    * Get posts.
+   * 
    * @param search string
    * @param searchFilter string[]
+   * 
    * @returns Post[]
    */
-  public getPosts(search: string = null, searchFilter: string[] = []): Post[] {
-    let posts = [];
+  public getPosts(search: string | null = null, searchFilter: string[] = []): Post[] {
+    let posts: Post[] = [];
     searchFilter = searchFilter.filter(x => x !== null && x !== undefined);
     this._posts.forEach(post => {
       post.TagsList = [];
       if (post.TagsListIds !== undefined) {
-        post.TagsListIds.forEach(x => {
-          if (!post.TagsList.includes(this._tagsService.getTag(x))) {
-            post.TagsList.push(this._tagsService.getTag(x));
+        post.TagsListIds?.forEach(x => {
+          if (!post.TagsList?.includes(this._tagsService.getTag(x))) {
+            post.TagsList?.push(this._tagsService.getTag(x));
           }
         });
       }
-      post.Author = this._usersService.getUserById(post.AuthorId);
+      
+      if(post.AuthorId) {
+        post.Author = this._usersService.getUserById(post.AuthorId);
+      }
+      
       post.CommentsCount = this._posts.findIndex(item => item.Id === post.Id);
       posts.push(post);
     });
@@ -60,10 +66,10 @@ export class PostsService {
 
     if (searchFilter.length > 0) {
       // posts = posts.filter(post => post.TagsList.every(x => x.Title.includes(searchFilter)));
-      const filteredPosts = [];
-      posts = posts.map(post => {
-        const found = post.TagsList.filter(tag => (searchFilter.includes(tag.Title)));
-        if (found.length > 0) {
+      const filteredPosts: Post[] = [];
+      posts.map(post => {
+        const found = post.TagsList?.filter(tag => (searchFilter.includes(tag.Title)));
+        if (found !== undefined && found.length > 0) {
           filteredPosts.push(post);
         }
       });
@@ -75,19 +81,24 @@ export class PostsService {
 
   /**
    * get user posts.
+   * 
    * @param userId number
    * @param search string
    * @param searchFilter string[]
+   * 
    * @returns Post[]
    */
-  public getUserPosts(userId: number, search: string = null, searchFilter: string[] = []): Post[] {
-    let posts = [];
+  public getUserPosts(userId: number, search: string | null = null, searchFilter: string[] = []): Post[] {
+    let posts: Post[] = [];
     searchFilter = searchFilter.filter(x => x !== null);
 
     this._posts.filter(user => user.Id === userId).forEach(post => {
       post.TagsList = [];
-      if (post.TagsListIds !== undefined) {
-        post.TagsListIds.forEach(x => {
+      if (post.TagsListIds !== undefined && post.TagsListIds !== null) {
+        post?.TagsListIds.forEach(x => {
+          if(!post?.TagsList){
+            post.TagsList = [];
+          }
           if (!post.TagsList.includes(this._tagsService.getTag(x))) {
             post.TagsList.push(this._tagsService.getTag(x));
           }
@@ -104,10 +115,10 @@ export class PostsService {
 
     if (searchFilter.length > 0) {
       // posts = posts.filter(post => post.TagsList.every(x => x.Title.includes(searchFilter)));
-      const filteredPosts = [];
-      posts = posts.map(post => {
-        const found = post.TagsList.filter(tag => (searchFilter.includes(tag.Title)));
-        if (found.length > 0) {
+      const filteredPosts: Post[] = [];
+      posts.map(post => {
+        const found = post.TagsList?.filter(tag => (searchFilter.includes(tag.Title)));
+        if (found != undefined && found.length > 0) {
           filteredPosts.push(post);
         }
       });
@@ -119,7 +130,9 @@ export class PostsService {
 
   /**
    * Sort posts.
+   * 
    * @param sort string
+   * 
    * @returns Post[]
    */
   public sort(sort: string): Post[] {
@@ -128,27 +141,33 @@ export class PostsService {
 
   /**
    * Get post by id.
+   * 
    * @param id number
+   * 
    * @returns Post
    */
   public getPost(id: number): Post {
     const post = this._posts[id];
     post.TagsList = [];
     if (post.TagsListIds !== undefined) {
-      post.TagsListIds.forEach(x => {
-        if (!post.TagsList.includes(this._tagsService.getTag(x))) {
-          post.TagsList.push(this._tagsService.getTag(x));
+      post.TagsListIds?.forEach(x => {
+        if (!post.TagsList?.includes(this._tagsService.getTag(x))) {
+          post.TagsList?.push(this._tagsService.getTag(x));
         }
       });
     }
-    post.Author = this._usersService.getUserById(post.AuthorId);
+
+    if(post.AuthorId) {
+      post.Author = this._usersService.getUserById(post.AuthorId);
+    }
+    
     return post;
   }
 
   /**
    * Add new post.
+   * 
    * @param post Post
-   * @returns void
    */
   public addPost(post: Post): void {
     debugger
@@ -157,11 +176,11 @@ export class PostsService {
     }
 
     post.TagsListIds = [];
-    post.TagsList.forEach(tag => {
-      post.TagsListIds.unshift(tag.Id);
+    post.TagsList?.forEach(tag => {
+      post.TagsListIds?.unshift(tag.Id);
     });
 
-    if (post.AuthorId !== null) {
+    if (post.AuthorId) {
       post.Author = this._usersService.getUserById(post.AuthorId);
     }
     this._posts.unshift(post);
@@ -170,6 +189,7 @@ export class PostsService {
 
   /**
    * Edit post by id.
+   * 
    * @param id number
    * @param post Post
    */
@@ -177,10 +197,10 @@ export class PostsService {
     if (id > -1) {
       this._posts[id] = post;
     }
-    post.TagsList.forEach(tag => {
-      post.TagsListIds.unshift(tag.Id);
+    post.TagsList?.forEach(tag => {
+      post.TagsListIds?.unshift(tag.Id);
     });
-    post.TagsListIds = post.TagsListIds.filter(function(item, pos, self) {
+    post.TagsListIds = post.TagsListIds?.filter(function(item, pos, self) {
       return self.indexOf(item) === pos;
     });
     this.postChanged.emit(true);
@@ -188,8 +208,8 @@ export class PostsService {
 
   /**
    * Like post.
+   * 
    * @param id number
-   * @returns void
    */
   public like(id: number): void {
     this._posts[id].Likes++;
@@ -198,8 +218,8 @@ export class PostsService {
 
   /**
    * Dislike post.
+   * 
    * @param id number
-   * @returns void
    */
   public dislike(id: number): void {
     this._posts[id].Dislikes++;
@@ -208,8 +228,8 @@ export class PostsService {
 
   /**
    * Delete post by id.
+   * 
    * @param id number
-   * @returns void
    */
   public deletePost(id: number): void {
     const index = this._posts.findIndex(x => x.Id === id);

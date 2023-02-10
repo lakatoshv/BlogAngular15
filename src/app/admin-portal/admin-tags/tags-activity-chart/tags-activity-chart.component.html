@@ -5,7 +5,7 @@
     </div>
     <div class="card-body" #pbgChartContainer>
         <ngx-charts-line-chart [view]="chartOptions.View" [scheme]="chartOptions.ColorScheme" [results]="chartOptions.Data" [gradient]="chartOptions.Gradient" [xAxis]="chartOptions.ShowXAxis" [yAxis]="chartOptions.ShowYAxis" [showXAxisLabel]="chartOptions.ShowXAxisLabel"
-            [showYAxisLabel]="chartOptions.ShowYAxisLabel" [autoScale]="chartOptions.AutoScale" [timeline]="chartOptions.Data" (select)="onSelect($event)">
+            [showYAxisLabel]="chartOptions.ShowYAxisLabel" [autoScale]="chartOptions.AutoScale" [timeline]="chartOptions.Timeline" (select)="onSelect($event)">
         </ngx-charts-line-chart>
 
     </div>

@@ -29,7 +29,7 @@ export class AddTagComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param _router Router
@@ -61,12 +61,12 @@ export class AddTagComponent implements OnInit {
 
   /**
    * Add new tag.
+   * 
    * @param tag Tag
-   * @returns void
    */
   public add(tag: Tag): void {
     if (this.tagForm.valid) {
-      this._tagsService.addTag(new Tag(0, tag['title']));
+      this._tagsService.addTag(new Tag(0, tag['Title']));
       this._customToastrService.displaySuccessMessage(Messages.TAG_CREATED_SUCCESSFULLY);
       this._router.navigate(['/admin/tags']);
     }

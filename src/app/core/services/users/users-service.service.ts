@@ -1,6 +1,5 @@
 import { Users } from './../../data/UsersList';
 import { Injectable } from '@angular/core';
-import { AngularTokenService } from 'angular-token';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { GlobalService } from '../global-service/global-service.service';
 import { User } from '../../models/User';
@@ -13,20 +12,18 @@ export class UsersService {
    * @param _users User[]
    */
   private _users = Users;
+
   /**
    * @param _jwt JwtHelperService
    */
   private _jwt = new JwtHelperService();
 
   /**
-   * @param _tokenService Angular2TokenService
    * @param _globalService GlobalService
    */
   constructor(
-    private _tokenService: AngularTokenService,
     private _globalService: GlobalService
   ) {
-      // this._tokenService.init();
   }
 
   /*public registration(model): Observable<any> {
@@ -34,7 +31,8 @@ export class UsersService {
   }*/
 
   /**
-   * Save user to local storage
+   * Save user to local storage.
+   * 
    * @param user string
    * @returns void
    */
@@ -46,36 +44,38 @@ export class UsersService {
   }
 
   /**
-   * Login method
+   * Login method.
+   * 
    * @param credentials any
    * @returns string|null
    */
-  public login(credentials): string {
+  public login(credentials: any): string | null {
     const index = Users.findIndex(item => item.Email === credentials.email || item.Password === credentials.password);
     if(index === -1) {
       return null;
     }
 
     const user = Users[index];
-    delete user.Roles;
+    user.Roles = [];
     delete user.Password;
 
     return JSON.stringify(user);
   }
 
   /**
-   * Logout method
+   * Logout method.
    */
   logout() {
     localStorage.removeItem('user');
   }
 
   /**
-   * Check if user is logged in
+   * Check if user is logged in.
+   * 
    * @returns boolean
    */
   isLoggedIn() {
-    const token: string = localStorage.getItem('user');
+    const token: string | null = localStorage.getItem('user');
     if (token != null) {
       return true;
     }
@@ -84,12 +84,15 @@ export class UsersService {
   }
 
   /**
-   * Get token from local storage
+   * Get token from local storage.
    */
   getToken() {
     return localStorage.getItem('token');
   }
 
+  /**
+   * Get user by id.
+   */
   public getUserById(id: number): User {
     return this._users[id];
   }

@@ -11,13 +11,13 @@ import { CustomToastrService } from 'src/app/core/services/custom-toastr.service
 @Component({
   selector: 'app-comments-list',
   templateUrl: './comments-list.component.html',
-  styleUrls: ['./comments-list.component.css']
+  styleUrls: ['./comments-list.component.scss']
 })
 export class CommentsListComponent implements OnInit {
   /**
    * @param postId number
    */
-  @Input("post-id") postId: number;
+  @Input("post-id") postId: number | undefined;
 
   /**
    * @param comments Comment[]
@@ -27,12 +27,12 @@ export class CommentsListComponent implements OnInit {
   /**
    * @param comment Comment
    */
-  public comment: Comment;
+  public comment: Comment | undefined;
 
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param pageInfo Object
@@ -51,7 +51,7 @@ export class CommentsListComponent implements OnInit {
   /**
    * @param editCommentId number
    */
-  public editCommentId: number;
+  public editCommentId: number | undefined;
 
   /**
    * @param isLoadEdit boolean
@@ -89,9 +89,11 @@ export class CommentsListComponent implements OnInit {
     }
     this._commentsService.commentChanged.subscribe(
       () => {
-        this.comments = this._commentsService.getCommentsByPostId(this.postId);
-        this.pageInfo.totalItems = this.comments.length;
-        this.isLoadEdit = false;
+        if(this.postId) {
+          this.comments = this._commentsService.getCommentsByPostId(this.postId);
+          this.pageInfo.totalItems = this.comments.length;
+          this.isLoadEdit = false;
+        }
       }
     );
   }
@@ -100,25 +102,24 @@ export class CommentsListComponent implements OnInit {
    * Comments pagination.
    *
    * @param page number
-   * @returns void
    */
   public paginate(page: number): void {
     this.pageInfo.pageNumber = page;
   }
 
   /**
-   * Find comment by value
+   * Find comment by value.
+   * 
    * TODO Find comment by value
-   * @returns void
    */
   public findByValue() {
     // const index = Data.findIndex(item => item.name === 'John');
   }
 
   /**
-   * Edit comment event
+   * Edit comment event.
+   * 
    * @param comment Comment
-   * @returns void
    */
   editAction(comment: Comment): void {
     this.editCommentId = comment.Id;
@@ -127,12 +128,12 @@ export class CommentsListComponent implements OnInit {
   }
 
   /**
-   * Delete comment event
+   * Delete comment event.
+   * 
    * @param comment Comment
-   * @returns void
    */
   deleteAction(comment: Comment): void {
-    if (this.user.Id === comment.AuthorId) {
+    if (this.user?.Id === comment.AuthorId) {
       this._commentsService.deleteComment(comment);
       this._customToastrService.displaySuccessMessage(Messages.COMMENT_DELETED_SUCCESSFULLY);
     }
@@ -140,18 +141,17 @@ export class CommentsListComponent implements OnInit {
 
   /**
    * Get comments for current post.
-   *
-   * @returns void
    */
   private _getCommentsForCurrentPost(): void {
     this.users = Users;
-    this.comments = this._commentsService.getCommentsByPostId(this.postId);
-    this.pageInfo.totalItems = this.comments.length;
+    if(this.postId) {
+      this.comments = this._commentsService.getCommentsByPostId(this.postId);
+      this.pageInfo.totalItems = this.comments.length;
+    }
   }
 
   /**
-   * Load edit component event
-   * @returns void
+   * Load edit component event.
    */
   private _onLoadEditAction(): void {
     this.isLoadEdit = true;

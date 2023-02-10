@@ -16,7 +16,7 @@ export class Category {
   constructor (
     public Id: number,
     public Name: string,
-    public PostIds?: number[],
-    public Posts?: Post[],
+    public PostIds?: number[] | undefined,
+    public Posts?: Post[] | undefined,
   ) {}
 }

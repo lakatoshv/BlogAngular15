@@ -11,7 +11,7 @@ export class CommentsActivityComponent implements OnInit {
    /**
    * @param pbgChartContainer ElementRef
    */
-  @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef;
+  @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef | undefined;
 
   /**
    * @param chartOptions ChartOptions

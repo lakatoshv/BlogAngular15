@@ -29,17 +29,17 @@ export class EditTagComponent implements OnInit {
   /**
    * @param tag Tag
    */
-  public tag: Tag;
+  public tag: Tag | undefined;
 
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param _tagId number
    */
-  private _tagId: number;
+  private _tagId: number | undefined;
 
   /**
    * @param _activatedRoute ActivatedRoute
@@ -62,11 +62,14 @@ export class EditTagComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._tagId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute), null);
+    const postIdStr = this._globalService.getRouteParam('post-id', this._activatedRoute)
+    if(postIdStr !== null) {
+      this._tagId = parseInt(postIdStr, undefined);
+    }
 
     this._activatedRoute.params.subscribe(
       (params: Params) => {
-        this._tagId = parseInt(params['post-id'], null);
+        this._tagId = parseInt(params['post-id'], undefined);
         this._checkIfUserIsLoggedIn();
 
         this._getTag();
@@ -80,12 +83,12 @@ export class EditTagComponent implements OnInit {
 
   /**
    * Add new tag.
+   * 
    * @param tag Tag
-   * @returns void
    */
   public edit(tag: Tag): void {
-    if (this.tagForm.valid) {
-      this.tag.Title = tag['title'];
+    if (this.tagForm.valid && this.tag && this._tagId) {
+      this.tag.Title = tag['Title'];
       this._tagsService.editTag(this._tagId, this.tag);
       this._customToastrService.displaySuccessMessage(Messages.TAG_EDITED_SUCCESSFULLY);
       this._router.navigate(['/admin/tags']);
@@ -94,24 +97,24 @@ export class EditTagComponent implements OnInit {
 
   /**
    * Set edit form data.
-   * @returns void
    */
   private _setFormData(): void {
-    this.tagForm.get('title').setValue(this.tag.Title);
+    this.tagForm.get('title')?.setValue(this.tag?.Title);
   }
 
   /**
    * Get tag by id.
-   * @returns void
    */
   private _getTag(): void {
-    this.tag = this._tagsService.getTag(this._tagId);
+    if(this._tagId) {
+      this.tag = this._tagsService.getTag(this._tagId);
+    }
+    
     this._setFormData();
   }
 
   /**
    * Check if user is logged in.
-   * @returns void
    */
   private _checkIfUserIsLoggedIn(): void {
     this.isLoggedIn = this._usersService.isLoggedIn();

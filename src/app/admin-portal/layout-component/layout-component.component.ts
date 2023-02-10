@@ -17,7 +17,7 @@ export class LayoutComponentComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param navbarOpen boolean

@@ -20,7 +20,7 @@ export class ProfilePageComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User = null;
+  public user: User | undefined = undefined;
 
   /**
    * @param posts Post[]
@@ -73,17 +73,20 @@ export class ProfilePageComponent implements OnInit {
    * @inheritdoc
    */
   public ngOnInit() {
-    this._userId = parseInt(this._generalService.getRouteParam('profile-id', this._activatedRoute), null);
+    const profileIdStr = this._generalService.getRouteParam('profile-id', this._activatedRoute);
+    if(profileIdStr) {
+      this._userId = parseInt(profileIdStr, undefined);
+    }
 
     this._activatedRoute.params.subscribe(
       (params: Params) => {
-        this._userId = parseInt(params['profile-id'], null);
+        this._userId = parseInt(params['profile-id'], undefined);
         this._checkIfUserIsLoggedIn();
 
-        this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user.Id === this._userId);
+        this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user?.Id === this._userId);
 
         if (!this.isForCurrentUser) {
-          if (this._userId !== null) {
+          if (this._userId !== null && this.user) {
             this.user = Users.find(user => user.Id === this._userId);
             this._getPosts();
           } else {
@@ -97,7 +100,7 @@ export class ProfilePageComponent implements OnInit {
 
     this._checkIfUserIsLoggedIn();
 
-    this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user.Id === this._userId);
+    this.isForCurrentUser = this._router.url.includes('/my-profile') || (this._userId !== null && this.user?.Id === this._userId);
 
     if (!this.isForCurrentUser) {
       if (this._userId !== null) {
@@ -112,7 +115,8 @@ export class ProfilePageComponent implements OnInit {
   }
 
   /**
-   * Select tab
+   * Select tab.
+   * 
    * @param selectedTab string
    * @param level string
    */
@@ -129,38 +133,40 @@ export class ProfilePageComponent implements OnInit {
 
   /**
    * Confirm phone number.
-   * @returns void
    */
   public confirmPhoneNumber(): void {
-    this._globalService._currentUser.PhoneNumberConfirmed = true;
-    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
-    this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_VERIFIED_SUCCESSFULLY);
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.PhoneNumberConfirmed = true;
+      this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+      this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_VERIFIED_SUCCESSFULLY);
+    }
   }
 
   /**
    * Confirm email.
-   * @returns void
    */
   public confirmEmail(): void {
-    this._globalService._currentUser.EmailConfirmed = true;
-    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
-    this._customToastrService.displaySuccessMessage(Messages.EMAIL_VERIFIED_SUCCESSFULLY);
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.EmailConfirmed = true;
+      this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+      this._customToastrService.displaySuccessMessage(Messages.EMAIL_VERIFIED_SUCCESSFULLY);
+    }
   }
 
   /**
-   * Get all posts
-   * @returns void
+   * Get all posts.
    */
   private _getPosts(): void {
-    Posts.filter(post => post.AuthorId = this.user.Id).forEach(post => {
-      post.CommentsCount = Comments.filter(comment => comment.AuthorId = this.user.Id).length;
-      this.posts.push(post);
-    });
+    if(this.user !== undefined) {
+      Posts.filter(post => post.AuthorId = this.user?.Id).forEach(post => {
+        post.CommentsCount = Comments.filter(comment => comment.AuthorId = this.user?.Id).length;
+        this.posts.push(post);
+      });
+    }
   }
 
   /**
    * Check if user is logged in.
-   * @returns void
    */
   private _checkIfUserIsLoggedIn(): void {
     this.isLoggedIn = this._usersService.isLoggedIn();

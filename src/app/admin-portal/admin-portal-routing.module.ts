@@ -3,6 +3,10 @@ import { LayoutComponentComponent } from './layout-component/layout-component.co
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from '../shared/errors/not-found/not-found.component';
 import { AuthGuard } from '../core/guards/AuthGuard';
+import { DefaultPagesModule } from './default-pages/default-pages.module';
+import { AdminPostsModule } from './admin-posts/admin-posts.module';
+import { AdminCommentsModule } from './admin-comments/admin-comments.module';
+import { AdminTagsModule } from './admin-tags/admin-tags.module';
 
 const routes: Routes = [
   {
@@ -12,23 +16,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './default-pages/default-pages.module#DefaultPagesModule'
+        loadChildren: () => DefaultPagesModule
       },
       {
         path: 'posts',
-        loadChildren: './admin-posts/admin-posts.module#AdminPostsModule'
+        loadChildren: () => AdminPostsModule
       },
       {
         path: 'comments',
-        loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
+        loadChildren: () => AdminCommentsModule
       },
       {
         path: 'comments/:post-id',
-        loadChildren: './admin-comments/admin-comments.module#AdminCommentsModule'
+        loadChildren: () => AdminCommentsModule
       },
       {
         path: 'tags',
-        loadChildren: './admin-tags/admin-tags.module#AdminTagsModule'
+        loadChildren: () => AdminTagsModule
       },
       {
         path: 'not-found',

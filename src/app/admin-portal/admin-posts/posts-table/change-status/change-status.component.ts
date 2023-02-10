@@ -21,7 +21,7 @@ export class ChangeStatusComponent implements OnInit {
   /**
    * @param button ElementRef
    */
-  @ContentChild('button') button: ElementRef;
+  @ContentChild('button') button: ElementRef | undefined;
 
   /**
    * @param changed boolean

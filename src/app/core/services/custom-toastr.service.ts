@@ -25,11 +25,10 @@ export class CustomToastrService {
 
   /**
    * Display custom toastr message.
+   * 
    * @param title string
    * @param message string
    * @param type string
-   *
-   * @returns void
    */
   displayCustomToastrMessage(title: string, message: string, type: string): void {
     this._toastrService.show(message, title, this.options, 'toast-' + type);
@@ -37,9 +36,8 @@ export class CustomToastrService {
 
   /**
    * Display success message.
+   * 
    * @param title string
-   *
-   * @returns void
    */
   displaySuccessMessage(title: string): void {
     this._toastrService.success(title, Status[Status.Success], this.options);
@@ -49,9 +47,8 @@ export class CustomToastrService {
 
   /**
    * Display error message.
+   * 
    * @param error ErrorResponse
-   *
-   * @returns void
    */
   displayErrorMessage(error: ErrorResponse): void {
     if(error.error !== undefined){
@@ -74,10 +71,9 @@ export class CustomToastrService {
 
   /**
    * Not found error.
+   * 
    * @param title string
    * @param status any
-   *
-   * @returns void
    */
   notFoundError(title: string, status: any): void {
     this._toastrService.error(title, status + ' ' + Status[Status.Error], this.options);
@@ -85,10 +81,9 @@ export class CustomToastrService {
 
   /**
    * Model field error.
+   * 
    * @param errors object
    * @param status any
-   *
-   * @returns void
    */
   modelFieldError(errors: object, status: any): void {
     for (const [key, value] of Object.entries(errors)) {
@@ -98,10 +93,9 @@ export class CustomToastrService {
 
   /**
    * Custom errorOr bad request.
+   * 
    * @param error string
    * @param status any
-   *
-   * @returns void
    */
   customErrorOrBadRequest(error: string, status: any): void {
     this._toastrService.error(error, status + ' ' + Status[Status.Error], this.options);

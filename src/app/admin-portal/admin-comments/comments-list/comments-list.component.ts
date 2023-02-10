@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comments-list.component.css']
 })
 export class CommentsListComponent implements OnInit {
-
+  /**
+   * @inheritdoc
+   */
   constructor() {
-   }
+  }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
   }
 

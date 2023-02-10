@@ -1,8 +1,7 @@
 import { TagsService } from './../../../core/services/posts-services/tags.service';
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Location } from '@angular/common';
+import { FormGroup } from '@angular/forms';
 import { PostForm } from '../../../core/forms/posts/PostForm';
 import { Post } from '../../../core/models/Post';
 import { Router } from '@angular/router';
@@ -24,7 +23,7 @@ export class AddPostComponent implements OnInit {
   /**
    * @param tagInput ElementRef
    */
-  @ViewChild('tag') tagInput: ElementRef;
+  @ViewChild('tag') tagInput: ElementRef | undefined;
 
   /**
    * @param postForm FormGroup
@@ -59,7 +58,7 @@ export class AddPostComponent implements OnInit {
   /**
    * @param selectedTag object
    */
-  public selectedTag: object = {
+  public selectedTag: any = {
     value: '',
     id: null
   };
@@ -67,7 +66,7 @@ export class AddPostComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param tinyMCEOptions TinyMCEOptionsObject
@@ -110,7 +109,6 @@ export class AddPostComponent implements OnInit {
    *
    * @param tag string
    * @param action string
-   * @returns void
    */
   public tagAction(tag: string, action: string): void {
     if (action === 'add') { this.onAddTagAction(tag); }
@@ -118,16 +116,15 @@ export class AddPostComponent implements OnInit {
   }
 
   /**
-   * Add tag event
-   * @returns void
+   * Add tag event.
    */
   public addTagLabel(): void {
     this.clearFormData();
   }
   /**
-   * Edit tag event
+   * Edit tag event.
+   * 
    * @param tag string
-   * @returns void
    */
   public editTag(tag: Tag): void {
     this.selectedTag['value'] = tag.Title;
@@ -137,9 +134,9 @@ export class AddPostComponent implements OnInit {
   }
 
   /**
-   * Add tag event
+   * Add tag event.
+   * 
    * @param tag string
-   * @returns void
    */
   public onAddTagAction(tag: string): void {
     if (tag !== '' && this.tagsList.findIndex(x => x.Title === tag) === -1) {
@@ -149,18 +146,23 @@ export class AddPostComponent implements OnInit {
         this._removeFromAvailableTags(this.availableTags[index]);
       } else {
         this._tagsService.addTag({Id: 0, Title: tag});
-        this.tagsList.unshift(this._tagsService.getTagByTitle(tag));
+
+        const result = this._tagsService.getTagByTitle(tag);
+        if(result !== null) {
+          this.tagsList.unshift(result);
+        }
       }
       this.clearFormData();
     }
   }
 
   /**
-   * Edit tag event
+   * Edit tag event.
+   * 
    * @param tag string
-   * @returns void
    */
   public onEditTagAction(tag: string): void {
+    debugger
     const index = this.selectedTag['id'];
     if (index > -1) {
       this.tagsList[index].Title = tag;
@@ -169,7 +171,8 @@ export class AddPostComponent implements OnInit {
   }
 
   /**
-   * Delete tag event
+   * Delete tag event.
+   * 
    * @param tag any
    */
   public onDeleteTagAction(tag: any): void {
@@ -180,14 +183,18 @@ export class AddPostComponent implements OnInit {
   }
 
   /**
-   * Add new post
+   * Add new post.
+   * 
    * @param post Post
-   * @returns void
    */
   public add(post: Post): void {
     if (this.postForm.valid) {
       post.TagsList = this.tagsList;
-      post.AuthorId = this.user.Id;
+
+      if(this.user !== undefined){
+        post.AuthorId = this.user.Id;
+      }
+      
       this._postsService.addPost(post);
       this._customToastrService.displaySuccessMessage(Messages.POST_CREATED_SUCCESSFULLY);
       this._router.navigate(['/blog']);
@@ -196,7 +203,6 @@ export class AddPostComponent implements OnInit {
 
   /**
    * Get available tags.
-   * @returns void
    */
   private _getTags(): void {
     this.availableTags = this._tagsService.getTags();
@@ -204,8 +210,8 @@ export class AddPostComponent implements OnInit {
 
   /**
    * Remove selected tag from available tags.
+   * 
    * @param tag Tag
-   * @returns void
    */
   private _removeFromAvailableTags(tag: Tag): void {
     const index = this.availableTags.indexOf(tag);
@@ -216,13 +222,14 @@ export class AddPostComponent implements OnInit {
 
   /**
    * Clear form data.
-   * @returns void
    */
   private clearFormData(): void {
     this.tagLabel = 'Додати новий тег';
     this.action = 'add';
     this.selectedTag['value'] = '';
     this.selectedTag['id'] = null;
-    this.tagInput.nativeElement.value = '';
+    if(this.tagInput !== undefined) {
+      this.tagInput.nativeElement.value = '';
+    }
   }
 }

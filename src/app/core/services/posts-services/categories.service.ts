@@ -26,18 +26,20 @@ export class CategoriesService {
 
   /**
    * Get categories.
+   * 
    * @param search string
    * @param searchFilter string[]
+   * 
    * @returns Category[]
    */
-  public getCategories(search: string = null): Category[] {
-    let categories = [];
+  public getCategories(search: string | null = null): Category[] {
+    let categories: Category[] = [];
     this._categories.forEach(category => {
       category.Posts = [];
       if (category.PostIds !== undefined) {
-        category.PostIds.forEach(x => {
-          if (!category.Posts.includes(this._postsService.getPost(x))) {
-            category.Posts.push(this._postsService.getPost(x));
+        category?.PostIds.forEach(x => {
+          if (category?.Posts !== undefined && !category?.Posts.includes(this._postsService.getPost(x))) {
+            category?.Posts.push(this._postsService.getPost(x));
           }
         });
       }

@@ -66,7 +66,9 @@ export class PostsTableComponent implements OnInit {
    */
   private _getPosts() {
     const posts = Posts.forEach(post => {
-      post.Author = Users[post.AuthorId];
+      if(post.AuthorId) {
+        post.Author = Users[post.AuthorId];
+      }
       post.CommentsCount = Posts.findIndex(item => item.Id === post.Id);
       this.posts.push(post);
     });

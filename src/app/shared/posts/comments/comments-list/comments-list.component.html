@@ -17,13 +17,13 @@
                                     <div class="comment_panel d-flex flex-row align-items-center justify-content-start">
                                         <span><I class="fa fa-3x fa-user-circle"></I></span>
                                         <small class="post_meta">
-                                          <a href="#">{{comment.AuthorId !== null ? comment.Author.FirstName + " " + comment.Author.LastName : comment.Name}}</a>
+                                          <a href="#">{{comment.AuthorId !== null ? comment.Author?.FirstName + " " + comment.Author?.LastName : comment.Name}}</a>
                                           <span>{{comment.CreatedAt}}</span>
                                         </small>
                                     </div>
                                     <div class="comment_content">
                                         <p>{{comment.Content}}</p>
-                                        <p class="pull-right buttons" *ngIf="loggedIn && comment.Author.Id === user.Id">
+                                        <p class="pull-right buttons" *ngIf="loggedIn && comment.Author?.Id === user?.Id">
                                             <button type="button" class="btn btn-sm text-white btn-primary" (click)="editAction(comment)" title="Редагувати">
                                               <i class="fa fa-edit"></i> 
                                             </button>

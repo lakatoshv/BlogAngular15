@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./popular-archives.component.css']
 })
 export class PopularArchivesComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  /**
+   * @inheritdoc
+   */
+  ngOnInit(): void {
   }
 
+  /**
+   * @inheritdoc
+   */
+  constructor() {
+  }
 }

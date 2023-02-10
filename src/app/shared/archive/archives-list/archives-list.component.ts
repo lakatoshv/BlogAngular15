@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./archives-list.component.css']
 })
 export class ArchivesListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  /**
+   * @inheritdoc
+   */
+  ngOnInit(): void {
   }
 
+  /**
+   * @inheritdoc
+   */
+  constructor() {
+  }
 }

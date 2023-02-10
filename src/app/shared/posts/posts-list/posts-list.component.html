@@ -46,7 +46,7 @@
                     <a [routerLink]="['/blog/post', post.Id]">
                         <h2 class="post-title" [innerHTML]="post.Title"></h2>
                     </a>
-                    <div class="pull-right" *ngIf="loggedIn && post.Author.Id === user.Id">
+                    <div class="pull-right" *ngIf="loggedIn && post.Author?.Id === user?.Id">
                         <a class="btn btn-sm text-white btn-primary" [routerLink]="['/blog/post/edit', post.Id]">
                             <i class="fa fa-edit"></i> Редагувати
                         </a>
@@ -66,13 +66,13 @@
                         <span><i class="fa fa-fw fa-comment"></i>{{post.CommentsCount}}</span>
                     </p>
                     <p class="post-meta">Категорія:
-                        <a [routerLink]="['/blog/posts-category', post.Category.Name]">{{post.Category.Name}}</a>
+                        <a [routerLink]="['/blog/posts-category', post.Category?.Name]">{{post.Category?.Name}}</a>
                     </p>
                     <p class="post-meta">Теги:
                         <a [routerLink]="['/blog/posts', tag.Title]" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a>
                     </p>
                     <p class="post-meta">
-                        Написав: <b><a [routerLink]="['/blog/profile', post.AuthorId]">{{post.Author.FirstName + " " + post.Author.LastName}}</a><i > {{post.CreatedAt | date:'medium' }}</i></b>
+                        Написав: <b><a [routerLink]="['/blog/profile', post.AuthorId]">{{post.Author?.FirstName + " " + post.Author?.LastName}}</a><i > {{post.CreatedAt | date:'medium' }}</i></b>
                     </p>
                     <button class="btn btn-xs btn-info" (click)="like(post.Id)"><span class="fa fa-thumbs-up"></span> Подобається</button>
                     <button class="btn btn-sm btn-danger" (click)="dislike(post.Id)"><span class="fa fa-thumbs-down"></span> Неподобається</button>

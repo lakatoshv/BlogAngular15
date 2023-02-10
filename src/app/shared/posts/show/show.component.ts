@@ -12,18 +12,18 @@ import { CustomToastrService } from 'src/app/core/services/custom-toastr.service
 @Component({
   selector: 'app-show',
   templateUrl: './show.component.html',
-  styleUrls: ['./show.component.css']
+  styleUrls: ['./show.component.scss']
 })
 export class ShowComponent implements OnInit {
   /**
-   * @param post Post
+   * @param post Post | undefined
    */
-  public post: Post;
+  public post: Post | undefined;
 
   /**
-   * @param user User
+   * @param user User | undefined
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param loggedIn boolean
@@ -31,9 +31,9 @@ export class ShowComponent implements OnInit {
   public loggedIn = false;
 
   /**
-   * @param postId number
+   * @param postId number | undefined
    */
-  public postId: number;
+  public postId: number | undefined;
 
   /**
    * @param _generalService GeneralServiceService
@@ -58,11 +58,14 @@ export class ShowComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this.postId = parseInt(this._generalService.getRouteParam('post-id', this._activatedRoute), null);
+    var postIdStr = this._generalService.getRouteParam('post-id', this._activatedRoute);
+    if(postIdStr) {
+      this.postId = parseInt(postIdStr, undefined);
+    }
 
     this._activatedRoute.params.subscribe(
       (params: Params) => {
-        this.postId = parseInt(params['post-id'], null);
+        this.postId = parseInt(params['post-id'], undefined);
         this._checkIfUserIsLoggedIn();
 
         this._getPost();
@@ -80,8 +83,8 @@ export class ShowComponent implements OnInit {
 
   /**
    * Like post.
+   * 
    * @param id number
-   * @returns void
    */
   public like(id: number): void {
     this._postsService.like(id);
@@ -89,8 +92,8 @@ export class ShowComponent implements OnInit {
 
   /**
    * Dislike post.
+   * 
    * @param id number
-   * @returns void
    */
   public dislike(id: number): void {
     this._postsService.dislike(id);
@@ -98,33 +101,36 @@ export class ShowComponent implements OnInit {
 
   /**
    * Delete post.
-   * @returns void
    */
   public deleteAction(): void {
-    if (this.loggedIn && this.post.Author.Id === this.user.Id) {
-      this._postsService.deletePost(this.postId);
-      this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
+    if (this.loggedIn && this.post?.Author?.Id === this.user?.Id) {
+      if(this.postId) {
+        this._postsService.deletePost(this.postId);
+        this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
+      }
       this._router.navigateByUrl('/blog');
     }
   }
 
   /**
    * Get posts.
-   * @returns void
    */
   private _getPost(): void {
-    this.post = this._postsService.getPost(this.postId);
+    if(this.postId){
+      this.post = this._postsService.getPost(this.postId);
+    }
   }
 
   /**
    * Check if user is logged in.
-   * @returns void
    */
   private _checkIfUserIsLoggedIn(): void {
     this.loggedIn = this._usersService.isLoggedIn();
     if (this.loggedIn) {
       this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
+      if(this._globalService._currentUser) {
+        this.user = this._globalService._currentUser;
+      }
     }
   }
 }

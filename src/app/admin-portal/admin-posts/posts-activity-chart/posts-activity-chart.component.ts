@@ -1,6 +1,5 @@
 import { ChartOptions } from '../../../core/models/chart/ChartOptions';
 import { ChartOptionsData } from './../../../core/data/chart/ChartOptionsData';
-import { ChartData } from '../../../core/data/chart/ChartData';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -12,7 +11,7 @@ export class PostsActivityChartComponent implements OnInit {
   /**
    * @param pbgChartContainer ElementRef
    */
-  @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef;
+  @ViewChild('pbgChartContainer') pbgChartContainer: ElementRef | undefined;
 
   /**
    * @param chartOptions ChartOptions

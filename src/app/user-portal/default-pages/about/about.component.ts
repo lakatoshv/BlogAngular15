@@ -6,14 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-
-  constructor() {
+  /**
+   * @inheritdoc
+   */
+  ngOnInit(): void {
   }
 
   /**
    * @inheritdoc
    */
-  ngOnInit() {
+  constructor() {
   }
-
 }

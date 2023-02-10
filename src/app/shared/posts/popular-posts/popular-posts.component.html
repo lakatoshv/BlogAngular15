@@ -8,7 +8,7 @@
             </h3>
             <div class="meta">
                 <div><a href="#"><span class="fa fa-calendar"></span> {{post.CreatedAt | date:'medium' }}</a></div>
-                <div><a [routerLink]="['/blog/profile', post.AuthorId]"><span class="fa fa-user"></span> {{post.Author.FirstName + " " + post.Author.LastName}}</a></div>
+                <div><a [routerLink]="['/blog/profile', post.AuthorId]"><span class="fa fa-user"></span> {{post.Author?.FirstName + " " + post.Author?.LastName}}</a></div>
                 <div><a href="#"><span class="fa fa-comment"></span> {{post.CommentsCount}}</a></div>
             </div>
         </div>

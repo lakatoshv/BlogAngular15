@@ -11,19 +11,19 @@ import { CustomToastrService } from 'src/app/core/services/custom-toastr.service
 export class CountDownComponent implements OnInit, OnDestroy {
   
   /** @param secondsToDay number */
-  public secondsToDay: number;
+  public secondsToDay: number | undefined;
 
   /** @param minutesToDay number */
-  public minutesToDay: number;
+  public minutesToDay: number | undefined;
 
   /** @param hoursToDay number */
-  public hoursToDay: number;
+  public hoursToDay: number | undefined;
 
   /** @param daysToDay number */
-  public daysToDay: number;
+  public daysToDay: number | undefined;
 
   /** @param subscription Subscription */
-  private subscription: Subscription;
+  private subscription: Subscription | undefined;
 
   /** @param dateNow Date */
   private dateNow: Date = new Date();
@@ -48,7 +48,7 @@ export class CountDownComponent implements OnInit, OnDestroy {
   private secondsInAMinute: number  = 60;
 
   /** @param timeDifference number */
-  private timeDifference: number;
+  private timeDifference: number | undefined;
 
   /**
     @param _customToastrService CustomToastrService
@@ -56,19 +56,23 @@ export class CountDownComponent implements OnInit, OnDestroy {
   constructor(private _customToastrService: CustomToastrService) {    
   }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
     this.countDownByInterval();
     this.countDownByCustomObservable();
   }
 
+  /**
+   * @inheritdoc
+   */
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   /**
    * Count down by interval.
-   * 
-   * @returns void.
    */
   private countDownByInterval(): void {
     this.subscription = interval(1000)
@@ -77,11 +81,9 @@ export class CountDownComponent implements OnInit, OnDestroy {
 
   /**
    * Count down by custom observable.
-   * 
-   * @returns void.
    */
   private countDownByCustomObservable(): void {
-    const customCountDownObservable = Observable.create(observer => {
+    const customCountDownObservable = Observable.create((observer: { next: (arg0: number) => void; error: (arg0: Error) => void; complete: () => void; }) => {
       let timeDifference = this.dDay.getTime() - new  Date().getTime();
       setInterval(() => {
         observer.next(timeDifference);
@@ -109,8 +111,6 @@ export class CountDownComponent implements OnInit, OnDestroy {
 
   /**
    * Get time difference.
-   * 
-   * @returns void.
    */
   private getTimeDifference(): void {
     this.timeDifference = this.dDay.getTime() - new  Date().getTime();
@@ -119,11 +119,10 @@ export class CountDownComponent implements OnInit, OnDestroy {
 
   /**
    * Allocate time units.
-   * @param timeDifference
    * 
-   * @returns void. 
+   * @param timeDifference
    */
-  private allocateTimeUnits(timeDifference): void {
+  private allocateTimeUnits(timeDifference: any): void {
     this.secondsToDay = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.secondsInAMinute);
     this.minutesToDay = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.secondsInAMinute);
     this.hoursToDay = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.secondsInAMinute) % this.hoursInADay);

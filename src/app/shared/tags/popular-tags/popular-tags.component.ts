@@ -8,15 +8,27 @@ import { TagsService } from 'src/app/core/services/posts-services/tags.service';
   styleUrls: ['./popular-tags.component.css']
 })
 export class PopularTagsComponent implements OnInit {
+  /**
+   * @param tags Tag[]
+   */
   public tags: Tag[] = [];
-  
+
+  /**
+   * @param _tagsService TagsService
+   */
   constructor(private _tagsService: TagsService) {
   }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
     this._getTags();
   }
 
+  /**
+   * Get tags.
+   */
   private _getTags(): void {
     this.tags = this._tagsService.getTags().slice(0, 5);
   }

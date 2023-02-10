@@ -21,16 +21,22 @@ export class TagsTableComponent implements OnInit {
     private _customToastrService: CustomToastrService
   ) { }
 
+  /**
+   * @inheritdoc
+   */
   ngOnInit() {
     this._getTags();
   }
 
-  private _getTags(search: string = null): void {
+  /**
+   * Get all tags.
+   */
+  private _getTags(): void {
     this.tags = this._tagsService.getTags();
   }
 
   /**
-   * Delete tag event
+   * Delete tag event.
    * @param tag Tag
    * @returns void
    */

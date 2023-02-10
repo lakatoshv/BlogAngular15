@@ -19,7 +19,7 @@ export class EditProfileComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User = null;
+  public user: User | null = null;
 
   /**
    * @param isLoggedIn boolean
@@ -56,7 +56,10 @@ export class EditProfileComponent implements OnInit {
     this.isLoggedIn = this._usersService.isLoggedIn();
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
+
+      if(this._globalService._currentUser) {
+        this.user = this._globalService._currentUser;
+      }
       this._setFormData();
     } else {
       this._router.navigateByUrl('/authorization');
@@ -65,32 +68,32 @@ export class EditProfileComponent implements OnInit {
 
   /**
    * Edit profile.
+   * 
    * @param profileModel any
-   * @returns void
    */
   edit(profileModel: any): void {
-    this._globalService._currentUser.UserName = profileModel.firstName + ' ' + profileModel.lastName;
-    this._globalService._currentUser.FirstName = profileModel.firstName;
-    this._globalService._currentUser.LastName = profileModel.lastName;
-    this._globalService._currentUser.About = profileModel.about;
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.UserName = profileModel.firstName + ' ' + profileModel.lastName;
+      this._globalService._currentUser.FirstName = profileModel.firstName;
+      this._globalService._currentUser.LastName = profileModel.lastName;
+      this._globalService._currentUser.About = profileModel.about;
+    }
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
     this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
   }
 
   /**
    * Set form data.
-   * @returns void
    */
   private _setFormData(): void {
-    this.profileForm.get('userName').setValue(this.user.FirstName + ' ' + this.user.LastName);
-    this.profileForm.get('firstName').setValue(this.user.FirstName);
-    this.profileForm.get('lastName').setValue(this.user.LastName);
-    this.profileForm.get('about').setValue(this.user.About);
+    this.profileForm.get('userName')?.setValue(this.user?.FirstName + ' ' + this.user?.LastName);
+    this.profileForm.get('firstName')?.setValue(this.user?.FirstName);
+    this.profileForm.get('lastName')?.setValue(this.user?.LastName);
+    this.profileForm.get('about')?.setValue(this.user?.About);
   }
 
   /**
    * Clear form data.
-   * @returns void
    */
   private clearFormData(): void {
   }

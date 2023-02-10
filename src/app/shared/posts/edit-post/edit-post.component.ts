@@ -1,17 +1,15 @@
 import { PostsService } from './../../../core/services/posts-services/posts.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { PostForm } from '../../../core/forms/posts/PostForm';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { GlobalService } from 'src/app/core/services/global-service/global-service.service';
 import { User } from 'src/app/core/models/User';
-import { Posts } from 'src/app/core/data/PostsList';
 import { Post } from 'src/app/core/models/Post';
 import { TinyMCEOptionsObject } from 'src/app/core/models/TinyMCEOptionsObject';
 import { TinyMCEOptions } from 'src/app/core/data/TinyMCEOptions';
 import { Tag } from 'src/app/core/models/Tag';
-import { Tags } from 'src/app/core/data/TagsList';
 import { TagsService } from 'src/app/core/services/posts-services/tags.service';
 import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
 import { Messages } from 'src/app/core/data/Mesages';
@@ -25,7 +23,7 @@ export class EditPostComponent implements OnInit {
   /**
    * @param tagInput ElementRef
    */
-  @ViewChild('tag') tagInput: ElementRef;
+  @ViewChild('tag') tagInput: ElementRef | undefined;
 
   /**
    * @param postForm FormGroup
@@ -35,7 +33,7 @@ export class EditPostComponent implements OnInit {
   /**
    * @param post Post
    */
-  post: Post;
+  post: Post | undefined;
 
   /**
    * @param isLoggedIn boolean
@@ -55,7 +53,7 @@ export class EditPostComponent implements OnInit {
   /**
    * @param selectedTag object
    */
-  selectedTag: object = {
+  selectedTag: any = {
     value: '',
     id: null
   };
@@ -63,12 +61,12 @@ export class EditPostComponent implements OnInit {
   /**
    * @param user User
    */
-  user: User;
+  user: User | undefined;
 
   /**
    * @param _postId number
    */
-  private _postId: number;
+  private _postId: number | undefined;
 
   /**
    * @param availableTags Tag[]
@@ -103,11 +101,14 @@ export class EditPostComponent implements OnInit {
    * @inheritdoc
    */
   ngOnInit() {
-    this._postId = parseInt(this._globalService.getRouteParam('post-id', this._activatedRoute), null);
+    const postIdStr = this._globalService.getRouteParam('post-id', this._activatedRoute);
+    if(postIdStr !== null) {
+      this._postId = parseInt(postIdStr, undefined);
+    }
 
     this._activatedRoute.params.subscribe(
       (params: Params) => {
-        this._postId = parseInt(params['post-id'], null);
+        this._postId = parseInt(params['post-id'], undefined);
         this._checkIfUserIsLoggedIn();
         this._getPost();
         this._getTags();
@@ -124,7 +125,6 @@ export class EditPostComponent implements OnInit {
    *
    * @param tag string
    * @param action string
-   * @returns void
    */
   tagAction(tag: string, action: string): void {
     if (action === 'add') { this.onAddTagAction(tag); }
@@ -138,14 +138,20 @@ export class EditPostComponent implements OnInit {
    * @returns void
    */
   edit(post: Post): void {
-    if (this.postForm.valid) {
-      this.post.Title = post['title'];
-      this.post.Description = post['description'];
-      this.post.Content = post['content'];
-      this.post.ImageUrl = post['imageUrl'];
+    if (this.postForm.valid && this.post) {
+      this.post.Title = post['Title'];
+      this.post.Description = post['Description'];
+      this.post.Content = post['Content'];
+      this.post.ImageUrl = post['ImageUrl'];
       this.post.CreatedAt = new Date();
-      this.post.AuthorId = this.user.Id;
-      this._postsService.editPost(this._postId, this.post);
+
+      if(this.user) {
+        this.post.AuthorId = this.user.Id;
+      }
+      
+      if(this._postId) {
+        this._postsService.editPost(this._postId, this.post);
+      }
       this._customToastrService.displaySuccessMessage(Messages.POST_EDITED_SUCCESSFULLY);
       this._router.navigateByUrl('/');
     }
@@ -153,74 +159,81 @@ export class EditPostComponent implements OnInit {
 
 
   /**
-   * Add tag event
-   * @returns void
+   * Add tag event.
    */
   addTagLabel(): void {
     this.clearFormData();
   }
   /**
-   * Edit tag event
+   * Edit tag event.
+   * 
    * @param tag string
-   * @returns void
    */
   editTag(tag: Tag): void {
     this.selectedTag['value'] = tag.Title;
-    this.selectedTag['id'] = this.post.TagsList.findIndex(x => x.Title === tag.Title);
+    this.selectedTag['id'] = this.post?.TagsList?.findIndex(x => x.Title === tag.Title);
     this.action = 'edit';
     this.tagLabel = 'Редагувати тег';
   }
 
   /**
-   * Add tag event
+   * Add tag event.
+   * 
    * @param tag string
-   * @returns void
    */
   onAddTagAction(tag: string): void {
-    if (tag !== '' && this.post.TagsList.findIndex(x => x.Title === tag) === -1) {
+    if (tag !== '' && this.post?.TagsList?.findIndex(x => x.Title === tag) === -1) {
       const index = this.availableTags.findIndex(x => x.Title === tag);
       if (index > -1) {
         this.post.TagsList.unshift(this.availableTags[index]);
         this._removeFromAvailableTags(this.availableTags[index]);
       } else {
-        this._tagsService.addTag({Id: 0, Title: tag});
-        this.post.TagsList.unshift(this._tagsService.getTagByTitle(tag));
+        if(tag !== null) {
+          this._tagsService.addTag({Id: 0, Title: tag});
+          const result = this._tagsService.getTagByTitle(tag);
+          if(result) {
+            this.post.TagsList.unshift();
+          }
+        }
       }
       this.clearFormData();
     }
   }
 
   /**
-   * Edit tag event
+   * Edit tag event.
+   * 
    * @param tag any
-   * @returns void
    */
   onEditTagAction(tag: string): void {
     const index = this.selectedTag['id'];
-    if (index > -1) {
+    if (index > -1 && this.post?.TagsList) {
       this.post.TagsList[index].Title = tag;
       this.clearFormData();
     }
   }
 
   /**
-   * Delete tag event
+   * Delete tag event.
+   * 
    * @param tag any
    */
   onDeleteTagAction(tag: any): void {
-    const index = this.post.TagsList.indexOf(tag);
-    if (index > -1) {
-      this.post.TagsList.splice(index, 1);
+    const index = this.post?.TagsList?.indexOf(tag);
+    if (index && index > -1) {
+      this.post?.TagsList?.splice(index, 1);
     }
   }
 
   /**
    * Get post.
-   * @returns void
    */
   private _getPost(): void {
-    this.post = this._postsService.getPost(this._postId);
-    if (this.post.AuthorId !== this.user.Id) {
+    if(this._postId){
+      this.post = this._postsService.getPost(this._postId);
+    }
+    
+    if (this.post?.AuthorId !== this.user?.Id) {
       this._router.navigateByUrl('/');
     }
     this._setFormData();
@@ -228,18 +241,16 @@ export class EditPostComponent implements OnInit {
 
   /**
    * Set edit form data.
-   * @returns void
    */
   private _setFormData(): void {
-    this.postForm.get('title').setValue(this.post.Title);
-    this.postForm.get('description').setValue(this.post.Description);
-    this.postForm.get('content').setValue(this.post.Content);
-    this.postForm.get('imageUrl').setValue(this.post.ImageUrl);
+    this.postForm.get('title')?.setValue(this.post?.Title);
+    this.postForm.get('description')?.setValue(this.post?.Description);
+    this.postForm.get('content')?.setValue(this.post?.Content);
+    this.postForm.get('imageUrl')?.setValue(this.post?.ImageUrl);
   }
 
   /**
    * Get available tas.
-   * @returns void
    */
   private _getTags(): void {
     this.availableTags = this._tagsService.getTags();
@@ -247,8 +258,8 @@ export class EditPostComponent implements OnInit {
 
   /**
    * Remove selected tag from available tags.
+   * 
    * @param tag Tag
-   * @returns void
    */
   private _removeFromAvailableTags(tag: Tag): void {
     const index = this.availableTags.indexOf(tag);
@@ -259,19 +270,19 @@ export class EditPostComponent implements OnInit {
 
   /**
    * Clear form data.
-   * @returns void
    */
   private clearFormData(): void {
     this.tagLabel = 'Додати новий тег';
     this.action = 'add';
     this.selectedTag['value'] = '';
     this.selectedTag['id'] = null;
-    this.tagInput.nativeElement.value = '';
+    if(this.tagInput) {
+      this.tagInput.nativeElement.value = '';
+    }
   }
 
   /**
    * Check if user is logged in.
-   * @returns void
    */
   private _checkIfUserIsLoggedIn(): void {
     this.isLoggedIn = this._usersService.isLoggedIn();

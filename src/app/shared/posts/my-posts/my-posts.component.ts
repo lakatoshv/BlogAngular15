@@ -15,7 +15,7 @@ import { CustomToastrService } from 'src/app/core/services/custom-toastr.service
 @Component({
   selector: 'app-my-posts',
   templateUrl: './my-posts.component.html',
-  styleUrls: ['./my-posts.component.css']
+  styleUrls: ['./my-posts.component.scss']
 })
 export class MyPostsComponent implements OnInit {
   /**
@@ -26,7 +26,7 @@ export class MyPostsComponent implements OnInit {
   /**
    * @param user User
    */
-  public user: User;
+  public user: User | undefined;
 
   /**
    * @param pageInfo PageInfo
@@ -75,7 +75,11 @@ export class MyPostsComponent implements OnInit {
   /**
    * @param _userId number
    */
-  private _userId: number;
+  private _userId: number | undefined;
+
+  /**
+   * @param _searchFilter any
+   */
   private _searchFilter: any;
 
   /**
@@ -110,10 +114,10 @@ export class MyPostsComponent implements OnInit {
         this._checkIfUserIsLoggedIn();
 
         if (this._router.url.includes('/my-posts')) {
-          this._userId = this.user.Id;
+          this._userId = this.user?.Id;
           this.isCurrentUserPosts = true;
         } else {
-          this._userId = parseInt(params['user-id'], null);
+          this._userId = parseInt(params['user-id'], undefined);
           this.isCurrentUserPosts = false;
         }
         this._getPosts();
@@ -123,29 +127,34 @@ export class MyPostsComponent implements OnInit {
     this._checkIfUserIsLoggedIn();
 
     if (this._router.url.includes('/my-posts')) {
-      this._userId = this.user.Id;
+      this._userId = this.user?.Id;
       this.isCurrentUserPosts = true;
     } else {
-      this._userId = parseInt(this._globalService.getRouteParam('user-id', this._activatedRoute), null);
-      this.isCurrentUserPosts = false;
+      const userIdStr = this._globalService.getRouteParam('user-id', this._activatedRoute);
+      if(userIdStr){
+        this._userId = parseInt(userIdStr, undefined);
+        this.isCurrentUserPosts = false;
+      }
     }
     this._getPosts();
 
     this._postsService.postChanged.subscribe(
       () => {
-        this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
-        this.pageInfo.TotalItems = this.paginate.length;
+        if(this._userId) {
+          this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
+          this.pageInfo.TotalItems = this.paginate.length;
+        }
       }
     );
   }
 
   /**
    * Delete post event.
+   * 
    * @param postId number
-   * @returns void
    */
   public deleteAction(postId: number): void {
-    if (this.isLoggedIn && this.posts[postId].Author.Id === this.user.Id) {
+    if (this.isLoggedIn && this.posts[postId].Author?.Id === this.user?.Id) {
       this._postsService.deletePost(postId);
       this._customToastrService.displaySuccessMessage(Messages.AUTHORIZED_SUCCESSFULLY);
     }
@@ -155,8 +164,8 @@ export class MyPostsComponent implements OnInit {
 
   /**
    * Like post event.
+   * 
    * @param id number
-   * @returns void
    */
   public like(id: number): void {
     this._postsService.like(id);
@@ -164,8 +173,8 @@ export class MyPostsComponent implements OnInit {
 
   /**
    * Dislike post event.
+   * 
    * @param id number
-   * @returns void
    */
   public dislike(id: number): void {
     this._postsService.dislike(id);
@@ -173,25 +182,26 @@ export class MyPostsComponent implements OnInit {
 
   /**
    * Post pagination.
+   * 
    * @param page number
-   * @returns void
    */
   public paginate(page: number): void {
     this.pageInfo.PageNumber = page;
   }
 
   /**
-   * Search post by Title
+   * Search post by Title.
+   * 
    * @param search string
-   * @returns void
    */
   public search(search: string): void {
-    this.posts = this._postsService.getUserPosts(this._userId, search, [this._searchFilter]);
+    if(this._userId) {
+      this.posts = this._postsService.getUserPosts(this._userId, search, [this._searchFilter]);
+    }
   }
 
   /**
    * Sort posts by parameter.
-   * @returns void
    */
   public sort(): void {
     this.posts = this._postsService.sort(this.sortBy);
@@ -199,16 +209,16 @@ export class MyPostsComponent implements OnInit {
 
   /**
    * Get all posts.
-   * @returns void
    */
   private _getPosts(): void {
-    this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
+    if(this._userId) {
+      this.posts = this._postsService.getUserPosts(this._userId, null, [this._searchFilter]);
+    }
     this.pageInfo.TotalItems = this.posts.length;
   }
 
   /**
    * Check if user is logged in.
-   * @returns void
    */
   private _checkIfUserIsLoggedIn(): void {
     this.isLoggedIn = this._usersService.isLoggedIn();

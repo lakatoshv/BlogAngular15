@@ -18,7 +18,11 @@ export class LayoutComponentComponent implements OnInit {
    * @param loggedIn boolean
    */
   loggedIn = false;
-  public user: User;
+
+  /**
+   * @param user User | undefined
+   */
+  public user: User | undefined;
 
   /**
    * @param globalService GlobalService
@@ -42,7 +46,7 @@ export class LayoutComponentComponent implements OnInit {
   }
 
   /**
-   * Toggle navbar menu
+   * Toggle navbar menu.
    */
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

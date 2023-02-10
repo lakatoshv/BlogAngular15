@@ -18,12 +18,12 @@
         </tfoot>
         <tbody>
             <tr *ngFor="let comment of comments">
-                <td><a [routerLink]="['/admin/posts/show', comment.Post.Id]">{{comment.Post.Title}}</a></td>
-                <td><a [routerLink]="['/blog/profile', comment.AuthorId]">{{comment.Author.FirstName + " " + comment.Author.LastName}}</a></td>
+                <td><a routerLink="['/admin/posts/show', comment.Post.Id]">{{comment.Post?.Title}}</a></td>
+                <td><a routerLink="['/blog/profile', comment.AuthorId]">{{comment.Author?.FirstName + " " + comment.Author?.LastName}}</a></td>
                 <td>{{comment.Content}}</td>
                 <td>2011/04/25</td>
                 <td class="actions" data-th="">
-                    <a class="btn btn-primary" [routerLink]="['/admin/comments/edit', comment.Id]"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary" routerLink="['/admin/comments/edit', comment.Id]"><i class="fa fa-edit"></i></a>
                     <button type="button" class="btn btn-sm text-white btn-danger" id="post.Post.Id" (click)="deleteAction(comment)" data-toggle="modal" data-target="#delete-post">
                       <i class="fa fa-trash"></i>
                   </button>

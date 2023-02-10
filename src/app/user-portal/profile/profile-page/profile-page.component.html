@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-3 col-lg-3 ">
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar" class="img-circle img-responsive"><br>
-                    <h3>{{user.FirstName + " " + user.LastName}}</h3>
+                    <h3>{{user?.FirstName + " " + user?.LastName}}</h3>
                 </div>
                 <div class=" col-md-9 col-lg-9">
                     <ul class="nav nav-tabs">
@@ -30,15 +30,15 @@
                                     </tr>
                                     <tr>
                                         <td>Ім'я:</td>
-                                        <td><b>{{user.FirstName}}</b></td>
+                                        <td><b>{{user?.FirstName}}</b></td>
                                     </tr>
                                     <tr>
                                         <td>Фамілія:</td>
-                                        <td><b>{{user.LastName}}</b></td>
+                                        <td><b>{{user?.LastName}}</b></td>
                                     </tr>
                                     <tr>
                                         <td>Електронна пошта:</td>
-                                        <td><b><a [routerLink]="['/blogmailto:test@test.test']">{{user.Email}}</a></b></td>
+                                        <td><b><a [routerLink]="['/blogmailto:test@test.test']">{{user?.Email}}</a></b></td>
                                     </tr>
                                     <tr>
                                         <td>Адреса:</td>
@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr>
                                         <td>Номер телефону:</td>
-                                        <td><b>{{user.PhoneNumber}}</b></td>
+                                        <td><b>{{user?.PhoneNumber}}</b></td>
                                     </tr>
                                     <tr>
                                         <td>Статус:</td>
@@ -56,7 +56,7 @@
                             </table>
                             <div class="bs-callout bs-callout-danger">
                                 <h4>Про мене:</h4>
-                                <div [innerHTML]="user.About">
+                                <div [innerHTML]="user?.About">
                                 </div>
                             </div>
                         </div>
@@ -66,24 +66,24 @@
                                     <tr>
                                         <td>Електронна пошта:</td>
                                         <td>
-                                            <b>{{user.Email}}</b>
+                                            <b>{{user?.Email}}</b>
                                         </td>
                                         <td>
                                             <a [routerLink]="['personal-info/change-email']"><b><i class="fa fa-edit"></i></b></a>
                                             <a class="btn btn-default" (click)="confirmEmail()">Підтвердити</a>
                                         </td>
-                                        <td><i *ngIf="user.EmailConfirmed" class="fa fa-check text-success"></i></td>
+                                        <td><i *ngIf="user?.EmailConfirmed" class="fa fa-check text-success"></i></td>
                                     </tr>
                                     <tr>
                                         <td>Телефон:</td>
                                         <td>
-                                            <b>{{user.PhoneNumber}}</b>
+                                            <b>{{user?.PhoneNumber}}</b>
                                         </td>
                                         <td>
                                             <a [routerLink]="['personal-info/change-phone-number']"><b><i class="fa fa-edit"></i></b></a>
                                             <a class="btn btn-default" (click)="confirmPhoneNumber()">Підтвердити</a>
                                         </td>
-                                        <td><i *ngIf="user.PhoneNumberConfirmed" class="fa fa-check text-success"></i></td>
+                                        <td><i *ngIf="user?.PhoneNumberConfirmed" class="fa fa-check text-success"></i></td>
                                     </tr>
                                     <tr>
                                         <td>

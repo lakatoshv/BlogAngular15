@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subscribe-form.component.css']
 })
 export class SubscribeFormComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  /**
+   * @inheritdoc
+   */
+  ngOnInit(): void {
   }
 
+  /**
+   * @inheritdoc
+   */
+  constructor() {
+  }
 }

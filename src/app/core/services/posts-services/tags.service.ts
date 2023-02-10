@@ -21,11 +21,12 @@ export class TagsService {
 
   /**
    * Get tags.
+   * 
    * @param search string
    * @returns Tag[]
    */
-  public getTags(search: string = null): Tag[] {
-    let tags = [];
+  public getTags(search: string | null = null): Tag[] {
+    let tags: Tag[] = [];
     this._tags.forEach(post => {
       tags.push(post);
     });
@@ -39,6 +40,7 @@ export class TagsService {
 
   /**
    * Sort tags.
+   * 
    * @param sort string
    * @returns Tag[]
    */
@@ -48,6 +50,7 @@ export class TagsService {
 
   /**
    * Get tag by id.
+   * 
    * @param id number
    * @returns Tag
    */
@@ -55,7 +58,7 @@ export class TagsService {
     return this._tags[id];
   }
 
-  public getTagByTitle(title: string): Tag {
+  public getTagByTitle(title: string): Tag | null {
     const index = this._tags.findIndex(x => x.Title === title);
     if (index !== -1) {
       return this._tags[index];
@@ -65,6 +68,7 @@ export class TagsService {
 
   /**
    * Add new tag.
+   * 
    * @param tag Tag
    * @returns void
    */
@@ -80,6 +84,7 @@ export class TagsService {
 
   /**
    * Edit tag by id.
+   * 
    * @param id number
    * @param tag Tag
    */
@@ -92,7 +97,9 @@ export class TagsService {
 
   /**
    * Delete tag by id.
+   * 
    * @param id number
+   * 
    * @returns void
    */
   public deleteTag(id: number): void {

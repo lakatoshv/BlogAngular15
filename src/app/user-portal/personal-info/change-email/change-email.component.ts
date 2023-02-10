@@ -19,7 +19,7 @@ export class ChangeEmailComponent implements OnInit {
 /**
    * @param user User
    */
-  public user: User = null;
+  public user: User | null = null;
 
   /**
    * @param isLoggedIn boolean
@@ -56,7 +56,9 @@ export class ChangeEmailComponent implements OnInit {
     this.isLoggedIn = this._usersService.isLoggedIn();
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
+      if(this._globalService._currentUser) {
+        this.user = this._globalService._currentUser;
+      }
       this._setFormData();
     } else {
       this._router.navigateByUrl('/authorization');
@@ -65,37 +67,39 @@ export class ChangeEmailComponent implements OnInit {
 
   /**
    * Edit profile.
+   * 
    * @param profileModel any
-   * @returns void
    */
   edit(profileModel: any): void {
-    this._globalService._currentUser.Email = profileModel.email;
-    this._globalService._currentUser.EmailConfirmed = false;
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.Email = profileModel.email;
+      this._globalService._currentUser.EmailConfirmed = false;
+    }
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
     this._customToastrService.displaySuccessMessage(Messages.EMAIL_CHANGED_SUCCESSFULLY);
   }
 
   /**
    * Confirm email.
-   * @returns void
    */
   public confirmEmail(): void {
-    this._globalService._currentUser.EmailConfirmed = true;
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.EmailConfirmed = true;
+    }
+    
     this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
     this._customToastrService.displaySuccessMessage(Messages.EMAIL_VERIFIED_SUCCESSFULLY);
   }
 
   /**
    * Set form data.
-   * @returns void
    */
   private _setFormData(): void {
-    this.profileForm.get('email').setValue(this.user.Email);
+    this.profileForm.get('email')?.setValue(this.user?.Email);
   }
 
   /**
    * Clear form data.
-   * @returns void
    */
   private clearFormData() {
   }

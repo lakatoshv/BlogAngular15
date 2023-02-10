@@ -17,9 +17,9 @@ import { Messages } from 'src/app/core/data/Mesages';
 })
 export class ChangePhoneNumberComponent implements OnInit {
 /**
-   * @param user User
+   * @param user User | null
    */
-  public user: User = null;
+  public user: User | null = null;
 
   /**
    * @param isLoggedIn boolean
@@ -56,7 +56,11 @@ export class ChangePhoneNumberComponent implements OnInit {
     this.isLoggedIn = this._usersService.isLoggedIn();
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
+
+      if(this._globalService._currentUser) {
+        this.user = this._globalService._currentUser;
+      }
+
       this._setFormData();
     } else {
       this._router.navigateByUrl('/authorization');
@@ -65,37 +69,38 @@ export class ChangePhoneNumberComponent implements OnInit {
 
   /**
    * Edit profile.
+   * 
    * @param profileModel any
-   * @returns void
    */
   edit(profileModel: any): void {
-    this._globalService._currentUser.PhoneNumber = profileModel.phoneNumber;
-    this._globalService._currentUser.PhoneNumberConfirmed = false;
-    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
-    this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_CHANGED_SUCCESSFULLY);
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.PhoneNumber = profileModel.phoneNumber;
+      this._globalService._currentUser.PhoneNumberConfirmed = false;
+      this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+      this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_CHANGED_SUCCESSFULLY);
+    }
   }
 
   /**
    * Confirm phone number.
-   * @returns void
    */
   public confirmPhoneNumber(): void {
-    this._globalService._currentUser.PhoneNumberConfirmed = true;
-    this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
-    this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_VERIFIED_SUCCESSFULLY);
+    if(this._globalService._currentUser) {
+      this._globalService._currentUser.PhoneNumberConfirmed = true;
+      this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
+      this._customToastrService.displaySuccessMessage(Messages.PHONE_NUMBER_VERIFIED_SUCCESSFULLY);
+    }
   }
 
   /**
    * Set form data.
-   * @returns void
    */
   private _setFormData(): void {
-    this.profileForm.get('phoneNumber').setValue(this.user.PhoneNumber);
+    this.profileForm.get('phoneNumber')?.setValue(this.user?.PhoneNumber);
   }
 
   /**
    * Clear form data.
-   * @returns void
    */
   private clearFormData(): void {
   }

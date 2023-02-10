@@ -1,5 +1,7 @@
 import { ChartData } from './ChartData';
 import { ChartOptions } from '../../models/chart/ChartOptions';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
+
 /**
  * Chart options default data.
  */
@@ -14,6 +16,9 @@ export const ChartOptionsData: ChartOptions = {
     ShowYAxisLabel: true,
     Timeline: true,
     ColorScheme: {
+        group: ScaleType.Ordinal, 
+        selectable: true, 
+        name: 'Customer Usage',
         domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     },
     AutoScale: true

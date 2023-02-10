@@ -15,6 +15,9 @@ export class RegistrationComponent implements OnInit {
    */
   registrationForm: FormGroup = new RegistrationForm().registrationForm;
 
+  /**
+   * @param _customToastrService CustomToastrService
+   */
   constructor(
     private _customToastrService: CustomToastrService
   ) { }

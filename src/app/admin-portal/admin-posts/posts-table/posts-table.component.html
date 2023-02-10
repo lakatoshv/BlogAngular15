@@ -33,9 +33,9 @@
         <tbody>
             <tr *ngFor="let post of posts">
                 <td><a [routerLink]="[postsUrl, 'show', post.Id]">{{post.Title}}</a></td>
-                <td><a [routerLink]="['/blog/posts-category', post.Category.Name]">{{post.Category.Name}}</a></td>
+                <td><a [routerLink]="['/blog/posts-category', post.Category?.Name]">{{post.Category?.Name}}</a></td>
                 <td><a [routerLink]="['/blog/posts', tag.Title]" *ngFor="let tag of post.TagsList; let isLast=last"> {{tag.Title}}{{isLast ? '' : ', '}}</a></td>
-                <td><a [routerLink]="['/blog/profile', post.AuthorId]">{{post.Author.FirstName + " " + post.Author.LastName}}</a></td>
+                <td><a [routerLink]="['/blog/profile', post.AuthorId]">{{post.Author?.FirstName + " " + post.Author?.LastName}}</a></td>
                 <td>
                     <app-change-status [status]="null" (onChanged)="onChangeStatusAction(post.Id, $event)"></app-change-status>
                 </td>

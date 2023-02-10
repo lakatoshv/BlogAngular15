@@ -4,8 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
 import { AuthorizationComponent } from './user/authorization/authorization.component';
 import { RegistrationComponent } from './user/registration/registration.component';
-import { AboutComponent } from './default-pages/about/about.component';
-import { ContactsComponent } from './default-pages/contacts/contacts.component';
 import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { ChangeEmailComponent } from './personal-info/change-email/change-email.component';
@@ -13,6 +11,10 @@ import { ChangePasswordComponent } from './personal-info/change-password/change-
 import { ChangePhoneNumberComponent } from './personal-info/change-phone-number/change-phone-number.component';
 import { NotFoundComponent } from '../shared/errors/not-found/not-found.component';
 import { AuthGuard } from '../core/guards/AuthGuard';
+import { PostsModule } from '../shared/posts/posts.module';
+import { ProfileModule } from './profile/profile.module';
+import { ContactsComponent } from './default-pages/contacts/contacts.component';
+import { AboutComponent } from './default-pages/about/about.component';
 
 const routes: Routes = [
   {
@@ -21,7 +23,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: '../shared/posts/posts.module#PostsModule'
+        loadChildren: () => PostsModule
       },
       {
         path: 'about',
@@ -42,7 +44,7 @@ const routes: Routes = [
       {
         path: 'profile',
         canActivate: [AuthGuard],
-        loadChildren: '../user-portal/profile/profile.module#ProfileModule'
+        loadChildren: () => ProfileModule
       },
       {
         path: 'my-profile',

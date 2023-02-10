@@ -1,5 +1,4 @@
 import { Posts } from './../../data/PostsList';
-import { PostsService } from './posts.service';
 import { UsersService } from 'src/app/core/services/users/users-service.service';
 import { Comment } from '../../models/Comment';
 import { Comments } from '../../data/CommentsList';
@@ -31,6 +30,7 @@ export class CommentsService {
 
   /**
    * Get comment position by id.
+   * 
    * @param id number
    * @returns number
    */
@@ -40,14 +40,19 @@ export class CommentsService {
 
   /**
    * Get comments by post id.
+   * 
    * @param postId number
    * @returns Comment[].
    */
   public getCommentsByPostId(postId: number): Comment[] {
     const comments: Comment[] = [];
     this._comments.filter(item => item.PostId === postId).forEach(comment => {
-      comment.Author = this._usersService.getUserById(comment.AuthorId);
-      comment.Post = Posts[comment.PostId];
+      if(comment?.AuthorId){
+        comment.Author = this._usersService.getUserById(comment?.AuthorId);
+      }
+      if(comment?.PostId) {
+        comment.Post = Posts[comment?.PostId];
+      }
       comments.push(comment);
     });
     return comments;
@@ -55,13 +60,18 @@ export class CommentsService {
 
   /**
    * Get comments.
+   * 
    * @returns Comment[].
    */
   public getComments(): Comment[] {
     const comments: Comment[] = [];
     this._comments.forEach(comment => {
-      comment.Author = this._usersService.getUserById(comment.AuthorId);
-      comment.Post = Posts[comment.PostId];
+      if(comment?.AuthorId){
+        comment.Author = this._usersService.getUserById(comment?.AuthorId);
+      }
+      if(comment?.PostId) {
+        comment.Post = Posts[comment?.PostId];
+      }
       comments.push(comment);
     });
 
@@ -70,11 +80,11 @@ export class CommentsService {
 
   /**
    * Add new comment.
+   * 
    * @param comment Comment
-   * @returns void
    */
   public addComment(comment: Comment): void {
-    if (comment.AuthorId !== null) {
+    if (comment.AuthorId){
       comment.Author = this._usersService.getUserById(comment.AuthorId);
     }
     this._comments.unshift(comment);
@@ -83,8 +93,8 @@ export class CommentsService {
 
   /**
    * Edit comment.
+   * 
    * @param comment Comment
-   * @returns void
    */
   public editComment(comment: Comment): void {
     const index = this.getCommentPositionById(comment.Id);
@@ -96,8 +106,8 @@ export class CommentsService {
 
   /**
    * Delete comment.
+   * 
    * @param comment Comment
-   * @returns void
    */
   public deleteComment(comment: Comment): void {
     const index = this.getCommentPositionById(comment.Id);
@@ -109,8 +119,8 @@ export class CommentsService {
 
   /**
    * Delete comment by post id.
+   * 
    * @param postId number
-   * @returns void
    */
   public deleteCommentsByPostId(postId: number): void {
     const comments = this._comments.filter(comment => comment.PostId === postId).forEach(comment => {

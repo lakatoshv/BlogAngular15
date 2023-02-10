@@ -5,7 +5,7 @@ import { MessageForm } from '../../../core/forms/Message';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.css']
+  styleUrls: ['./contacts.component.scss']
 })
 export class ContactsComponent implements OnInit {
   /**
@@ -13,9 +13,15 @@ export class ContactsComponent implements OnInit {
    */
   public messageForm: FormGroup = new MessageForm().messageForm;
 
-  constructor() { }
-
-  ngOnInit() {
+  /**
+   * @inheritdoc
+   */
+  ngOnInit(): void {
   }
 
+  /**
+   * @inheritdoc
+   */
+  constructor() {
+  }
 }

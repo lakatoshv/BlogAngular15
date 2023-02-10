@@ -6,8 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tags-list.component.css']
 })
 export class TagsListComponent implements OnInit {
-  constructor() { }
+  /**
+   * @inheritdoc
+   */
+  ngOnInit(): void {
+  }
 
-  ngOnInit() {
+  /**
+   * @inheritdoc
+   */
+  constructor() {
   }
 }

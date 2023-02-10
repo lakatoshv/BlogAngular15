@@ -16,10 +16,10 @@ import { CustomToastrService } from 'src/app/core/services/custom-toastr.service
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-/**
-   * @param user User
+  /**
+   * @param user User | null
    */
-  public user: User = null;
+  public user: User | null = null;
 
   /**
    * @param isLoggedIn boolean
@@ -56,7 +56,9 @@ export class ChangePasswordComponent implements OnInit {
     this.isLoggedIn = this._usersService.isLoggedIn();
     if (this._usersService.isLoggedIn()) {
       this._globalService.resetUserData();
-      this.user = this._globalService._currentUser;
+      if(this._globalService._currentUser) {
+        this.user = this._globalService._currentUser;
+      }
     } else {
       this._router.navigateByUrl('/authorization');
     }
@@ -64,15 +66,15 @@ export class ChangePasswordComponent implements OnInit {
 
   /**
    * Edit profile.
+   * 
    * @param profileModel any
-   * @returns void
    */
   edit(profileModel: any): void {
     if (profileModel.oldPassword !== null
         && profileModel.newPassword !== null
         && profileModel.confirmPassword != null) {
 
-      if (profileModel.oldPassword === this._globalService._currentUser.Password
+      if (this._globalService._currentUser && profileModel.oldPassword === this._globalService._currentUser.Password
         && profileModel.newPassword === profileModel.confirmPassword) {
         this._globalService._currentUser.Password = profileModel.newPassword;
         this._usersService.saveUser(JSON.stringify(this._globalService._currentUser));
@@ -87,7 +89,6 @@ export class ChangePasswordComponent implements OnInit {
 
   /**
    * Clear form data.
-   * @returns void
    */
   private clearFormData(): void {
   }

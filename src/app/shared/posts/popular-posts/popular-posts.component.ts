@@ -41,7 +41,6 @@ export class PopularPostsComponent implements OnInit {
 
   /**
    * Sort posts by parameter.
-   * @returns void
    */
   public sort(): void {
     this.posts = this._postsService.sort(this.sortBy).slice(0, 5);
