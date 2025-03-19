@@ -9,7 +9,7 @@ import { UsersService } from 'src/app/core/services/users/users-service.service'
   styleUrls: ['./layout-component.component.css']
 })
 export class LayoutComponentComponent implements OnInit {
-   /**
+  /**
     * @param loggedIn boolean
     */
   loggedIn = false;

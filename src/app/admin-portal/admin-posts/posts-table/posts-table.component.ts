@@ -6,6 +6,7 @@ import { Users } from 'src/app/core/data/UsersList';
 import { Comments } from 'src/app/core/data/CommentsList';
 import { Messages } from 'src/app/core/data/Mesages';
 import { CustomToastrService } from 'src/app/core/services/custom-toastr.service';
+import { PageInfo } from 'src/app/core/models/PageInfo';
 
 @Component({
   selector: 'app-posts-table',
@@ -19,6 +20,15 @@ export class PostsTableComponent implements OnInit {
   posts: Post[] = [];
 
   postsUrl = "";
+
+  /**
+   * @param pageInfo PageInfo
+   */
+  public pageInfo: PageInfo = {
+    PageSize: 10,
+    PageNumber: 0,
+    TotalItems: 0
+  };
 
   /**
    * @param _router Router
@@ -59,6 +69,15 @@ export class PostsTableComponent implements OnInit {
       this._customToastrService.displaySuccessMessage(Messages.POST_DELETED_SUCCESSFULLY);
       this.posts = this.posts;
     }
+  }
+
+  /**
+   * Post pagination.
+   * @param page number
+   * @returns void
+   */
+  public paginate(page: number): void {
+    this.pageInfo.PageNumber = page;
   }
 
   /**
